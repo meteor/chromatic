@@ -39,21 +39,21 @@ The following packages have been added to the root of the project
 ```
 react
 kadira:flow-router
-react-meteor-app
-chromatic  # this is all you need to use chromatic
+mdg:react-meteor-app
+mdg:chromatic  # this is all you need to use chromatic in your react app
 
 # below are packages with extra components you can use in your projects
-animations
-buttons
-callout
-code-block
-color-grid
-date-components
-form-components
-list
-loading-spinner
-overlays
-sortable
-tooltips
-outlines
+msg:animations
+msg:buttons
+msg:callout
+msg:code-block
+msg:color-grid
+msg:date-components
+msg:form-components
+msg:list
+msg:loading-spinner
+msg:overlays
+msg:sortable
+msg:tooltips
+msg:outlines
 ```
