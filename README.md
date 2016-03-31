@@ -2,10 +2,15 @@
 Explore, visualize, and prototype your organization's UI components.
 
 ## Usage
+
+``` bash
+meteor add mdg:chromatic
+```
+
 Chromatic is available at `/styleguide` in your app in development mode.
 
 ``` js
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ComponentName = React.createClass({
   // code
