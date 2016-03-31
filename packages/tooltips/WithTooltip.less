@@ -1,0 +1,58 @@
+@import "{borealis}/util/index.import.less";
+@import "jquery.qtip.import.less";
+
+span.tooltip-trigger { display: inline-block; }
+
+.tooltip {
+  padding: 0 1rem;
+  border: none;
+  background: none;
+
+  .qtip-content {
+    padding: 0;
+    background-color: fade(@color-lightest, 0%);
+    .background-image(
+      linear-gradient(top, fade(#f8f8fe, 95%) 0%, fade(#fafafa, 95%) 100%)
+    );
+    border-color: #f8f8fe;
+    border-width: 0;
+    border-radius: 3px;
+    box-shadow: rgba(0,0,0,.15) 0 1px 3px 0;
+    color: @color-darkest;
+
+    .tooltip-inner-content {
+      .font-s1;
+      border-radius: 3px; // needs to be replicated here for masking purposes
+      overflow: hidden;
+    }
+    
+    // Default tooltip style
+    .message {
+      display: inline-block;
+      padding: 1rem 1rem;
+      text-align: center;
+
+      .link {
+        .subheading-caps(center);
+        .type-bold;
+        display: block;
+        margin-top: .666em;
+        text-align: center;
+
+        &:hover { text-decoration: none; }
+      }
+    }
+
+    // global/activity.less shim
+    .activity-item {
+      padding: 1rem 1rem;
+    }
+
+    // global/list.less shim
+    .list {
+      width: 180px;
+
+      & + .list { margin-top: .5rem; }
+    }
+  }
+}

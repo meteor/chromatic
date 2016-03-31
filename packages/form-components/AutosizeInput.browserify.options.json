@@ -1,0 +1,11 @@
+{
+  "transforms": {
+    "externalify": {
+      "global": true,
+      "external": {
+        "react": "Package.react-runtime.React.require",
+        "react-dom": "Package.react-runtime.React.require"
+      }
+    }
+  }
+}

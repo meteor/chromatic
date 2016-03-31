@@ -1,0 +1,24 @@
+@import "{borealis}/util/index.import.less";
+
+.spec-container {
+  display: block;
+  margin: 0 auto;
+  height: 100%;
+  .transition(background-color 300ms linear);
+
+  &.lightest {
+    background-color: @color-lightest;
+  }
+  &.medium {
+    background-color: @color-medium;
+  }
+  &.mediumdark {
+    background-color: @color-mediumdark;
+  }
+  &.dark {
+    background-color: @color-dark;
+  }
+  &.darkest {
+    background-color: @color-darkest;
+  }
+}

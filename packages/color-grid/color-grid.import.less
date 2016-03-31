@@ -1,0 +1,56 @@
+@import 'for.import.less';
+
+@angle: 30deg;
+@animationDuration: 5s;
+@animationStagger: 100ms;
+
+.anim() {
+
+  // 0%, 60% { transform: rotate3d(1, 1, 0, 0); }
+  // 30% {
+  //   transform: rotate3d(1, 1, 0, @angle);
+  // }
+
+  0%, 60%, 100% { opacity: 0.7; }
+  30% {
+    opacity: 1;
+  }
+
+}
+
+@-webkit-keyframes anim { .anim; }
+@keyframes anim { .anim; }
+
+.color-grid(@size, @tl, @tr, @br, @bl) {
+  table tbody {
+    >*>* {
+      width: 100% / @size;
+      height: 100% / @size;
+    }
+    .for(@size); .-each(@i) {
+      >*:nth-child(@{i}) {
+        @rl: mix(@bl, @tl, 100% * @i / @size);
+        @rr: mix(@br, @tr, 100% * @i / @size);
+        .for(@size); .-each(@j) {
+          >*:nth-child(@{j}) {
+            background-color: mix(@rr, @rl, 100% * @j / @size);
+            animation: anim @animationDuration infinite ease-in-out;
+            animation-delay: @i * (@j - @size / 2) * @animationStagger;
+          }
+        }
+      }
+    }
+  }
+}
+
+.simple-color-grid(@size) {
+  @green: #33ff00;
+  @purple: #6c00ff;
+  @orange: #ff8a00;
+  @yellow: #ffff00;
+  @boost: 2;
+  .color-grid(@size, mix(@green, #416185, @boost * 0%),
+                 mix(@purple, #334f6f, @boost * 10%),
+                 mix(@orange, #596068, @boost * 7%),
+                 mix(@yellow, #656c77, @boost * 3%));
+}

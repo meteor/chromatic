@@ -1,0 +1,29 @@
+@import "{borealis}/util/index.import.less";
+
+.callout {
+	.font-s1;
+	text-align: center;
+	.std-xpadding;
+	padding-top: .5em;
+	padding-bottom: .5em;
+
+
+	&.primary {
+		background-color: @color-darker;
+		color: @color-lightest;
+	}
+
+	&.secondary {
+		background-color: @color-neutral;
+		color: @color-darkest;
+	}
+
+	&.alert {
+		background-color: @color-negative;
+		color: @color-lightest;
+	}
+
+	.title-callout {
+		.subheading-caps;
+	}
+}

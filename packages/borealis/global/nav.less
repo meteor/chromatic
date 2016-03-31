@@ -1,0 +1,85 @@
+@import "{borealis}/util/index.import.less";
+
+.nav {
+	.std-xpadding;
+	.transform(translate3d(0,0,0));
+	text-align: center;
+	z-index: 3;
+
+  .position(absolute, 0, 0, auto, 0, auto, 3rem);
+	@media screen and (min-width: @breakpoint) { height: 4rem; }
+
+  &.dark {
+    color: @color-darker;
+    .logo { fill: @color-darkest; }
+  }
+
+  &.light {
+    color: @color-lightest;
+    .logo { fill: @color-lightest; }
+  }
+
+	.logo {
+		position: relative;
+		@media screen and (min-width: @breakpoint) { top: .5rem; }
+		height: 3rem;
+		line-height: 3rem;
+		display: inline-block;
+
+		.subheading-caps(center);
+
+		img {
+			display: inline-block;
+			vertical-align: middle;
+
+			height: 10px;
+		}
+  }
+
+  .nav-group {
+    .position(absolute, 0, auto, auto, 0);
+		@media screen and (min-width: @breakpoint) { top: .5rem; }
+		.std-xpadding;
+    z-index: 1;
+
+    &.right {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .nav-item {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 3rem;
+    height: 3rem;
+    vertical-align: top;
+
+		& + .nav-item {
+			margin-left: .75rem;
+			@media screen and (min-width: @breakpoint) { margin-left: 1.875rem;  }
+		}
+
+    .link {
+			.font-s2;
+			line-height: 1;
+
+			.type-semibold;
+		}
+
+		.btn {
+	    vertical-align: middle;
+	  }
+
+    .icon-menu {
+			.font-s3;
+      line-height: 1;
+      vertical-align: text-top;
+    }
+
+		.account-menu-wrapper {
+			display: inline-block; //necessary for accounts loading state
+			margin-top: .75rem;
+		}
+  }
+}

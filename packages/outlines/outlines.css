@@ -1,0 +1,3 @@
+.debug-outlines * {
+  outline: 1px dashed rgba(255, 170, 170, 0.6);
+}
