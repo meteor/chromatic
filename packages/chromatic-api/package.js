@@ -3,7 +3,8 @@ Package.describe({
   version: '0.0.1',
   summary: 'chromatic dev include',
   git: 'https://github.com/meteor/chromatic',
-  debugOnly: true
+  debugOnly: true,
+  documentation: null
 });
 
 Package.onUse(function(api) {
@@ -12,7 +13,7 @@ Package.onUse(function(api) {
     'ecmascript',
     'underscore',
     'check',
-    'react'
+    'react@0.14.3'
   ], 'client');
   api.addFiles('chromatic-api.js', 'client');
   api.export('Chromatic', 'client');

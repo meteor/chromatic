@@ -2,7 +2,8 @@ Package.describe({
   name: 'mdg:flow-router-extensions',
   version: '0.0.1',
   summary: 'Update flow router to use a pattern that is more contained',
-  git: 'https://github.com/meteor/chromatic'
+  git: 'https://github.com/meteor/chromatic',
+  documentation: null
 });
 
 Package.onUse(function(api) {

@@ -3,6 +3,7 @@ Package.describe({
   version: '0.0.1',
   readme: 'README.md',
   summary: 'Press ctrl+~ to show outlines around all dom elements',
+  git: 'https://github.com/meteor/chromatic',
   debugOnly: true
 });
 

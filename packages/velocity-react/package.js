@@ -2,7 +2,8 @@ Package.describe({
   name: 'mdg:velocity-react',
   version: '0.0.1',
   summary: 'Wrapper package for the velocity-react animation library',
-  git: 'https://github.com/meteor/chromatic'
+  git: 'https://github.com/meteor/chromatic',
+  documentation: null
 });
 
 Npm.depends({

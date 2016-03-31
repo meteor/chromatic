@@ -10,10 +10,10 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2');
   api.use([
     'ecmascript',
-    'react',
+    'react@0.14.3',
     'less',
-    'mdg:borealis',
-    'mdg:chromatic-api'
+    'mdg:borealis@0.0.1',
+    'mdg:chromatic-api@0.0.1'
   ], 'client');
   api.addFiles([
     'for.import.less',

@@ -1,19 +1,21 @@
 Package.describe({
   name: 'mdg:tooltips',
   version: '0.0.1',
-  summary: 'Basic tooltip wrapper for elements'
+  summary: 'Basic tooltip wrapper for elements',
+  git: 'https://github.com/meteor/chromatic',
+  documentation: null
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2');
   api.use([
     'ecmascript',
-    'react',
+    'react@0.14.3',
     'less',
     'underscore',
-    'mdg:borealis',
-    'mdg:chromatic',
-    'mdg:date-components'
+    'mdg:borealis@0.0.1',
+    'mdg:chromatic@0.0.1',
+    'mdg:date-components@0.0.1'
   ], 'client');
   api.addFiles([
     'jquery.qtip.js',

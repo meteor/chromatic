@@ -17,14 +17,14 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'less',
-    'react',
-    'mdg:utils',
-    'mdg:classnames',
+    'react@0.14.3',
+    'mdg:utils@0.0.1',
+    'mdg:classnames@0.0.1',
     'cosmos:browserify@0.2.0',
-    'mdg:validation-error',
-    'mdg:borealis',
-    'mdg:chromatic-api',
-    'mdg:buttons'
+    'mdg:validation-error@0.5.1',
+    'mdg:borealis@0.0.1',
+    'mdg:chromatic-api@0.0.1',
+    'mdg:buttons@0.0.1'
   ], 'client');
 
   api.addFiles([

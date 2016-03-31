@@ -61,7 +61,7 @@ mdg:react-meteor-app@0.0.1
 mdg:sortable@0.0.1
 mdg:tooltips@0.0.1
 mdg:utils@0.0.1
-mdg:validation-error@0.0.1
+mdg:validation-error@0.5.1
 mdg:velocity-react@0.0.1
 meteor@1.1.10
 meteor-base@1.0.1
