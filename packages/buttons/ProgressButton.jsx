@@ -1,7 +1,7 @@
 /* global ProgressButton:true */
 /* global React */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ProgressButton = React.createClass({
   propTypes: {

@@ -1,7 +1,7 @@
 /* global Radio:true FormRadio:true */
 /* global React makeField classnames */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Radio = React.createClass({
   propTypes: {

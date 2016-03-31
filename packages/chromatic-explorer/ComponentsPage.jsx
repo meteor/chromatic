@@ -2,7 +2,7 @@
 /* global React FlowRouter ChromaticLayout StyleguideReadme ComponentsPageSidebar
 ReactMeteorData SingleComponentPage */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ComponentsPage = React.createClass({
   mixins: [ReactMeteorData],

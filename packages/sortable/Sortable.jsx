@@ -1,7 +1,7 @@
 /* global Sortable:true */
 /* global React classnames */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Sortable = React.createClass({
   propTypes: {

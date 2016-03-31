@@ -1,7 +1,8 @@
 Package.describe({
-  name: 'chromatic-api',
+  name: 'mdg:chromatic-api',
   version: '0.0.1',
-  summary: '',
+  summary: 'chromatic dev include',
+  git: 'https://github.com/meteor/chromatic',
   debugOnly: true
 });
 
@@ -15,11 +16,4 @@ Package.onUse(function(api) {
   ], 'client');
   api.addFiles('chromatic-api.js', 'client');
   api.export('Chromatic', 'client');
-});
-
-Package.onTest(function(api) {
-  api.use('ecmascript');
-  api.use('tinytest');
-  api.use('chromatic-api');
-  api.addFiles('chromatic-api-tests.js');
 });

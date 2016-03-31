@@ -1,7 +1,7 @@
 /* global OverlayLayout:true */
 /* global React OverlayController */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const ESCAPE_KEY_CODE = 27;
 

@@ -1,7 +1,7 @@
 /* global LoadingButton:true */
 /* global React */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 LoadingButton = React.createClass({
   propTypes: {

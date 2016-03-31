@@ -3,7 +3,7 @@
    StylesPageSidebar CodeBlock Icons Color Buttons Forms Icons Table Typography
    ChromaticLayout */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 StylesPage = React.createClass({
   render() {

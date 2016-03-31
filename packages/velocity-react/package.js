@@ -1,7 +1,8 @@
 Package.describe({
-  name: 'velocity-react',
+  name: 'mdg:velocity-react',
   version: '0.0.1',
-  summary: 'Wrapper package for the velocity-react animation library'
+  summary: 'Wrapper package for the velocity-react animation library',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Npm.depends({
@@ -11,7 +12,7 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.0.1');
+  api.versionsFrom('1.2');
   api.use(['ecmascript', 'cosmos:browserify@0.2.0'], 'client');
   api.addFiles([
     'velocity-react.browserify.js',

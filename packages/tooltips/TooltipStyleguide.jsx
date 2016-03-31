@@ -1,6 +1,6 @@
 /* global React WithTooltip RelativeDate */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const TooltipStyleguide = React.createClass({
   render() {

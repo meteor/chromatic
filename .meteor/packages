@@ -21,19 +21,19 @@ insecure                # Allow all DB writes from clients (for prototyping)
 
 react
 kadira:flow-router
-react-meteor-app
-chromatic
+mdg:react-meteor-app
+mdg:chromatic
 
-animations
-buttons
-callout
-code-block
-color-grid
-date-components
-form-components
-list
-loading-spinner
-overlays
-sortable
-tooltips
-outlines
+mdg:animations
+mdg:buttons
+mdg:callout
+mdg:code-block
+mdg:color-grid
+mdg:date-components
+mdg:form-components
+mdg:list
+mdg:loading-spinner
+mdg:overlays
+mdg:sortable
+mdg:tooltips
+mdg:outlines

@@ -1,7 +1,8 @@
 Package.describe({
-  name: 'utils',
+  name: 'mdg:utils',
   version: '0.0.1',
-  summary: 'common util functions'
+  summary: 'common utility functions',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {

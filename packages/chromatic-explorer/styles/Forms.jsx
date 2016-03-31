@@ -1,7 +1,7 @@
 /* global Forms:true */
 /* global React StyleguideSpec */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Forms = React.createClass({
   render() {

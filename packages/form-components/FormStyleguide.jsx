@@ -1,7 +1,7 @@
 /* global React Form FormInput FormTextarea FormRadio FormSelect FormCheckbox FormStepper
   ValidationError */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 let FormStyleguide = React.createClass({
   getInitialState() {

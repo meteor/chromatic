@@ -1,7 +1,7 @@
 /* global ChromaticExplorer:true */
 /* global FlowRouter ComponentSpec */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ChromaticExplorer = {
   /**

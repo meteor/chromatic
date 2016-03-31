@@ -1,7 +1,7 @@
 /* global Callout:true */
 /* global React classnames */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Callout = React.createClass({
 

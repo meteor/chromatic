@@ -1,7 +1,8 @@
 Package.describe({
-  name: 'borealis',
+  name: 'mdg:borealis',
   version: '0.0.1',
-  summary: 'borealis styleguide',
+  summary: 'a style system',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {

@@ -1,17 +1,18 @@
 Package.describe({
-  name: 'date-components',
+  name: 'mdg:date-components',
   version: '0.0.1',
-  summary: 'Simple rendering of dates'
+  summary: 'Simple rendering of dates',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2-rc.12');
+  api.versionsFrom('1.2');
   api.use([
     'ecmascript',
     'react',
-    'classnames',
-    'borealis',
-    'chromatic',
+    'mdg:classnames',
+    'mdg:borealis',
+    'mdg:chromatic',
     'momentjs:moment@2.10.6',
     'tracker'], 'client');
   api.addFiles([

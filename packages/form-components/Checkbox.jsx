@@ -1,7 +1,7 @@
 /* global Checkbox:true FormCheckbox:true */
 /* global React makeField */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Checkbox = React.createClass({
   propTypes: {

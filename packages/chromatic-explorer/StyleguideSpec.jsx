@@ -1,7 +1,7 @@
 /* global StyleguideSpec:true */
 /* global React */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 const {StubCollections} = Package['stub-collections'] || {};
 
 StyleguideSpec = React.createClass({

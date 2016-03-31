@@ -1,7 +1,8 @@
 Package.describe({
-  name: 'sortable',
+  name: 'mdg:sortable',
   version: '0.0.1',
-  summary: 'Components to create sortable things'
+  summary: 'Components to create sortable things',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {
@@ -9,9 +10,9 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'react',
-    'borealis',
-    'chromatic',
-    'classnames',
+    'mdg:borealis',
+    'mdg:chromatic',
+    'mdg:classnames',
     'dfischer:faker@1.0.8'
   ], 'client');
   api.addFiles(['Sortable.jsx', 'SortableTableExample.jsx'], 'client');

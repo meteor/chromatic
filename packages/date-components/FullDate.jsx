@@ -1,7 +1,7 @@
 /* global FullDate:true */
 /* global React moment */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 FullDate = React.createClass({
   propTypes: {

@@ -1,20 +1,21 @@
 Package.describe({
-  name: 'list',
+  name: 'mdg:list',
   version: '0.0.1',
-  summary: 'A infinite-scroll list component that',
+  summary: 'A infinite-scroll list component',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2-rc.12');
+  api.versionsFrom('1.2');
   api.use([
     'ecmascript',
     'react',
-    'borealis',
-    'chromatic',
+    'mdg:borealis',
+    'mdg:chromatic',
     'underscore',
-    'velocity-react',
-    'form-components',
-    'animations'
+    'mdg:velocity-react',
+    'mdg:form-components',
+    'mdg:animations'
   ], 'client');
   api.addFiles(['List.jsx', 'AnimatedListTester.jsx'], 'client');
   api.export('List', 'client');

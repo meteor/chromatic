@@ -1,7 +1,7 @@
 /* global PageToggleButton:true */
 /* global React FlowRouter classnames */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 PageToggleButton = React.createClass({
   render() {

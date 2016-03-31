@@ -1,7 +1,7 @@
 /* global Stepper:true, FormStepper:true */
 /* global React classnames AutosizeInput makeField */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Stepper = React.createClass({
   propTypes: {

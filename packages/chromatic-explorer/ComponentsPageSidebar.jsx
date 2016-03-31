@@ -1,7 +1,7 @@
 /* global ComponentsPageSidebar:true */
 /* global React FlowRouter PageToggleButton Form */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ComponentsPageSidebar = React.createClass({
   propTypes: {

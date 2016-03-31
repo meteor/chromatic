@@ -1,16 +1,17 @@
 Package.describe({
-  name: 'buttons',
+  name: 'mdg:buttons',
   version: '0.0.1',
-  summary: 'Button Components',
+  summary: 'button components',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2-rc.12');
+  api.versionsFrom('1.2');
   api.use([
     'ecmascript',
     'react',
-    'borealis',
-    'chromatic-api'
+    'mdg:borealis',
+    'mdg:chromatic-api'
   ], 'client');
   api.addFiles([
     'ProgressButton.jsx',

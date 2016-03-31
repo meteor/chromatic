@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'tooltips',
+  name: 'mdg:tooltips',
   version: '0.0.1',
   summary: 'Basic tooltip wrapper for elements'
 });
@@ -11,9 +11,9 @@ Package.onUse(function(api) {
     'react',
     'less',
     'underscore',
-    'borealis',
-    'chromatic',
-    'date-components'
+    'mdg:borealis',
+    'mdg:chromatic',
+    'mdg:date-components'
   ], 'client');
   api.addFiles([
     'jquery.qtip.js',

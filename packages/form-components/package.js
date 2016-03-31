@@ -1,8 +1,9 @@
 Package.describe({
-  name: 'form-components',
+  name: 'mdg:form-components',
   version: '0.0.1',
   summary: 'Simple React form components that use method validation',
-  documentation: 'README.md'
+  documentation: 'README.md',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Npm.depends({
@@ -12,18 +13,18 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2-rc.12');
+  api.versionsFrom('1.2');
   api.use([
     'ecmascript',
     'less',
     'react',
-    'utils',
-    'classnames',
+    'mdg:utils',
+    'mdg:classnames',
     'cosmos:browserify@0.2.0',
-    'validation-error',
-    'borealis',
-    'chromatic-api',
-    'buttons'
+    'mdg:validation-error',
+    'mdg:borealis',
+    'mdg:chromatic-api',
+    'mdg:buttons'
   ], 'client');
 
   api.addFiles([

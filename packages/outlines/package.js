@@ -1,12 +1,13 @@
 Package.describe({
-  name: 'outlines',
+  name: 'mdg:outlines',
   version: '0.0.1',
   readme: 'README.md',
-  summary: 'Press ctrl+~ to show outlines around all dom elements'
+  summary: 'Press ctrl+~ to show outlines around all dom elements',
+  debugOnly: true
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2-rc.15');
+  api.versionsFrom('1.2');
   api.use(['ecmascript', 'jquery'], 'client');
   api.addFiles(['outlines.js', 'outlines.css'], 'client');
 });

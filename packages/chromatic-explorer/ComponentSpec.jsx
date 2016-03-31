@@ -1,7 +1,7 @@
 /* global ComponentSpec:true */
 /* global React StyleguideSpec ReactMeteorData FlowRouter classnames */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ComponentSpec = React.createClass({
   mixins: [ReactMeteorData],

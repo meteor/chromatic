@@ -1,7 +1,7 @@
 /* global Select:true FormSelect:true */
 /* global React makeField */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Select = React.createClass({
   propTypes: {

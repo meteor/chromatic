@@ -23,7 +23,7 @@ ChromaticLayout = React.createClass({
     const header = this.props.header || (
       <div className="styleguide-header">
         <a href="" className="logo">
-          <img src="/packages/chromatic-explorer/logotype-chromatic.svg" alt="Chromatic"/>
+          <img src="/packages/mdg_chromatic-explorer/logotype-chromatic.svg" alt="Chromatic"/>
         </a>
       </div>
     );

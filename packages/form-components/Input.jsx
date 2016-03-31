@@ -1,7 +1,7 @@
 /* global Input:true FormInput:true */
 /* global React makeField */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Input = React.createClass({
   propTypes: {

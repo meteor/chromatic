@@ -1,7 +1,7 @@
 /* globals AnimatedListTester:true */
 /* globals React List VelocityTransitionGroup Form FormSelect Animations */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const ItemComponent = React.createClass({ // eslint-disable-line react/no-multi-comp
   propTypes: {

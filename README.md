@@ -1,6 +1,5 @@
 # Chromatic
-Explore, visualize, and prototype your organization's UI components. 
-Chromatic is the home for your user interface.
+Explore, visualize, and prototype your organization's UI components.
 
 ## Usage
 Chromatic is available at `/styleguide` in your app in development mode.

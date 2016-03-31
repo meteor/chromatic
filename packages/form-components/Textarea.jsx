@@ -1,7 +1,7 @@
 /* global Textarea:true FormTextarea:true */
 /* global React ReactDOM makeField Utils autosize */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Textarea = React.createClass({
   propTypes: {

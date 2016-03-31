@@ -1,6 +1,6 @@
 /* global ColorGrid:true React */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ColorGrid = React.createClass({
   propTypes: {

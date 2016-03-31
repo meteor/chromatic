@@ -2,7 +2,7 @@
 /* global React classnames FlowRouter
 Form FormSelect */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 SingleComponentPageHeader = React.createClass({
   propTypes: {

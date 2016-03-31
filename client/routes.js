@@ -1,5 +1,5 @@
 
-const {ChromaticExplorer} = Package['chromatic-explorer'] || {};
+const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
 
 if (ChromaticExplorer) {
   ChromaticExplorer.configure({basePath: '/styleguide'});
@@ -7,7 +7,7 @@ if (ChromaticExplorer) {
 
 FlowRouter.notFound = NotFound;
 FlowRouter.route('/', {
-  triggersEnter: [(context, redirect) => {
+  action: function() {
     FlowRouter.go('/styleguide');
-  }]
+  }
 });

@@ -1,19 +1,20 @@
 Package.describe({
-  name: 'callout',
+  name: 'mdg:callout',
   version: '0.0.1',
-  summary: 'Let mdg members know that they\'re looking at another client\'s app'
+  summary: 'an important thing at the top of the screen',
+  git: 'https://github.com/meteor/chromatic'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2-rc.12');
+  api.versionsFrom('1.2');
   api.use([
     'dfischer:faker',
     'ecmascript',
     'less',
     'react',
-    'borealis',
-    'chromatic',
-    'classnames'
+    'mdg:borealis',
+    'mdg:chromatic-api',
+    'mdg:classnames'
   ], 'client');
 
   api.addFiles([

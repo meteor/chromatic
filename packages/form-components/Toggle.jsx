@@ -1,7 +1,7 @@
 /* global Toggle:true, FormToggle:true */
 /* global React makeField */
 
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Toggle = React.createClass({
   propTypes: {

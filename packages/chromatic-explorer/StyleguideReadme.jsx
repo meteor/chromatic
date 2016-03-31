@@ -14,7 +14,7 @@ StyleguideReadme = React.createClass({
           <div className="section-content">
             <p className="font-s2">Declare Chromatic at the top of your component code</p>
             <pre>{`
-      const {Chromatic} = Package['chromatic-api'] || {};
+      const {Chromatic} = Package['mdg:chromatic-api'] || {};
                   `}</pre>
             <p className="font-s2">Build your component</p>
             <pre>{`
@@ -43,7 +43,7 @@ StyleguideReadme = React.createClass({
             </pre>
             <div className="font-s2">Example Code</div>
             <pre>{`
-      const {Chromatic} = Package['chromatic-api'] || {};
+      const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
       ColorGrid = React.createClass({
         propTypes: {
