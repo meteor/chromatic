@@ -43,17 +43,17 @@ mdg:react-meteor-app
 mdg:chromatic  # this is all you need to use chromatic in your react app
 
 # below are packages with extra components you can use in your projects
-msg:animations
-msg:buttons
-msg:callout
-msg:code-block
-msg:color-grid
-msg:date-components
-msg:form-components
-msg:list
-msg:loading-spinner
-msg:overlays
-msg:sortable
-msg:tooltips
-msg:outlines
+mdg:animations
+mdg:buttons
+mdg:callout
+mdg:code-block
+mdg:color-grid
+mdg:date-components
+mdg:form-components
+mdg:list
+mdg:loading-spinner
+mdg:overlays
+mdg:sortable
+mdg:tooltips
+mdg:outlines
 ```
