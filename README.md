@@ -1,5 +1,5 @@
 # Chromatic
-Explore, visualize, and prototype your organization's UI components.
+Explore, visualize, and prototype your UI components.
 
 ## Usage
 
