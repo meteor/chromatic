@@ -1,5 +1,7 @@
 /* globals Animations:true */
 /* globals VelocityHelpers */
+import Velocity from 'velocity-animate';
+import VelocityHelpers from 'velocity-react';
 
 Animations = {
   // These two are just POC

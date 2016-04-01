@@ -6,11 +6,15 @@ Package.describe({
   documentation: null
 });
 
+Npm.depends({
+  'react': '0.14.8'
+});
+
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use([
     'ecmascript',
-    'react@0.14.3',
+    'react-meteor-data',
     'mdg:flow-router-extensions@0.0.1'
   ], 'client');
   api.addFiles([

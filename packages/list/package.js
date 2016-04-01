@@ -6,15 +6,19 @@ Package.describe({
   documentation: null
 });
 
+Npm.depends({
+  'react': '0.14.8',
+  'velocity-react': '1.1.1',
+  'velocity-animate': '1.2.3'
+});
+
 Package.onUse(function(api) {
   api.versionsFrom('1.2');
   api.use([
     'ecmascript',
-    'react@0.14.3',
     'mdg:borealis@0.0.1',
     'mdg:chromatic@0.0.1',
     'underscore',
-    'mdg:velocity-react@0.0.1',
     'mdg:form-components@0.0.1',
     'mdg:animations@0.0.1'
   ], 'client');
