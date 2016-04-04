@@ -6,9 +6,15 @@ Explore, visualize, and prototype your UI components.
 ``` bash
 meteor add mdg:chromatic
 ```
+Make Chromatic available at `/styleguide` in your app in development mode:
+```js
+const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
 
-Chromatic is available at `/styleguide` in your app in development mode.
-
+if (ChromaticExplorer) {
+  ChromaticExplorer.configure({basePath: '/styleguide'});
+}
+```
+Add component specs:
 ``` js
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
