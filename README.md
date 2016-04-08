@@ -1,6 +1,9 @@
 # Chromatic
 Explore, visualize, and prototype your UI components.
 
+## Demo
+[![Chromatic demo video](https://www.dropbox.com/s/ueu9lzdsrdr7z4l/Screenshot%202016-04-07%2017.25.30.png)](https://www.youtube.com/watch?v=dlMe7u02m50)
+
 ## Usage
 
 ``` bash
