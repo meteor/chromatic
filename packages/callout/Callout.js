@@ -1,9 +1,9 @@
 /* global Callout:true */
 /* global React classnames */
 
-const {Chromatic} = Package['mdg:chromatic-api'] || {};
+import { Chromatic } from 'meteor/mdg:chromatic';
 
-Callout = React.createClass({
+export const Callout = React.createClass({
 
   propTypes: {
     className: React.PropTypes.string.isRequired,

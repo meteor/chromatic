@@ -12,8 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'underscore',
-    'check',
-    'react@0.14.3'
+    'check'
   ], 'client');
   api.addFiles('chromatic-api.js', 'client');
   api.export('Chromatic', 'client');

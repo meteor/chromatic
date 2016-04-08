@@ -12,16 +12,21 @@ Package.onUse(function(api) {
     'dfischer:faker@1.0.8',
     'ecmascript',
     'less',
-    'react@0.14.3',
     'mdg:borealis@0.0.1',
     'mdg:chromatic-api@0.0.1',
     'mdg:classnames@0.0.1'
   ], 'client');
 
+  api.mainModule('main.js', 'client');
+
   api.addFiles([
-    'Callout.jsx',
     'Callout.less'
   ], 'client');
 
-  api.export('Callout', 'client');
+  // api.addFiles([
+  //   'Callout.jsx',
+  //   'Callout.less'
+  // ], 'client');
+
+  // api.export('Callout', 'client');
 });

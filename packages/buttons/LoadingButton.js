@@ -1,9 +1,9 @@
 /* global LoadingButton:true */
 /* global React */
 
-const {Chromatic} = Package['mdg:chromatic-api'] || {};
+const { Chromatic } = Package['mdg:chromatic-api'] || {};
 
-LoadingButton = React.createClass({
+export const LoadingButton = React.createClass({
   propTypes: {
     active: React.PropTypes.bool.isRequired,
     disabled: React.PropTypes.bool,

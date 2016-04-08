@@ -6,17 +6,13 @@ Package.describe({
   documentation: null
 });
 
-Npm.depends({
-  'velocity-react': '1.1.1',
-  'velocity-animate': '1.2.3'
-});
-
 Package.onUse(function(api) {
   api.versionsFrom('1.2');
   api.use([
+    'tmeasday:check-npm-versions',
     'ecmascript',
     'jquery',
     'underscore']);
-  api.addFiles('animations.js', 'client');
-  api.export('Animations', 'client');
+
+  api.mainModule('main.js', 'client');
 });

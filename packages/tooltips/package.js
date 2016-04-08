@@ -10,7 +10,6 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2');
   api.use([
     'ecmascript',
-    'react@0.14.3',
     'less',
     'underscore',
     'mdg:borealis@0.0.1',
