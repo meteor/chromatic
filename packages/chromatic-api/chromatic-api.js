@@ -4,7 +4,7 @@ import React from 'react';
 /**
  * Chromatic API
  */
-Chromatic = {
+export const Chromatic = {
   /**
    * Constructs a styleguided component entry
    * @param {React.Component} component

@@ -1,7 +1,7 @@
 /* global LoadingButton:true */
 import React from 'react';
 
-const { Chromatic } = Package['mdg:chromatic-api'] || {};
+import { Chromatic } from 'meteor/mdg:chromatic-api';
 
 export const LoadingButton = React.createClass({
   propTypes: {

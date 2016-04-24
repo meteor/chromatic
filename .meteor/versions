@@ -35,7 +35,7 @@ livedata@1.0.18
 logging@1.0.12
 mdg:borealis@0.0.1
 mdg:buttons@0.0.1
-mdg:chromatic@0.0.1
+mdg:chromatic@0.2.0
 mdg:chromatic-api@0.0.1
 mdg:chromatic-explorer@0.0.1
 mdg:classnames@0.0.1
@@ -58,7 +58,7 @@ mongo-id@1.0.4
 npm-mongo@1.4.43
 observe-sequence@1.0.11
 ordered-dict@1.0.7
-percolate:icons@0.0.8
+percolate:icons@0.0.9
 promise@0.6.7
 random@1.0.9
 react-meteor-data@0.2.9
