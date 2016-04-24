@@ -1,5 +1,5 @@
 
-const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
+import { ChromaticExplorer } from 'meteor/mdg:chromatic';
 
 if (ChromaticExplorer) {
   ChromaticExplorer.configure({basePath: '/styleguide'});
