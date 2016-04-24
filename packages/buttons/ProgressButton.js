@@ -1,5 +1,6 @@
 /* global ProgressButton:true */
 /* global React */
+import React from 'react';
 
 const { Chromatic } = Package['mdg:chromatic-api'] || {};
 

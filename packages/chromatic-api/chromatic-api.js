@@ -1,5 +1,5 @@
 /* global Chromatic:true */
-/* global React */
+import React from 'react';
 
 /**
  * Chromatic API

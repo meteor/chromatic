@@ -1,5 +1,6 @@
 /* global React Form FormInput FormTextarea FormRadio FormSelect FormCheckbox FormStepper
   ValidationError */
+import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

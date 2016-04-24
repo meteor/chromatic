@@ -1,7 +1,7 @@
 /* global SingleComponentPageSidebar:true */
 /* global React classnames ReactMeteorData FlowRouter Form FormRadio StyleguideNotFound
    FormSelect ColorGrid */
-
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 SingleComponentPageSidebar = React.createClass({

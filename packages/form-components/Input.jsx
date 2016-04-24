@@ -1,5 +1,6 @@
 /* global Input:true FormInput:true */
-/* global React makeField */
+/* global makeField */
+import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

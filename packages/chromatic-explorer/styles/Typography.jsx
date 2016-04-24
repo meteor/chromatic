@@ -1,5 +1,6 @@
 /* global Typography:true */
 /* global React */
+import React from 'react';
 
 Typography = React.createClass({
   render() {

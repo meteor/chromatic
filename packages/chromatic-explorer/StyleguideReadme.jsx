@@ -1,5 +1,6 @@
 /* global StyleguideReadme:true */
 /* global React */
+import React from 'react';
 
 StyleguideReadme = React.createClass({
   render() {

@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/meteor/chromatic#readme",
   "dependencies": {
-    "react": "^15.0.0",
-    "react-addons-pure-render-mixin": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "velocity-react": "^1.1.4"
+    "autosize": "3.0.15",
+    "react": "^15.0.1",
+    "react-addons-pure-render-mixin": "^15.0.1",
+    "react-dom": ">=15.0.0",
+    "react-input-autosize": "0.6.13",
+    "velocity-react": ">=1.1.4"
   }
 }
