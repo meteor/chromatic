@@ -17,18 +17,19 @@ kadira:flow-router
 mdg:react-meteor-app
 mdg:chromatic
 
-# mdg:animations
-# mdg:buttons
-# mdg:callout
-# mdg:code-block
-# mdg:color-grid
-# mdg:date-components
-# mdg:form-components
-# mdg:list
-# mdg:loading-spinner
-# mdg:overlays
-# mdg:sortable
-# mdg:tooltips
-# mdg:outlines
 standard-minifier-css
 standard-minifier-js
+
+mdg:animations
+mdg:buttons
+mdg:callout
+mdg:code-block
+mdg:color-grid
+mdg:date-components
+mdg:form-components
+mdg:list
+mdg:loading-spinner
+mdg:overlays
+mdg:sortable
+mdg:tooltips
+mdg:outlines

@@ -4,7 +4,7 @@
 import Velocity from 'velocity-animate';
 import VelocityHelpers from 'velocity-react';
 
-export default const Animations = {
+export const Animations = {
   // These two are just POC
   scaleIn: VelocityHelpers.registerEffect({
     defaultDuration: 1100,
