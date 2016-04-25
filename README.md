@@ -1,6 +1,9 @@
 # Chromatic
 Explore, visualize, and prototype your UI components.
 
+## Demo
+[![Chromatic demo video](https://raw.githubusercontent.com/meteor/chromatic/dom/more-documentation/thumbnail-video.png)](https://www.youtube.com/watch?v=dlMe7u02m50)
+
 ## Usage
 
 ``` bash
