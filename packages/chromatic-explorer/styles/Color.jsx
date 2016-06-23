@@ -1,5 +1,6 @@
 /* global Color:true */
 /* global React */
+import React from 'react';
 
 Color = React.createClass({
   render() {

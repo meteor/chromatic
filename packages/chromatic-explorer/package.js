@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic-explorer',
-  version: '0.0.1',
+  version: '0.1.0',
   summary: 'chromatic component explorer',
   git: 'https://github.com/meteor/chromatic',
   debugOnly: true,
@@ -8,20 +8,19 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2');
+  api.versionsFrom('1.3');
   api.use([
     'underscore',
     'ecmascript',
-    'react@0.14.3',
     'less',
     'check',
     'kadira:flow-router@2.4.0',
-    'mdg:classnames@0.0.1',
+    'mdg:classnames@0.1.0',
     'mdg:flow-router-extensions@0.0.1',
-    'mdg:chromatic-api@0.0.1',
-    'mdg:form-components@0.0.1',
-    'mdg:color-grid@0.0.1',
-    'mdg:outlines@0.0.1'
+    'mdg:chromatic-api@0.1.0',
+    'mdg:form-components@0.1.0',
+    'mdg:color-grid@0.1.0',
+    'mdg:outlines@0.1.0'
   ], 'client');
 
   api.addFiles([

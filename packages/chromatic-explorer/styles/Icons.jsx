@@ -1,5 +1,6 @@
 /* global Icons:true */
 /* global React */
+import React from 'react';
 
 Icons = React.createClass({
   render() {

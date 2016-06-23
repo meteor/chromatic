@@ -1,6 +1,6 @@
 /* global Radio:true FormRadio:true */
 /* global React makeField classnames */
-
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Radio = React.createClass({

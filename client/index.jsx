@@ -1,5 +1,9 @@
-/* globals ReactMeteorApp React ReactDOM */
+/* globals ReactMeteorApp ReactDOM */
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 Meteor.startup(function() {
-  ReactDOM.render(<ReactMeteorApp />, document.getElementById('render-target'));
+  const root = document.createElement('div');
+  document.body.appendChild(root);
+  ReactDOM.render(<ReactMeteorApp />, root);
 });

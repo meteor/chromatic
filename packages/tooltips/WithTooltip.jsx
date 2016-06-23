@@ -1,6 +1,10 @@
 /* global WithTooltip:true */
 /* global React ReactDOM */
 
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+
 // TODO: we should probably use modernizr / capabilities
 const IS_TOUCH = !!('ontouchstart' in window);
 

@@ -1,5 +1,5 @@
 /* global ReactLayoutRenderer:true */
-/* global React */
+import React from 'react';
 
 // Render a given Component Class inside a layout as defined by its static layout property,
 //   recursively. Any props that are passed in (in this case the current route), are passed to all

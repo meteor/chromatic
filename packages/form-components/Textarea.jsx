@@ -1,5 +1,7 @@
 /* global Textarea:true FormTextarea:true */
-/* global React ReactDOM makeField Utils autosize */
+/* global ReactDOM makeField Utils autosize */
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

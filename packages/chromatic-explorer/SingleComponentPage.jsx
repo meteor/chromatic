@@ -1,7 +1,7 @@
 /* global SingleComponentPage:true */
 /* global React ReactDOM classnames ReactMeteorData FlowRouter SingleComponentPageSidebar
 SingleComponentPageHeader StyleguideNotFound ColorGrid ChromaticLayout */
-
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 SingleComponentPage = React.createClass({

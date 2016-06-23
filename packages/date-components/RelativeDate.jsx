@@ -1,6 +1,10 @@
 /* global RelativeDate:true */
 /* global React moment DateVar classnames ReactMeteorData */
 
+import React from 'react';
+
+const {ReactMeteorData} = Package['react-meteor-data'] || {};
+
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 // global dependencies that tick over every..

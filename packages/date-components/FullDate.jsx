@@ -1,6 +1,8 @@
 /* global FullDate:true */
 /* global React moment */
 
+import React from 'react';
+
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 FullDate = React.createClass({

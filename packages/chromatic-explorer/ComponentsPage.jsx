@@ -1,6 +1,8 @@
 /* global ComponentsPage:true */
 /* global React FlowRouter ChromaticLayout StyleguideReadme ComponentsPageSidebar
 ReactMeteorData SingleComponentPage */
+import React from 'react';
+import { ReactMeteorData } from 'meteor/react-meteor-data';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

@@ -2,7 +2,7 @@
 /* global React Cardinal WithTooltip FullDate RelativeDate Status ContainerItemPlaceholder
    StylesPageSidebar CodeBlock Icons Color Buttons Forms Icons Table Typography
    ChromaticLayout */
-
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 StylesPage = React.createClass({

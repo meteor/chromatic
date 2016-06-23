@@ -1,5 +1,6 @@
 /* global StylesPageSidebar:true */
 /* global React PageToggleButton classnames */
+import React from 'react';
 
 StylesPageSidebar = React.createClass({
   getInitialState() {
