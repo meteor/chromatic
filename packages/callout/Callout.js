@@ -1,9 +1,9 @@
 /* global Callout:true */
 /* global React classnames */
 
-const {Chromatic} = Package['mdg:chromatic-api'] || {};
+const { Chromatic } = Package['mdg:chromatic-api'] || {};
 
-Callout = React.createClass({
+export const Callout = React.createClass({
 
   propTypes: {
     className: React.PropTypes.string.isRequired,

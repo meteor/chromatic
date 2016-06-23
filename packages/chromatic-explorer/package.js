@@ -12,7 +12,6 @@ Package.onUse(function(api) {
   api.use([
     'underscore',
     'ecmascript',
-    'react@0.14.3',
     'less',
     'check',
     'kadira:flow-router@2.4.0',

@@ -1,9 +1,10 @@
 /* global ProgressButton:true */
 /* global React */
+import React from 'react';
 
-const {Chromatic} = Package['mdg:chromatic-api'] || {};
+const { Chromatic } = Package['mdg:chromatic-api'] || {};
 
-ProgressButton = React.createClass({
+export const ProgressButton = React.createClass({
   propTypes: {
     active: React.PropTypes.bool.isRequired,
     progress: React.PropTypes.number,

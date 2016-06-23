@@ -1,5 +1,6 @@
 /* global ChromaticLayout:true */
 /* global React FlowRouter classnames*/
+import React from 'react';
 
 ChromaticLayout = React.createClass({
   propTypes: {

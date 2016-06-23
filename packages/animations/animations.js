@@ -1,7 +1,10 @@
 /* globals Animations:true */
 /* globals VelocityHelpers */
 
-Animations = {
+import Velocity from 'velocity-animate';
+import VelocityHelpers from 'velocity-react';
+
+export const Animations = {
   // These two are just POC
   scaleIn: VelocityHelpers.registerEffect({
     defaultDuration: 1100,

@@ -1,4 +1,5 @@
-/* global ColorGrid:true React */
+/* global ColorGrid:true */
+import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

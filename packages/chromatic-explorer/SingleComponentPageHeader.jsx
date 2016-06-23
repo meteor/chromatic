@@ -1,6 +1,7 @@
 /* global SingleComponentPageHeader:true */
 /* global React classnames FlowRouter
 Form FormSelect */
+import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

@@ -1,5 +1,6 @@
 /* global Buttons:true */
 /* global React StyleguideSpec */
+import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

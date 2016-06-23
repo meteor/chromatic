@@ -1,6 +1,6 @@
 /* global Checkbox:true FormCheckbox:true */
 /* global React makeField */
-
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Checkbox = React.createClass({

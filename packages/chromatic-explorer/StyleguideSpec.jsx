@@ -1,6 +1,6 @@
 /* global StyleguideSpec:true */
 /* global React */
-
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 const {StubCollections} = Package['stub-collections'] || {};
 

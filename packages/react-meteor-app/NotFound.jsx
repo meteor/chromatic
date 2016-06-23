@@ -1,6 +1,8 @@
 /* global NotFound:true */
 /* global React Layout */
 
+import React from 'react';
+
 NotFound = React.createClass({
   render() {
     return (

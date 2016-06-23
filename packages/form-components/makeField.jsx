@@ -1,5 +1,5 @@
 /* global makeField:true */
-/* global React */
+import React from 'react';
 
 makeField = function(Component, displayName, defaultValue = '') {
   return React.createClass({

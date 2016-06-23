@@ -1,5 +1,7 @@
 /* global Form:true */
-/* global React ValidationError */
+/* global ValidationError */
+import React from 'react';
+
 const recontextChildren = function(children) {
   // NOTE: This is a bit of a hack to make this element the owner (as well as the parent) of
   //   the child element. See https://github.com/facebook/react/issues/3392#issuecomment-78772905

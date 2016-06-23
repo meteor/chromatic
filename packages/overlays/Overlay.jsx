@@ -1,6 +1,8 @@
 /* global Overlay:true */
 /* global React OverlayController OverlayLayout ReactMeteorData VelocityTransitionGroup Animations*/
 
+import React from 'react';
+
 Overlay = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {

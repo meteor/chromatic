@@ -8,13 +8,11 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2');
+  api.versionsFrom('1.3');
   api.use([
     'ecmascript',
     'underscore',
-    'check',
-    'react@0.14.3'
+    'check'
   ], 'client');
-  api.addFiles('chromatic-api.js', 'client');
-  api.export('Chromatic', 'client');
+  api.mainModule('chromatic-api.js', 'client');
 });

@@ -1,0 +1,27 @@
+{
+  "name": "chromatic",
+  "version": "1.0.0",
+  "description": "Explore, visualize, and prototype your UI components.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meteor/chromatic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meteor/chromatic/issues"
+  },
+  "homepage": "https://github.com/meteor/chromatic#readme",
+  "dependencies": {
+    "autosize": "3.0.15",
+    "react": "^15.0.1",
+    "react-addons-pure-render-mixin": "^15.0.1",
+    "react-dom": ">=15.0.0",
+    "react-input-autosize": "0.6.13",
+    "velocity-react": ">=1.1.4"
+  }
+}
