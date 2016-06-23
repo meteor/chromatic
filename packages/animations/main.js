@@ -1,8 +1,8 @@
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
-checkNpmVersions({
+/*checkNpmVersions({
   'velocity-react': '1.1.1',
   'velocity-animate': '1.2.3'
-}, 'mdg:animations');
+}, 'mdg:animations');*/
 
-export Animations from './animations';
+export * from './animations';

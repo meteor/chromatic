@@ -1,5 +1,6 @@
 /* global CodeBlock:true */
 /* global React hljs classnames */
+import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

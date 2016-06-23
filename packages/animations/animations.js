@@ -1,8 +1,9 @@
 /* globals Animations:true */
 /* globals VelocityHelpers */
 
-import Velocity from 'velocity-animate';
-import VelocityHelpers from 'velocity-react';
+import Velocity from 'velocity-animate'
+import 'velocity-animate/velocity.ui';
+import {velocityHelpers as VelocityHelpers} from 'velocity-react';
 
 export const Animations = {
   // These two are just POC

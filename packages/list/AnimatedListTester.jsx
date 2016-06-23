@@ -1,9 +1,14 @@
 /* globals AnimatedListTester:true */
 /* globals React List VelocityTransitionGroup Form FormSelect Animations */
 
+import React from 'react';
+
 import VelocityTransitionGroup from 'velocity-animate';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
+
+const {Animations} = Package['mdg:animations'] || {};
+
 
 const ItemComponent = React.createClass({ // eslint-disable-line react/no-multi-comp
   propTypes: {

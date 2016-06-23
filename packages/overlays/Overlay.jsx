@@ -3,6 +3,8 @@
 
 import React from 'react';
 
+const {ReactMeteorData} = Package['react-meteor-data'] || {};
+
 Overlay = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {

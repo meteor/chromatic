@@ -1,6 +1,8 @@
 /* global SortableTableExample:true */
 /* global React Sortable faker */
 
+import React from 'react';
+
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 SortableTableExample = React.createClass({
