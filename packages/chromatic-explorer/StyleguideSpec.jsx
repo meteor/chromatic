@@ -10,11 +10,16 @@ StyleguideSpec = React.createClass({
     component: React.PropTypes.instanceOf(React.Component.constructor),
     specName: React.PropTypes.string.isRequired
   },
+  componentDidMount() {
+    this.showControls();
+  },
   componentWillReceiveProps() {
     this.teardownSpec();
+    this.showControls();
   },
   componentWillUnmount() {
     this.teardownSpec();
+    this.teardownControls();
   },
   teardownSpec() {
     const spec = this.spec();
@@ -36,6 +41,21 @@ StyleguideSpec = React.createClass({
     }
     return spec;
   },
+  showControls() {
+    if(!this.props.showControls)
+      return
+    const entry = this.entry();
+    this.newProps = {}
+    if(window.parent && window.parent.ChromaticControls)
+      this.controls = window.parent.ChromaticControls.show(this.refComponent, (obj) => {
+        this.newProps = obj
+        this.forceUpdate()
+      })
+  },
+  teardownControls() {
+    if(this.controls)
+      this.controls.remove()
+  },
   render() {
     const entry = this.entry();
     const spec = this.spec();
@@ -49,9 +69,13 @@ StyleguideSpec = React.createClass({
       props = _.isFunction(spec.props) ? spec.props() : spec.props;
     }
 
+    if(this.newProps)
+      for(i in this.newProps)
+        props[i] = this.newProps[i]
+
     if (entry) {
       return (
-        <entry.component {...props} />
+        <entry.component {...props} ref={(ref) => this.refComponent = ref} />
       );
     }
     return null;

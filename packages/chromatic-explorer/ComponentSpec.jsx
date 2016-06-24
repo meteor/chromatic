@@ -34,7 +34,7 @@ ComponentSpec = React.createClass({
     }
     return (
       <div className="styleguide spec-container">
-        <StyleguideSpec entry={entry} specName={specName}/>
+        <StyleguideSpec entry={entry} specName={specName} showControls={entry.showControls} />
       </div>
     );
   }

@@ -12,6 +12,7 @@ meteor add mdg:chromatic
 Make Chromatic available at `/styleguide` in your app in development mode:
 ```js
 const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
+```
 
 ## Importing Chromatic
 Versions 0.0.x of these packages are compatible with Meteor 1.2
@@ -39,24 +40,24 @@ ChromaticExplorer.configure({ basePath: '/styleguide' });
 import { Chromatic } from 'meteor/mdg:chromatic';
 
 ComponentName = React.createClass({
-// code
+  // code
 });
 
 if (Chromatic) {
-Chromatic.add(ComponentName, {
-specs: [
-new Chromatic.Spec('specName1', {props:
-{
-// props used by your component
-}
-}),
-new Chromatic.Spec('specName2', {props:
-{
-// props used by your component
-}
-})
-]
-});
+  Chromatic.add(ComponentName, {
+    specs: [
+      new Chromatic.Spec('specName1', {props:
+        {
+          // props used by your component
+        }
+      }),
+      new Chromatic.Spec('specName2', {props:
+        {
+          // props used by your component
+        }
+      })
+    ]
+  });
 }
 ```
 
@@ -82,3 +83,6 @@ When extending Chromatic itself you may need to import the API directly to avoid
 ```
 import { Chromatic } from 'meteor/mdg:chromatic-api';
 ```
+
+## Community packages
+ - [`meteor add kuip:chromatic-controls`](https://atmospherejs.com/kuip/chromatic-controls) - GUI for dynamically changing component props

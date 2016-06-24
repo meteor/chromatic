@@ -23,7 +23,8 @@ export const Chromatic = {
     check(options, Match.Optional({
       specs: Match.Optional(Array),
       isPage: Match.Optional(Boolean),
-      name: Match.Optional(String)
+      name: Match.Optional(String),
+      showControls: Match.Optional(Boolean)
     }));
 
     if (options && options.specs && options.isPage) {
@@ -34,6 +35,7 @@ export const Chromatic = {
     this.component = component;
     this.specs = (options && options.specs) || [Chromatic.defaultSpec()];
     this.isPage = (options && options.isPage) || false;
+    this.showControls = (options && options.showControls) || true;
   },
 
   /**

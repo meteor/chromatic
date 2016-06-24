@@ -38,9 +38,9 @@ mdg:animations@0.1.0
 mdg:borealis@0.1.0
 mdg:buttons@0.1.0
 mdg:callout@0.1.0
-mdg:chromatic@0.1.0
-mdg:chromatic-api@0.1.0
-mdg:chromatic-explorer@0.1.0
+mdg:chromatic@0.1.1
+mdg:chromatic-api@0.1.1
+mdg:chromatic-explorer@0.1.1
 mdg:classnames@0.1.0
 mdg:code-block@0.1.0
 mdg:color-grid@0.1.0
