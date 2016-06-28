@@ -60,6 +60,25 @@ if (Chromatic) {
   });
 }
 ```
+## API for exposing and using CSS classes
+``` js
+  Chromatic.addClass('button', ['primary', 'secondary', 'tertiary'])
+  let allClasses = Chromatic.allClasses();
+  let buttonClasses = Chromatic.classes('button');
+```
+## API for adding plugins to run after rendering a component spec 
+
+(`chromatic-explorer/StyleguideSpec.jsx`)
+``` js
+  Chromatic.addPlugin(ChromaticControls);
+  
+  // where:
+  ChromaticControls = {
+    load: function(ReactInstance, ReactReferenceEntryComponent, entry, spec, metadata) {},
+    remove: function() {},
+    props: {...} // new props, set up by the plugin
+  }
+```
 
 ## Component packages
 ```
