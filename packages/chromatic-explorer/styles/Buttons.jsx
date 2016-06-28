@@ -47,3 +47,6 @@ Buttons = React.createClass({
     );
   }
 });
+
+Chromatic.addStyle('button', ['btn', 'primary', 'secondary', 'tertiary', 'round', 'paginated', 'small', 'ancillary', 'active', 'inverse', 'circle'])
+

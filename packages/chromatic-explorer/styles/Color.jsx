@@ -2,6 +2,8 @@
 /* global React */
 import React from 'react';
 
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
+
 Color = React.createClass({
   render() {
     return (
@@ -77,3 +79,5 @@ Color = React.createClass({
     );
   }
 });
+
+Chromatic.addStyle('color', ['color-primary', 'color-secondary', 'color-tertiary', 'color-complementary', 'color-ancillary', 'color-accent-coolest', 'color-accent-cooler','color-accent-cool', 'color-accent-warm', 'color-accent-warmer', 'color-accent-warmest', 'color-lightest', 'color-lighter', 'color-light', 'color-mediumlight', 'color-medium', 'color-mediumdark', 'color-dark', 'color-darker', 'color-darkest', 'color-positive', 'color-negative', 'color-neutral', 'color-running', 'color-crashed', 'color-degraded', 'color-stopped', 'color-facebook', 'color-google', 'color-twitter'])

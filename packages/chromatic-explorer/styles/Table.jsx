@@ -78,3 +78,5 @@ Table = React.createClass({
     );
   }
 });
+
+Chromatic.addStyle('table', ['table-view', 'sortable', 'ascending', 'descending', 'js-expand-content', 'js-expand-trigger', 'column', 'fieldset'])
