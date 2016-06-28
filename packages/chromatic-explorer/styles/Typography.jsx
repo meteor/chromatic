@@ -57,5 +57,5 @@ Typography = React.createClass({
   }
 });
 
-Chromatic.addStyle('typography', ['font-m1', 'font-x1', 'font-l1', 'font-l2', 'font-l3', 'font-m2', 'font-m3', 'font-s1', 'font-s2', 'font-s3', 'type-light', 'type-bold', 'type-semibold', 'type-italic', 'type-normal'])
+Chromatic.addClass('typography', ['font-m1', 'font-x1', 'font-l1', 'font-l2', 'font-l3', 'font-m2', 'font-m3', 'font-s1', 'font-s2', 'font-s3', 'type-light', 'type-bold', 'type-semibold', 'type-italic', 'type-normal'])
 

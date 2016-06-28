@@ -34,5 +34,5 @@ if (Chromatic) {
     ]
   });
 
-  Chromatic.addStyle('code', ['code-block'])
+  Chromatic.addClass('code', ['code-block'])
 }

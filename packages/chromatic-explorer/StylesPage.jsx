@@ -179,5 +179,5 @@ StylesPage = React.createClass({
 
 Chromatic.add(StylesPage, {name: 'styles', isPage: true});
 
-Chromatic.addStyle('link', ['link', 'primary', 'secondary', 'tertiary', 'complementary', 'inverse', 'inverse-alt'])
+Chromatic.addClass('link', ['link', 'primary', 'secondary', 'tertiary', 'complementary', 'inverse', 'inverse-alt'])
 

@@ -80,6 +80,6 @@ Forms = React.createClass({
   }
 });
 
-Chromatic.addStyle('form', ['drawer', 'drawer-content', 'section-actions', 'action-group', 'left', 'right', 'title', 'column', 'fieldset', 'toggle-form'])
+Chromatic.addClass('form', ['drawer', 'drawer-content', 'section-actions', 'action-group', 'left', 'right', 'title', 'column', 'fieldset', 'toggle-form'])
 
 

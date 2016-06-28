@@ -41,5 +41,5 @@ if (Chromatic) {
     ]
   });
   
-  Chromatic.addStyle('callout', ['primary', 'secondary', 'alert'])
+  Chromatic.addClass('callout', ['primary', 'secondary', 'alert'])
 }

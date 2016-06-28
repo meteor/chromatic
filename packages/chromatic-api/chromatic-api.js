@@ -95,25 +95,25 @@ export const Chromatic = {
   },
 
   /**
-   * Adds style classes for an entry
+   * Adds css classes for an entry
    * @param {String} type - the name of the entry
-   * @param {Array} styles - the css classes
+   * @param {Array} classes - the css classes
    * @returns {void}
    */
-  addStyle(type, styles) {
+  addClass(type, classes) {
     check(type, String);
-    check(styles, [String]);
-    Chromatic._styles[type] = _.uniq((Chromatic._styles[type] || []).concat(styles));
+    check(classes, [String]);
+    Chromatic._classes[type] = _.uniq((Chromatic._classes[type] || []).concat(classes));
   },
 
   /**
-   * Gets style classes for an entry
+   * Gets css classes for an entry
    * @param {String} name - the name of the entry
    * @returns {Array}
    */
-  styles(name) {
+  classes(name) {
     check(name, String);
-    return Chromatic._styles[name];
+    return Chromatic._classes[name];
   },
 
   /**
@@ -149,8 +149,8 @@ export const Chromatic = {
    * Returns the list of css classes
    * @returns {[String]}
    */
-  allStyles: function() {
-    return Chromatic._styles;
+  allClasses: function() {
+    return Chromatic._classes;
   },
 
   /**
@@ -169,7 +169,7 @@ export const Chromatic = {
   /**
    * A dict that contains the list of css classes for the entries
    */
-  _styles: {},
+  _classes: {},
 
   /**
    * A dict that contains the list of plugins called after rendering entries
