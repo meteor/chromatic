@@ -18,13 +18,15 @@ ComponentSpec = React.createClass({
   render() {
     const {entryName, specName} = this.data;
     const entry = Chromatic.entry(entryName);
+    let meta = {type: 'component'}
 
     if (specName === 'all') {
       let instances = [];
+      meta.spec = 'all';
       instances = entry.specs.map(s => {
         return (
           <div key={s.name}>
-            <StyleguideSpec entry={entry} specName={s.name}/>
+            <StyleguideSpec entry={entry} specName={s.name} meta={meta}/>
           </div>
         );
       });
@@ -34,7 +36,7 @@ ComponentSpec = React.createClass({
     }
     return (
       <div className="styleguide spec-container">
-        <StyleguideSpec entry={entry} specName={specName} showControls={entry.showControls} />
+        <StyleguideSpec entry={entry} specName={specName} meta={meta}/>
       </div>
     );
   }

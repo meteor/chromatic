@@ -8,18 +8,19 @@ StyleguideSpec = React.createClass({
   propTypes: {
     entry: React.PropTypes.instanceOf(Chromatic.Entry),
     component: React.PropTypes.instanceOf(React.Component.constructor),
-    specName: React.PropTypes.string.isRequired
+    specName: React.PropTypes.string.isRequired,
+    meta: React.PropTypes.object
   },
   componentDidMount() {
-    this.showControls();
+    this.loadPlugins();
   },
   componentWillReceiveProps() {
     this.teardownSpec();
-    this.showControls();
+    this.loadPlugins();
   },
   componentWillUnmount() {
     this.teardownSpec();
-    this.teardownControls();
+    this.teardownPlugins();
   },
   teardownSpec() {
     const spec = this.spec();
@@ -41,20 +42,17 @@ StyleguideSpec = React.createClass({
     }
     return spec;
   },
-  showControls() {
-    if(!this.props.showControls)
-      return
+  loadPlugins() {
     const entry = this.entry();
-    this.newProps = {}
-    if(window.parent && window.parent.ChromaticControls)
-      this.controls = window.parent.ChromaticControls.show(this.refComponent, (obj) => {
-        this.newProps = obj
-        this.forceUpdate()
-      })
+    const spec = this.spec();
+    _.each(Chromatic.allPlugins(), (p) => {
+      p.load(this, this.refComponent, entry, spec, this.props.meta)
+    });
   },
-  teardownControls() {
-    if(this.controls)
-      this.controls.remove()
+  teardownPlugins() {
+    _.each(Chromatic.allPlugins(), (p) => {
+      p.remove();
+    });
   },
   render() {
     const entry = this.entry();
@@ -69,9 +67,12 @@ StyleguideSpec = React.createClass({
       props = _.isFunction(spec.props) ? spec.props() : spec.props;
     }
 
-    if(this.newProps)
-      for(i in this.newProps)
-        props[i] = this.newProps[i]
+    _.each(Chromatic.allPlugins(), (p) => {
+      if(p.props)
+        _.each(p.props, (prop, i) => {
+          props[i] = p.props[i];
+        });
+    });
 
     if (entry) {
       return (
