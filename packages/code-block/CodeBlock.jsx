@@ -33,4 +33,6 @@ if (Chromatic) {
       }}),
     ]
   });
+
+  Chromatic.addClass('code', ['code-block'])
 }

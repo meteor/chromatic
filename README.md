@@ -12,6 +12,7 @@ meteor add mdg:chromatic
 Make Chromatic available at `/styleguide` in your app in development mode:
 ```js
 const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
+```
 
 ## Importing Chromatic
 Versions 0.0.x of these packages are compatible with Meteor 1.2
@@ -39,25 +40,44 @@ ChromaticExplorer.configure({ basePath: '/styleguide' });
 import { Chromatic } from 'meteor/mdg:chromatic';
 
 ComponentName = React.createClass({
-// code
+  // code
 });
 
 if (Chromatic) {
-Chromatic.add(ComponentName, {
-specs: [
-new Chromatic.Spec('specName1', {props:
-{
-// props used by your component
+  Chromatic.add(ComponentName, {
+    specs: [
+      new Chromatic.Spec('specName1', {props:
+        {
+          // props used by your component
+        }
+      }),
+      new Chromatic.Spec('specName2', {props:
+        {
+          // props used by your component
+        }
+      })
+    ]
+  });
 }
-}),
-new Chromatic.Spec('specName2', {props:
-{
-// props used by your component
-}
-})
-]
-});
-}
+```
+## API for exposing and using CSS classes
+``` js
+  Chromatic.addClass('button', ['primary', 'secondary', 'tertiary'])
+  let allClasses = Chromatic.allClasses();
+  let buttonClasses = Chromatic.classes('button');
+```
+## API for adding plugins to run after rendering a component spec 
+
+(`chromatic-explorer/StyleguideSpec.jsx`)
+``` js
+  Chromatic.addPlugin(ChromaticControls);
+  
+  // where:
+  ChromaticControls = {
+    load: function(ReactInstance, ReactReferenceEntryComponent, entry, spec, metadata) {},
+    remove: function() {},
+    props: {...} // new props, set up by the plugin
+  }
 ```
 
 ## Component packages
@@ -82,3 +102,6 @@ When extending Chromatic itself you may need to import the API directly to avoid
 ```
 import { Chromatic } from 'meteor/mdg:chromatic-api';
 ```
+
+## Community packages
+ - [`meteor add kuip:chromatic-controls`](https://atmospherejs.com/kuip/chromatic-controls) - GUI for dynamically changing component props

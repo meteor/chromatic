@@ -95,6 +95,38 @@ export const Chromatic = {
   },
 
   /**
+   * Adds css classes for an entry
+   * @param {String} type - the name of the entry
+   * @param {Array} classes - the css classes
+   * @returns {void}
+   */
+  addClass(type, classes) {
+    check(type, String);
+    check(classes, [String]);
+    Chromatic._classes[type] = _.uniq((Chromatic._classes[type] || []).concat(classes));
+  },
+
+  /**
+   * Gets css classes for an entry
+   * @param {String} name - the name of the entry
+   * @returns {Array}
+   */
+  classes(name) {
+    check(name, String);
+    return Chromatic._classes[name];
+  },
+
+  /**
+   * Adds a plugin called after rendering entries
+   * @param {Function} callback - callback function
+   * @returns {void}
+   */
+  addPlugin(obj) {
+    check(obj, Object);
+    Chromatic._plugins.push(obj);
+  },
+
+  /**
    * Returns the list of non-page styleguide entries
    * @returns {[Chromatic.Entry]}
    */
@@ -113,8 +145,34 @@ export const Chromatic = {
     return _.filter(entries, (entry) => entry.isPage);
   },
 
+  /**
+   * Returns the list of css classes
+   * @returns {[String]}
+   */
+  allClasses: function() {
+    return Chromatic._classes;
+  },
+
+  /**
+   * Returns the list of plugins
+   * @returns {[String]}
+   */
+  allPlugins: function() {
+    return Chromatic._plugins;
+  },
+
    /**
    * A dict that contains the list of styleguide entries
    */
   _entries: {},
+
+  /**
+   * A dict that contains the list of css classes for the entries
+   */
+  _classes: {},
+
+  /**
+   * A dict that contains the list of plugins called after rendering entries
+   */
+  _plugins: []
 };

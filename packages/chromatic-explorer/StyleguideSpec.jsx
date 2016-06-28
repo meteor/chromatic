@@ -8,13 +8,19 @@ StyleguideSpec = React.createClass({
   propTypes: {
     entry: React.PropTypes.instanceOf(Chromatic.Entry),
     component: React.PropTypes.instanceOf(React.Component.constructor),
-    specName: React.PropTypes.string.isRequired
+    specName: React.PropTypes.string.isRequired,
+    meta: React.PropTypes.object
+  },
+  componentDidMount() {
+    this.loadPlugins();
   },
   componentWillReceiveProps() {
     this.teardownSpec();
+    this.loadPlugins();
   },
   componentWillUnmount() {
     this.teardownSpec();
+    this.teardownPlugins();
   },
   teardownSpec() {
     const spec = this.spec();
@@ -36,6 +42,18 @@ StyleguideSpec = React.createClass({
     }
     return spec;
   },
+  loadPlugins() {
+    const entry = this.entry();
+    const spec = this.spec();
+    _.each(Chromatic.allPlugins(), (p) => {
+      p.load(this, this.refComponent, entry, spec, this.props.meta)
+    });
+  },
+  teardownPlugins() {
+    _.each(Chromatic.allPlugins(), (p) => {
+      p.remove();
+    });
+  },
   render() {
     const entry = this.entry();
     const spec = this.spec();
@@ -49,9 +67,16 @@ StyleguideSpec = React.createClass({
       props = _.isFunction(spec.props) ? spec.props() : spec.props;
     }
 
+    _.each(Chromatic.allPlugins(), (p) => {
+      if(p.props)
+        _.each(p.props, (prop, i) => {
+          props[i] = p.props[i];
+        });
+    });
+
     if (entry) {
       return (
-        <entry.component {...props} />
+        <entry.component {...props} ref={(ref) => this.refComponent = ref} />
       );
     }
     return null;

@@ -40,4 +40,6 @@ if (Chromatic) {
       }})
     ]
   });
+  
+  Chromatic.addClass('callout', ['primary', 'secondary', 'alert'])
 }
