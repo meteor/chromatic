@@ -23,8 +23,7 @@ export const Chromatic = {
     check(options, Match.Optional({
       specs: Match.Optional(Array),
       isPage: Match.Optional(Boolean),
-      name: Match.Optional(String),
-      showControls: Match.Optional(Boolean)
+      name: Match.Optional(String)
     }));
 
     if (options && options.specs && options.isPage) {
@@ -35,7 +34,6 @@ export const Chromatic = {
     this.component = component;
     this.specs = (options && options.specs) || [Chromatic.defaultSpec()];
     this.isPage = (options && options.isPage) || false;
-    this.showControls = (options && options.showControls) || true;
   },
 
   /**
@@ -97,6 +95,38 @@ export const Chromatic = {
   },
 
   /**
+   * Adds style classes for an entry
+   * @param {String} type - the name of the entry
+   * @param {Array} styles - the css classes
+   * @returns {void}
+   */
+  addStyle(type, styles) {
+    check(type, String);
+    check(styles, [String]);
+    Chromatic._styles[type] = _.uniq((Chromatic._styles[type] || []).concat(styles));
+  },
+
+  /**
+   * Gets style classes for an entry
+   * @param {String} name - the name of the entry
+   * @returns {Array}
+   */
+  styles(name) {
+    check(name, String);
+    return Chromatic._styles[name];
+  },
+
+  /**
+   * Adds a plugin called after rendering entries
+   * @param {Function} callback - callback function
+   * @returns {void}
+   */
+  addPlugin(obj) {
+    check(obj, Object);
+    Chromatic._plugins.push(obj);
+  },
+
+  /**
    * Returns the list of non-page styleguide entries
    * @returns {[Chromatic.Entry]}
    */
@@ -115,8 +145,34 @@ export const Chromatic = {
     return _.filter(entries, (entry) => entry.isPage);
   },
 
+  /**
+   * Returns the list of css classes
+   * @returns {[String]}
+   */
+  allStyles: function() {
+    return Chromatic._styles;
+  },
+
+  /**
+   * Returns the list of plugins
+   * @returns {[String]}
+   */
+  allPlugins: function() {
+    return Chromatic._plugins;
+  },
+
    /**
    * A dict that contains the list of styleguide entries
    */
   _entries: {},
+
+  /**
+   * A dict that contains the list of css classes for the entries
+   */
+  _styles: {},
+
+  /**
+   * A dict that contains the list of plugins called after rendering entries
+   */
+  _plugins: []
 };
