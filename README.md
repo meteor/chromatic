@@ -12,14 +12,14 @@ meteor add mdg:chromatic
 Make Chromatic available at `/styleguide` in your app in development mode:
 ```js
 const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
-
+```
 ## Importing Chromatic
 Versions 0.0.x of these packages are compatible with Meteor 1.2
-```
+```js
 const { Chromatic } = Package['mdg:chromatic-api'] || {};
 ```
 Versions 0.1.x are compatible with Meteor 1.3
-```
+```js
 import { Chromatic } from 'meteor/mdg:chromatic';
 ```
 
@@ -35,7 +35,7 @@ ChromaticExplorer.configure({ basePath: '/styleguide' });
 
 ## Write Component Specs
 =======
-``` js
+```js
 import { Chromatic } from 'meteor/mdg:chromatic';
 
 ComponentName = React.createClass({
