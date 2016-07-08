@@ -6,27 +6,27 @@ Explore, visualize, and prototype your UI components.
 
 ## Usage
 
-``` bash
+```bash
 meteor add mdg:chromatic
 ```
 Make Chromatic available at `/styleguide` in your app in development mode:
-``` js
+```js
 const {ChromaticExplorer} = Package['mdg:chromatic-explorer'] || {};
 ```
 
 ## Importing Chromatic
 Versions 0.0.x of these packages are compatible with Meteor 1.2
-```
+```js
 const { Chromatic } = Package['mdg:chromatic-api'] || {};
 ```
 Versions 0.1.x are compatible with Meteor 1.3
-```
+```js
 import { Chromatic } from 'meteor/mdg:chromatic';
 ```
 
 ## Installing Component Explorer
 Configure the URL:
-``` js
+```js
 import { ChromaticExplorer } from 'meteor/mdg:chromatic';
 
 if (ChromaticExplorer) {
@@ -36,7 +36,7 @@ if (ChromaticExplorer) {
 
 ## Write Component Specs
 =======
-``` js
+```js
 import { Chromatic } from 'meteor/mdg:chromatic';
 
 ComponentName = React.createClass({
@@ -62,7 +62,7 @@ if (Chromatic) {
 ```
 
 ## Component packages
-``` bash
+```bash
 mdg:animations
 mdg:buttons
 mdg:callout
@@ -80,6 +80,6 @@ mdg:outlines
 
 ## Circular references
 When extending Chromatic itself you may need to import the API directly to avoid circular references:
-```
+```js
 import { Chromatic } from 'meteor/mdg:chromatic-api';
 ```
