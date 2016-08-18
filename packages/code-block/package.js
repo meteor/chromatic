@@ -16,10 +16,9 @@ Package.onUse(function(api) {
     'simple:highlight.js@1.0.9'
   ], 'client');
 
-  api.addFiles([
-    'CodeBlock.jsx',
-    'CodeBlock.less',
-  ], 'client');
+  api.mainModule('main.js', 'client');
 
-  api.export('CodeBlock', 'client');
+  api.addFiles([
+    'CodeBlock.less'
+  ], 'client');
 });
