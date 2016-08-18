@@ -64,6 +64,7 @@ momentjs:moment@2.14.4
 mongo@1.1.10
 mongo-id@1.0.5
 npm-mongo@1.5.45
+numeral:numeral@1.5.3_1
 observe-sequence@1.0.12
 ordered-dict@1.0.8
 percolate:icons@0.0.11

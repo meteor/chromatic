@@ -11,7 +11,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'mdg:borealis@0.1.0',
-    'mdg:chromatic@0.1.0',
+    'mdg:chromatic-api@0.1.0',
     'momentjs:moment@2.10.6',
     'react-meteor-data',
     'tracker'], 'client');

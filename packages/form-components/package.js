@@ -15,10 +15,14 @@ Package.onUse(function(api) {
     'mdg:validation-error@0.5.1',
     'mdg:borealis@0.1.0',
     'mdg:chromatic-api@0.1.0',
-    'mdg:buttons@0.1.0'
+    'mdg:buttons@0.1.0',
+    'mdg:tooltips@0.1.0',
+    'numeral:numeral'
   ], 'client');
 
   api.addFiles([
+    'Cardinal.jsx',
+    'Cardinal.less',
     'Form.jsx',
     'Form.less',
     'makeField.jsx',
@@ -43,6 +47,7 @@ Package.onUse(function(api) {
   ], 'client');
 
   api.export([
+    'Cardinal',
     'Form',
     'Input',
     'FormInput',

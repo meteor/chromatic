@@ -13,7 +13,7 @@ Package.onUse(function(api) {
     'less',
     'underscore',
     'mdg:borealis@0.1.0',
-    'mdg:chromatic@0.1.0',
+    'mdg:chromatic-api@0.1.0',
     'mdg:date-components@0.1.0'
   ], 'client');
   api.addFiles([
