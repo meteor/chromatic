@@ -4,5 +4,5 @@ checkNpmVersions({
   'react': '^15.0.0'
 }, 'mdg:buttons');
 
-export { ProgressButton } from './ProgressButton.js';
-export { LoadingButton } from './LoadingButton.js';
+export { ProgressButton } from './ProgressButton.jsx';
+export { LoadingButton } from './LoadingButton.jsx';

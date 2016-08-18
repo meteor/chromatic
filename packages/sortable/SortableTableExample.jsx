@@ -1,5 +1,5 @@
 /* global SortableTableExample:true */
-/* global React Sortable faker */
+/* global Sortable faker */
 
 import React from 'react';
 

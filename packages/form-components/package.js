@@ -6,17 +6,12 @@ Package.describe({
   git: 'https://github.com/meteor/chromatic'
 });
 
-// Npm.depends({
-//   'externalify': '0.1.0'
-// });
-
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use([
     'ecmascript',
     'less',
     'mdg:utils@0.0.1',
-    'mdg:classnames@0.1.0',
     'mdg:validation-error@0.5.1',
     'mdg:borealis@0.1.0',
     'mdg:chromatic-api@0.1.0',
@@ -24,15 +19,16 @@ Package.onUse(function(api) {
   ], 'client');
 
   api.addFiles([
-    'autosize.browserify.js',
-    'AutosizeInput.browserify.js',
     'Form.jsx',
     'Form.less',
     'makeField.jsx',
     'Input.jsx',
     'Input.less',
+    'FormattedInput.jsx',
     'Textarea.jsx',
     'Textarea.less',
+    'SearchBar.jsx',
+    'SearchBar.less',
     'Select.jsx',
     'Select.less',
     'Stepper.jsx',
@@ -46,13 +42,15 @@ Package.onUse(function(api) {
     'SubmitButton.jsx'
   ], 'client');
 
-
   api.export([
     'Form',
     'Input',
     'FormInput',
+    'FormattedInput',
+    'FormFormattedInput',
     'Textarea',
     'FormTextarea',
+    'SearchBar',
     'Select',
     'FormSelect',
     'Radio',

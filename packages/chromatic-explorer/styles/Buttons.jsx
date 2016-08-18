@@ -1,7 +1,7 @@
 /* global Buttons:true */
-/* global React StyleguideSpec */
-import React from 'react';
+/* global StyleguideSpec */
 
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Buttons = React.createClass({
@@ -14,6 +14,7 @@ Buttons = React.createClass({
           <a className="btn tertiary">Tertiary</a>
           <a className="btn primary round">Primary round</a>
           <a className="btn primary" disabled={true}>Disabled</a>
+          <div className="btn selected"><span className="icon-check"></span> Current</div>
           <StyleguideSpec entry={Chromatic.entry('ProgressButton')}
             specName="rest"/>
           <StyleguideSpec entry={Chromatic.entry('LoadingButton')}

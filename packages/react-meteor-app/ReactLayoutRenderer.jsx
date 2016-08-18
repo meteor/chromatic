@@ -1,18 +1,22 @@
 /* global ReactLayoutRenderer:true */
-import React from 'react';
+/* global */
 
 // Render a given Component Class inside a layout as defined by its static layout property,
 //   recursively. Any props that are passed in (in this case the current route), are passed to all
 //   components in the layout heirarchy (via the box mechanism below)
+import React from 'react';
+
 ReactLayoutRenderer = React.createClass({
   propTypes: {
     Component: React.PropTypes.any.isRequired,
     status: React.PropTypes.object.isRequired
   },
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     // NOTE: Not sure this is really the right place to put this.
     // Whenever we get a new page+set of layouts, re-scroll the screen to the top.
-    window.scrollTo(0, 0);
+    if (this.props.Component !== prevProps.Component) {
+      window.scrollTo(0, 0);
+    }
   },
   // "wrap" a component in a function that renders it with a the given child,
   //   with the other props that we are passed (which in our case are route params)

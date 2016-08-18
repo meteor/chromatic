@@ -13,7 +13,8 @@ Package.onUse(function(api) {
     'less',
     'mdg:borealis@0.1.0',
     'mdg:chromatic@0.1.0',
-    'mdg:animations@0.1.0'
+    'mdg:animations@0.1.0',
+    'react-meteor-data',
   ], 'client');
   api.addFiles([
     'OverlayLayout.jsx',

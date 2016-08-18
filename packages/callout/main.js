@@ -4,4 +4,4 @@ checkNpmVersions({
   'react': '^15.0.0'
 }, 'mdg:callout');
 
-export { Callout } from './Callout.js';
+export { Callout } from './Callout.jsx';

@@ -1,9 +1,8 @@
 /* global Overlay:true */
-/* global React OverlayController OverlayLayout ReactMeteorData VelocityTransitionGroup Animations*/
+/* global OverlayController OverlayLayout ReactMeteorData */
 
 import React from 'react';
-
-const {ReactMeteorData} = Package['react-meteor-data'] || {};
+import {VelocityTransitionGroup} from 'velocity-react';
 
 Overlay = React.createClass({
   mixins: [ReactMeteorData],

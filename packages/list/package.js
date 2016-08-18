@@ -16,6 +16,13 @@ Package.onUse(function(api) {
     'mdg:form-components@0.1.0',
     'mdg:animations@0.1.0'
   ], 'client');
-  api.addFiles(['List.jsx', 'AnimatedListTester.jsx'], 'client');
-  api.export('List', 'client');
+  api.addFiles([
+    'List.jsx',
+    'AnimatedListTester.jsx',
+    'Pagination.jsx'
+  ], 'client');
+  api.export([
+    'List',
+    'Pagination'
+  ], 'client');
 });

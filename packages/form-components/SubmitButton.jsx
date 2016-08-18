@@ -1,5 +1,6 @@
 /* global SubmitButton:true */
-/* global React LoadingButton */
+/* global LoadingButton */
+
 import React from 'react';
 
 SubmitButton = React.createClass({

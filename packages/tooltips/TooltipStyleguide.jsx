@@ -1,4 +1,4 @@
-/* global React WithTooltip RelativeDate */
+/* global WithTooltip RelativeDate */
 
 import React from 'react';
 

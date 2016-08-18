@@ -1,9 +1,10 @@
 /* global Checkbox:true FormCheckbox:true */
-/* global React makeField */
+/* global makeField */
+
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-const Checkbox = React.createClass({
+Checkbox = React.createClass({
   propTypes: {
     value: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
     error: React.PropTypes.string,

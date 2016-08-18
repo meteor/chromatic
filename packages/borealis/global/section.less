@@ -77,6 +77,10 @@
 		margin: 0;
 	}
 
+	& + .table-view {
+		margin-top: 0;
+	}
+
 
 	.title-section {
 		.font-s3;
@@ -90,6 +94,8 @@
 	.subtitle-section {
 		&.positive { color: @color-positive; }
 		&.negative { color: @color-mediumdark; }
+		&.informative { color: @color-complementary; }
+
 		&.small {
 			.font-s2;
 			color: @color-mediumdark;
@@ -211,27 +217,6 @@
 			padding: .25rem 0; //4 0
 		}
 
-		.reveal-search {
-			.transition(all 300ms @easing);
-			overflow: hidden;
-			max-width: 14px;
-			white-space: nowrap;
-
-			input[type="text"].nochrome {
-				display: inline-block;
-				position: relative;
-				top: -1px; //visual adjustment
-				margin-left: 0;
-			}
-
-			&.active {
-				max-width: 100%; // needed for animation
-				input[type="text"].nochrome {
-					margin-left: .5rem
-				}
-			}
-		}
-
 		.filter {
 			display: inline-block;
 			font-size: 11px;
@@ -304,7 +289,17 @@ a.section-subheading .subheading {
 	@media screen and (min-width: @breakpoint) { .flex-direction(row); }
 
 	.action-group { .flex(1); }
-	.action-group.right { .flex(0,0,auto); }
+	.action-group.right {
+		.flex(0,0,auto);
+		text-align: right;
+
+		.btn {
+			width: 100%;
+			@media screen and (min-width: @breakpoint) {
+				width: auto;
+			}
+		}
+	}
 
 	.action-group {
 
@@ -321,13 +316,18 @@ a.section-subheading .subheading {
 			}
 		}
 
-		.action-confirm {
+		.title-action {
 			.font-s2;
-			.type-bold;
+
+	    @media screen and (min-width: @breakpoint) {
+				max-width: 600px;
+				width: 75%;
+			}
 		}
 
-		.action-description {
-			.font-s2;
+		.subtitle-action {
+			.font-s1;
+			display: block;
 		}
 
 		.error-message {
@@ -339,7 +339,11 @@ a.section-subheading .subheading {
 		}
 
 		.btn-spacing + .btn-spacing { margin-left: 1rem; }
-		.btn + .btn { margin-left: .625rem; }
+
+		@media screen and (min-width: @breakpoint) {
+			.btn + .btn { margin-left: .625rem; }
+		}
+
 	}
 }
 
@@ -393,9 +397,15 @@ a.section-subheading .subheading {
 			margin-bottom: -1.5rem;
 			margin-left: 3rem;
     }
+
     display: none;
     background-repeat: no-repeat;
 		background-position: center center;
 		background-size: contain;
+
+		svg {
+			height: auto;
+			width: 100%;
+		}
   }
 }

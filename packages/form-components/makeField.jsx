@@ -1,4 +1,5 @@
 /* global makeField:true */
+
 import React from 'react';
 
 makeField = function(Component, displayName, defaultValue = '') {

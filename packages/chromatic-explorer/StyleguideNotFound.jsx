@@ -1,5 +1,6 @@
 /* global StyleguideNotFound:true */
-/* global React ChromaticLayout */
+/* global ChromaticLayout */
+
 import React from 'react';
 
 StyleguideNotFound = React.createClass({

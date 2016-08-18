@@ -1,8 +1,6 @@
 /* global WithTooltip:true */
-/* global React ReactDOM */
 
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 
 // TODO: we should probably use modernizr / capabilities
@@ -40,7 +38,7 @@ const MODES = {
       effect: IN_EFFECT
     },
     hide: {
-      delay: 0,
+      delay: 300,
       fixed: true,
       effect: OUT_EFFECT
     }

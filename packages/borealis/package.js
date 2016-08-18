@@ -10,7 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use([
     'less',
-    'percolate:icons@0.0.9'
+    'percolate:icons@0.0.11'
   ]);
 
   api.imply(['percolate:icons'], 'client');

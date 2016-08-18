@@ -13,7 +13,6 @@ Package.onUse(function(api) {
     'less',
     'mdg:borealis@0.1.0',
     'mdg:chromatic@0.1.0',
-    'mdg:classnames@0.1.0'
   ]);
   api.addFiles([
     'LoadingSpinner.jsx',

@@ -14,7 +14,6 @@ Package.onUse(function(api) {
     'less',
     'mdg:borealis@0.1.0',
     'mdg:chromatic-api@0.1.0',
-    'mdg:classnames@0.1.0'
   ], 'client');
 
   api.mainModule('main.js', 'client');
@@ -22,11 +21,4 @@ Package.onUse(function(api) {
   api.addFiles([
     'Callout.less'
   ], 'client');
-
-  // api.addFiles([
-  //   'Callout.jsx',
-  //   'Callout.less'
-  // ], 'client');
-
-  // api.export('Callout', 'client');
 });

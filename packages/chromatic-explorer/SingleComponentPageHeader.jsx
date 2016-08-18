@@ -1,8 +1,8 @@
 /* global SingleComponentPageHeader:true */
-/* global React classnames FlowRouter
-Form FormSelect */
-import React from 'react';
+/* global FlowRouter Form FormSelect */
 
+import classnames from 'classnames';
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 SingleComponentPageHeader = React.createClass({

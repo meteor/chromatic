@@ -1,5 +1,6 @@
 /* global ComponentsPageSidebar:true */
-/* global React FlowRouter PageToggleButton Form */
+/* global FlowRouter PageToggleButton Form */
+
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

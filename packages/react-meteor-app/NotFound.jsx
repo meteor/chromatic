@@ -1,5 +1,5 @@
 /* global NotFound:true */
-/* global React Layout */
+/* global Layout */
 
 import React from 'react';
 

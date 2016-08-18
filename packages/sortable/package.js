@@ -12,7 +12,6 @@ Package.onUse(function(api) {
     'ecmascript',
     'mdg:borealis@0.1.0',
     'mdg:chromatic@0.1.0',
-    'mdg:classnames@0.1.0',
     'dfischer:faker@1.0.8'
   ], 'client');
   api.addFiles(['Sortable.jsx', 'SortableTableExample.jsx'], 'client');

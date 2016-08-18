@@ -6,11 +6,6 @@ Package.describe({
   documentation: null
 });
 
-Npm.depends({
-  'velocity-react': '1.1.1',
-  'velocity-animate': '1.2.3'
-});
-
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use([

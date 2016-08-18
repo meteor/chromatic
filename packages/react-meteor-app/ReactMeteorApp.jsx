@@ -1,5 +1,6 @@
 /* global ReactMeteorApp:true */
-/* global React ReactMeteorData FlowRouter NotFound ReactLayoutRenderer */
+/* global ReactMeteorData FlowRouter NotFound ReactLayoutRenderer */
+
 import React from 'react';
 
 ReactMeteorApp = React.createClass({

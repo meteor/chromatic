@@ -1,7 +1,7 @@
 /* global Table:true */
-/* global React StyleguideSpec */
-import React from 'react';
+/* global StyleguideSpec */
 
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Table = React.createClass({

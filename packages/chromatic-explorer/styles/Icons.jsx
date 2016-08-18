@@ -1,5 +1,6 @@
 /* global Icons:true */
-/* global React */
+/* global */
+
 import React from 'react';
 
 Icons = React.createClass({
@@ -131,6 +132,11 @@ Icons = React.createClass({
               <span key="icon-watch" className="icon-watch"></span>
               <span key="icon-sidebar" className="icon-sidebar"></span>
               <span key="icon-tablet" className="icon-tablet"></span>
+              <span key="icon-transfer" className="icon-transfer"></span>
+              <span key="icon-request-change" className="icon-request-change"></span>
+              <span key="icon-lightning" className="icon-lightning"></span>
+              <span key="icon-grow" className="icon-grow"></span>
+              <span key="icon-redirect" className="icon-redirect"></span>
             </div>
           </div>
         </div>

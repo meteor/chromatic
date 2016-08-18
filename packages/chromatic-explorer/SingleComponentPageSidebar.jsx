@@ -1,6 +1,8 @@
 /* global SingleComponentPageSidebar:true */
-/* global React classnames ReactMeteorData FlowRouter Form FormRadio StyleguideNotFound
+/* global ReactMeteorData FlowRouter Form FormRadio StyleguideNotFound
    FormSelect ColorGrid */
+
+import classnames from 'classnames';
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 

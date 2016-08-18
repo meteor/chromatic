@@ -1,5 +1,6 @@
 /* global Form:true */
 /* global ValidationError */
+
 import React from 'react';
 
 const recontextChildren = function(children) {
@@ -21,6 +22,7 @@ Form = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func,
     onSubmit: React.PropTypes.func,
+    onSubmitError: React.PropTypes.func,
     children: React.PropTypes.node,
     // Set initial if you don't want to override the form state later
     defaults: React.PropTypes.object,
@@ -73,6 +75,9 @@ Form = React.createClass({
     this.setState({submitting: false});
     if (error) {
       this.onError(error);
+      if (this.props.onSubmitError) {
+        this.props.onSubmitError(error);
+      }
     }
   },
   onSubmit(event) {
@@ -106,7 +111,7 @@ Form = React.createClass({
     }
   },
   render() {
-    const {onSubmit, onChange, children, ...other} = this.props;
+    const {onSubmit, onChange, defaults, onSubmitError, children, ...other} = this.props;
 
     const contextedChildren = recontextChildren(children);
 
