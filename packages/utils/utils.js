@@ -73,16 +73,6 @@ Utils = _.extend(Utils || {}, {
   toSplitWords(string) {
     return this.capitalize(string.replace(/([A-Z])/g, (c) => ` ${c}`));
   },
-  // User-visible form of versionId
-  formatVersionId(versionId) {
-    // if the version id is "old" (i.e doesn't contain a version number, this is the best we can do)
-    return versionId.split('-')[1] || '-';
-  },
-  formatContainerId(containerId) {
-    // If the container id is in the old format, all we can do is return it right back to the
-    // user. However, we don't expect this to actually happen
-    return containerId.split('-')[1] || containerId;
-  },
   clamp(v, min, max) {
     return v < min ? min : v > max ? max : v; // eslint-disable-line
   },
