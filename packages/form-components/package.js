@@ -11,7 +11,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'less',
-    'mdg:utils@0.0.1',
+    'mdg:utils@0.2.0',
     'mdg:validation-error@0.5.1',
     'mdg:borealis@0.2.0',
     'mdg:chromatic-api@0.2.0',

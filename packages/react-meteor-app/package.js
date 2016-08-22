@@ -11,7 +11,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'react-meteor-data',
-    'mdg:flow-router-extensions@0.0.1'
+    'mdg:flow-router-extensions@0.2.0'
   ], 'client');
   api.addFiles([
     'ReactMeteorApp.jsx',

@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     'less',
     'check',
     'kadira:flow-router@2.4.0',
-    'mdg:flow-router-extensions@0.0.1',
+    'mdg:flow-router-extensions@0.2.0',
     'mdg:chromatic-api@0.2.0',
     'mdg:form-components@0.2.0',
     'mdg:color-grid@0.2.0',
