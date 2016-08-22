@@ -1,5 +1,6 @@
 /* global OverlayLayout:true */
-/* global React OverlayController */
+/* global OverlayController */
+
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
@@ -31,7 +32,7 @@ OverlayLayout = React.createClass({
     $(document.body).off('keydown', this.handleKeyDown);
   },
   render() {
-    const {children, className, ...other} = this.props;
+    const {children, className} = this.props;
     return (
       <div className={`overlay${className}`}>
         <a className="overlay-close" onClick={this.onCloseClick}>

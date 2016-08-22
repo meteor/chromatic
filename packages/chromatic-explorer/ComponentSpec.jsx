@@ -1,8 +1,10 @@
 /* global ComponentSpec:true */
-/* global React StyleguideSpec ReactMeteorData FlowRouter classnames */
+/* global StyleguideSpec FlowRouter */
+
+import classnames from 'classnames';
 import React from 'react';
-import { ReactMeteorData } from 'meteor/react-meteor-data';
-const { Chromatic } = Package['mdg:chromatic-api'] || {};
+import {ReactMeteorData} from 'meteor/react-meteor-data';
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ComponentSpec = React.createClass({
   mixins: [ReactMeteorData],

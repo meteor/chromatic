@@ -1,0 +1,222 @@
+@import "{mdg:borealis}/util/index.import.less";
+
+.cardinal {
+	.clearfix;
+	cursor: pointer;
+	display: block;
+	position: relative;;
+
+	@media screen and (min-width: @breakpoint) {
+		display: inline-block;
+		text-align: center;
+		vertical-align: top;
+
+		&:not(.small) { padding: .125rem 0 .75rem; }
+	}
+
+	&.static {
+		cursor: default;
+		.cardinal-number { color: @color-darkest; }
+	}
+
+	.cardinal-number {
+		.clearfix;
+		float: right;
+		position: relative;
+		text-align: right;
+		width: 60px;
+
+		.font-m2;
+		.type-light;
+		color: @color-primary;
+
+		@media screen and (max-width: (@breakpoint - 1px )) {
+			&.editable {
+				//same height as font-m2
+				//visual corrected so inputs align nicely with titles
+				.position(absolute, 2px, 0, auto, auto, auto, 24px);
+			}
+		}
+
+		@media screen and (min-width: @breakpoint) {
+			display: inline-block;
+			float: none;
+			text-align: center;
+			top: -2px; //visual correction
+			width: auto;
+
+			.font-l3;
+			.type-light;
+		}
+
+		.cardinal-numeral {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.cardinal-half {
+			display: inline-block;
+
+			.font-s2;
+			.type-normal;
+			color: @color-mediumdark;
+
+
+			@media screen and (min-width: @breakpoint) {
+				.font-m1;
+				color: @color-medium;
+				margin-right: -.5em;
+			}
+		}
+	}
+
+	.cardinal-name {
+		float: left;
+
+		.font-s3;
+		.type-bold;
+
+		@media screen and (min-width: @breakpoint) {
+			float: none;
+			line-height: 1;
+		}
+	}
+
+	.cardinal-input {
+		overflow: hidden;
+		vertical-align: top;
+		margin: 0 .5rem;
+
+		@media screen and (min-width: @breakpoint) {
+			height: 3rem;
+			margin: 0 24px 0 0;
+		}
+
+		input[type="number"] {
+			//reset input styling
+			border: none;
+			box-shadow: none;
+			background: none;
+			padding: 0;
+
+			display: block;
+			height: 32px;
+			text-align: center;
+
+			.font-m2;
+	    color: @color-primary;
+
+			@media screen and (min-width: @breakpoint) {
+				height: 60px; // need to define height else browsers set height willy nilly
+				margin: -6px 0; // visual correction for browsers setting height
+				text-align: left;
+
+				.font-l3;
+				.type-light;
+			}
+
+			&:hover,
+			&:focus {
+				background-color: @color-lighter !important;
+			}
+		}
+	}
+
+	// Scale buttons
+	.cardinal-action {
+		.appearance(none);
+		background: transparent;
+		border: 0;
+		outline: 0;
+		padding: 0;
+
+		margin-top: 3px;
+
+		&.increment { float: right; }
+		&.decrement { float: left; }
+
+		@media screen and (min-width: @breakpoint) {
+			.position(absolute, 0, 0, auto, auto, 24px, 24px);
+			float: none;
+			margin-top: 0;
+
+			.font-m2;
+
+			&:first-child .btn {
+				position: relative;
+				top: 2px;
+			}
+
+			&:last-child {
+				top: auto;
+				bottom: 0;
+
+				.btn {
+					position: relative;
+					bottom: 3px;
+				}
+			}
+		}
+
+		.btn { vertical-align: middle; }
+	}
+
+	&.small {
+		@media screen and (min-width: @breakpoint) {
+			.cardinal-number {
+				.font-l1;
+				color: @color-darkest;
+			}
+
+			.cardinal-half {
+				.font-s3;
+				color: @color-mediumdark;
+			}
+		}
+
+		.cardinal-name {
+			.font-s3;
+			@media screen and (min-width: @breakpoint) {
+				.font-s2;
+				line-height: 1;
+			}
+
+			color: @color-dark;
+		}
+
+		.chart.spark {
+			height: 1rem;
+			float: right;
+			width: 60px;
+			margin-top: .25rem;
+
+			@media screen and (min-width: @breakpoint) {
+				display: inline-block;
+				float: none;
+				margin-top: .25rem;
+			}
+		}
+	}
+}
+
+// Occurs when two cardinal numbers are displayed alongside one another w/o separators
+// e.g., rolling updates
+.cardinal-wrapper {
+	.cardinal-subtext {
+		float: left;
+
+		.font-s1;
+		color: @color-mediumdark;
+		line-height: 1;
+	}
+	@media screen and (min-width: @breakpoint) {
+		display: inline-block;
+		position: relative;
+
+		.cardinal-subtext {
+			float: none;
+
+			.position(absolute, auto, 0, -.125rem, 0);
+		}
+	}
+}

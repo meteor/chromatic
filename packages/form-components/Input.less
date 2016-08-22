@@ -23,6 +23,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; /* Removes leftover margin */
 }
 
+input.secondary {
+  &:extend(textarea.secondary all);
+}
+
 // Inputs with icons inside of them
 .input-symbol {
 	.font-s2;
@@ -88,6 +92,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 		background: rgba(255,255,255,.9);
     color: @color-negative;
+  }
+
+  &.nochrome:before {
+    right: 0;
   }
 
   &[data-error] {

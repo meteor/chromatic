@@ -46,7 +46,7 @@ ComponentName = React.createClass({
 if (Chromatic) {
   Chromatic.add(ComponentName, {
     specs: [
-      new Chromatic.Spec('specName1', { 
+      new Chromatic.Spec('specName1', {
         props: {
           // props used by your component
         }
@@ -76,6 +76,30 @@ mdg:overlays
 mdg:sortable
 mdg:tooltips
 mdg:outlines
+```
+
+## NPM Dependencies
+Some of these UI components have NPM dependencies, here is the full list that you may need (taken from Chromatic's `package.json`)
+```
+  "dependencies": {
+    "autosize": "3.0.15",
+    "classnames": "^2.2.5",
+    "react": "^15.1.0",
+    "react": "^15.2.1",
+    "react-addons-create-fragment": "^15.2.1",
+    "react-addons-css-transition-group": "^15.2.1",
+    "react-addons-linked-state-mixin": "^15.2.1",
+    "react-addons-perf": "^15.2.1",
+    "react-addons-pure-render-mixin": "^15.2.1",
+    "react-addons-test-utils": "^15.2.1",
+    "react-addons-transition-group": "^15.2.1",
+    "react-addons-update": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-input-autosize": "^1.1.0",
+    "react-input-mask": "^0.7.2",
+    "velocity-animate": "^1.2.3",
+    "velocity-react": ">=1.1.4"
+  }
 ```
 
 ## Circular references

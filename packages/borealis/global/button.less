@@ -114,9 +114,30 @@
 		}
 	}
 
+	&.selected {
+		color: @color-dark;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+
+		&:after {
+			.position(absolute, 0,0,0,0);
+			content: '';
+			border: 1px dotted @color-mediumdark;
+			display: block;
+		}
+
+		[class*="icon-"] {
+			text-indent: 0;
+			letter-spacing: 0;
+			margin-left: -.375rem;
+		}
+	}
+
 	// Progress button
 	// When a user has submitted a form and there is a finite amount wait time
 	&.progress {
+		height: auto;
+
 		.rest,
     .active { .transition( all 700ms @easing); }
 

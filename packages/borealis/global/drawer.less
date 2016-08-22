@@ -6,10 +6,38 @@
 	position: relative;
 	overflow: hidden;
 
+	svg {
+		display: block;
+	}
+
 	// For generic drawer content
 	.drawer-content {
 		.std-xpadding;
 		.std-ypadding;
+
+		.drawer-section-title {
+			.subheading-caps;
+			.font-s1;
+			color: @color-darkest;
+		}
+
+		.drawer-section-subtitle {
+			.font-s1;
+			color: @color-dark;
+		}
+
+		// inspired by .section-content
+		.description-section {
+			.font-s2;
+			@media screen and (min-width: @breakpoint) {
+				max-width: 600px;
+				width: 75%;
+			}
+		}
+	}
+
+	.separator {
+		border-bottom: 1px solid @color-medium;
 	}
 
 	// Down Arrow

@@ -11,29 +11,21 @@
 
   &.dark {
     color: @color-darker;
-    .logo { fill: @color-darkest; }
+    svg { fill: @color-darkest; }
   }
 
   &.light {
     color: @color-lightest;
-    .logo { fill: @color-lightest; }
+    svg { fill: @color-lightest; }
   }
 
-	.logo {
+	svg {
 		position: relative;
-		@media screen and (min-width: @breakpoint) { top: .5rem; }
-		height: 3rem;
-		line-height: 3rem;
-		display: inline-block;
+		top: .75rem;
+		@media screen and (min-width: @breakpoint) { top: 1.25rem; }
+		height: 10px;
 
 		.subheading-caps(center);
-
-		img {
-			display: inline-block;
-			vertical-align: middle;
-
-			height: 10px;
-		}
   }
 
   .nav-group {

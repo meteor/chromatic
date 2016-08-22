@@ -1,7 +1,7 @@
-/* global React Form FormInput FormTextarea FormRadio FormSelect FormCheckbox FormStepper
-  ValidationError */
-import React from 'react';
+/* global Form FormInput FormTextarea FormRadio FormSelect FormCheckbox FormStepper
+  ValidationError FormMaskedInput */
 
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 let FormStyleguide = React.createClass({
@@ -43,6 +43,11 @@ let FormStyleguide = React.createClass({
         <FormCheckbox name="gender" ourValue="Male" label="Male"/>
 
         <FormStepper name="componentCount" min={1} max={10} ready={true} />
+
+        <FormFormattedInput mask="9999 9999 9999 9999" name="card" label="Credit Card" icon="credit"
+          placeholder="xxxx-xxxx-xxxx-xxxx" size={20} maskChar=' '/>
+        <FormFormattedInput mask="99/9999" name="expiry" label="Expiration" placeholder="mm/yyyy"
+          maskChar=' '/>
 
         <button className="btn primary" type="submit" disabled={!this.state.canSubmit}>
           Submit Form

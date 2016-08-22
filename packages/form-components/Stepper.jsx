@@ -1,5 +1,9 @@
 /* global Stepper:true, FormStepper:true */
-/* global React classnames AutosizeInput makeField */
+/* global makeField */
+
+import classnames from 'classnames';
+import AutosizeInput from 'react-input-autosize';
+
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
@@ -11,6 +15,7 @@ Stepper = React.createClass({
     onLimitReached: React.PropTypes.func,
     max: React.PropTypes.number,
     min: React.PropTypes.number,
+    maxLength: React.PropTypes.number,
     name: React.PropTypes.string.isRequired,
     className: React.PropTypes.string
   },
@@ -22,10 +27,9 @@ Stepper = React.createClass({
   },
   componentWillReceiveProps(nextProps) {
     const {ready, value} = this.props;
-    if (!_.isUndefined(nextProps.value)
-      && (!ready || nextProps.value !== value)) {
+    if (_.has(nextProps, 'value') && (!ready || nextProps.value !== value)) {
       this.setState({
-        inputValue: nextProps.value.toString()
+        inputValue: nextProps.value && nextProps.value.toString()
       });
     }
   },
@@ -44,7 +48,12 @@ Stepper = React.createClass({
     }
   },
   onInputChange(event) {
-    this.setState({inputValue: event.target.value});
+    const {maxLength} = this.props;
+    let inputValue = event.target.value;
+    if (maxLength && !isNaN(maxLength)) {
+      inputValue = inputValue.substring(0, maxLength);
+    }
+    this.setState({inputValue});
   },
   onInputKeyDown(event) {
     if (event.keyCode === 13) {
@@ -52,17 +61,24 @@ Stepper = React.createClass({
     }
   },
   onInputConfirm() {
+    const {value, min, max, onChange, onLimitReached} = this.props;
     const inputValue = parseInt(this.state.inputValue, 10);
     if (_.isNaN(inputValue)) {
       // If the user enters junk, reset on focus-out
-      this.setState({inputValue: this.props.value.toString()});
+      this.setState({inputValue: value.toString()});
       return;
     }
-    const newValue = Math.min(Math.max(inputValue, this.props.min), this.props.max);
-    this.props.onChange(newValue);
+    const newValue = Math.min(Math.max(inputValue, min), max);
+    this.setState({inputValue: newValue.toString()});
+    onChange(newValue);
+    if (inputValue > newValue && onLimitReached) {
+      onLimitReached('max');
+    } else if (inputValue < newValue && onLimitReached) {
+      onLimitReached('min');
+    }
   },
   render() {
-    const {ready, value, onChange, max, min, name, className, ...other} = this.props;
+    const {ready, value, max, min, name, className} = this.props;
     const atMax = value >= max;
     const atMin = value <= min;
 

@@ -1,6 +1,7 @@
 /* global Sortable:true */
-/* global React classnames */
+/* global */
 
+import classnames from 'classnames';
 import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
@@ -11,12 +12,14 @@ Sortable = React.createClass({
     field: React.PropTypes.string.isRequired,
     specifier: React.PropTypes.object.isRequired,
     onSort: React.PropTypes.func.isRequired,
+    inverted: React.PropTypes.bool,
     className: React.PropTypes.string,
     children: React.PropTypes.node,
     Component: React.PropTypes.string
   },
   getDefaultProps() {
     return {
+      inverted: false,
       Component: 'th'
     };
   },
@@ -29,12 +32,13 @@ Sortable = React.createClass({
     }
   },
   render() {
-    const {field, specifier, onSort, className, children, Component, ...other} = this.props;
+    const {field, specifier, onSort, inverted, className, children, Component, ...other} = this.props;
     const classNames = [className];
     let icon;
     if (specifier[field]) {
       classNames.push('sortable');
-      if (specifier[field] === 1) {
+      const direction = inverted ? -1 : 1;
+      if (specifier[field] === direction) {
         icon = 'icon-arrow-up';
         classNames.push('ascending');
       } else {
@@ -44,7 +48,7 @@ Sortable = React.createClass({
     }
 
     return (
-      <Component className={classnames(classNames)} onClick={this.onClick}>
+      <Component className={classnames(classNames)} onClick={this.onClick} {...other}>
         <span>{children}<span className={icon}></span></span>
       </Component>
     );

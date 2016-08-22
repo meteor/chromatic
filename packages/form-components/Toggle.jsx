@@ -1,9 +1,10 @@
 /* global Toggle:true, FormToggle:true */
-/* global React makeField */
+/* global makeField */
+
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-const Toggle = React.createClass({
+Toggle = React.createClass({
   propTypes: {
     value: React.PropTypes.bool.isRequired,
     error: React.PropTypes.string,

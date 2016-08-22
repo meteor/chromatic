@@ -1,8 +1,9 @@
 /* global Textarea:true FormTextarea:true */
-/* global ReactDOM makeField Utils autosize */
+/* global makeField Utils */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import autosize from 'autosize';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Textarea = React.createClass({

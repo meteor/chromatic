@@ -1,8 +1,10 @@
 /* global StyleguideSpec:true */
-/* global React */
-import React from 'react';
+/* global */
+
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 const {StubCollections} = Package['stub-collections'] || {};
+
+import React from 'react';
 
 StyleguideSpec = React.createClass({
   propTypes: {

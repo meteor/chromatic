@@ -1,7 +1,7 @@
 /* global Select:true FormSelect:true */
 /* global makeField */
-import React from 'react';
 
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Select = React.createClass({

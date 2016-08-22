@@ -1,7 +1,8 @@
 /* global CodeBlock:true */
-/* global React hljs classnames */
-import React from 'react';
+/* global hljs */
 
+import classnames from 'classnames';
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 CodeBlock = React.createClass({
@@ -24,12 +25,20 @@ if (Chromatic) {
   Chromatic.add(CodeBlock, {
     specs: [
       new Chromatic.Spec('default', {props: {
-        code: `{ "json": "value" };
-        const square = function(x) { return Math.pow(x, 2); }
-        // comment`
+        code: `{
+          "public": {
+            "environment": "production"
+          },
+          "logSettings": {
+            "level": "debug",
+            "options": {
+              "treatWarningsAsErrors": true
+            }
+          }
+        }`
       }}),
       new Chromatic.Spec('one-line', {props: {
-        code: `const clamp = (v, min, max) => v < min ? min : v > max ? max : v;`
+        code: `items.find().fetch().map(i => i.name);`
       }}),
     ]
   });

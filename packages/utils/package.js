@@ -7,7 +7,6 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2');
   api.use(['ecmascript', 'underscore']);
   api.addFiles(['utils.js']);
   api.export(['Utils']);

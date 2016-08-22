@@ -1,27 +1,38 @@
 /* global Input:true FormInput:true */
 /* global makeField */
+
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const Input = React.createClass({
   propTypes: {
-    value: React.PropTypes.string.isRequired,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+    ]).isRequired,
     error: React.PropTypes.string,
     onChange: React.PropTypes.func.isRequired,
     label: React.PropTypes.string,
     sublabel: React.PropTypes.string,
     className: React.PropTypes.string,
-    icon: React.PropTypes.string
+    icon: React.PropTypes.string,
+    autofocus: React.PropTypes.bool
   },
   onChange(event) {
     this.props.onChange(event.target.value);
   },
+  componentDidMount() {
+    if (this.props.autofocus) {
+      ReactDOM.findDOMNode(this.refs.input).focus();
+    }
+  },
   render() {
     let {className} = this.props;
-    const {value, error, onChange, label, sublabel, icon, ...other} = this.props;
+    const {value, error, onChange, label, sublabel, icon, autofocus, ...other} = this.props;
 
-    const input = <input {...other} value={value} onChange={this.onChange}/>;
+    const input = <input ref="input" {...other} value={value} onChange={this.onChange}/>;
 
     // Non-inline input
     if (label) {
@@ -82,6 +93,14 @@ if (Chromatic) {
       new Chromatic.Spec('right-error', {props: {
         type: 'text', placeholder: 'input-symbol', icon: 'proceed',
         onChange: noop, className: 'right', error: 'Something is wrong', value: ''
+      }}),
+      new Chromatic.Spec('secondary', {props: {
+        type: 'text', placeholder: 'input-symbol', icon: 'user-alt', className: 'secondary',
+        onChange: noop, value: '', error: null
+      }}),
+      new Chromatic.Spec('secondary-error', {props: {
+        type: 'text', placeholder: 'input-symbol', icon: 'user-alt', className: 'secondary',
+        onChange: noop, error: 'Something is wrong', value: ''
       }})
     ]
   });

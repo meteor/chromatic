@@ -1,8 +1,8 @@
 /* global LoadingSpinner:true */
-/* global React classnames */
+/* global */
 
+import classnames from 'classnames';
 import React from 'react';
-
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const TICK_COUNTS = {small: 16, medium: 24, large: 32};

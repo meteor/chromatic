@@ -1,6 +1,8 @@
 /* global Upload:true */
-/* global React File */
+/* global File */
+
 import React from 'react';
+
 Upload = React.createClass({
   propTypes: {
     value: React.PropTypes.instanceOf(File),

@@ -1,5 +1,5 @@
 /* global List:true */
-/* global React */
+/* global */
 
 import React from 'react';
 
@@ -17,7 +17,7 @@ List = React.createClass({
     onLoadMore: React.PropTypes.func.isRequired,
     loadMoreLink: React.PropTypes.node.isRequired,
     separateBy: React.PropTypes.func,
-    Separator: React.PropTypes.any
+    Separator: React.PropTypes.any,
   },
   getDefaultProps() {
     return {
@@ -30,7 +30,7 @@ List = React.createClass({
 
     let lastValue;
     const renderedItems = items.map(item => {
-      const renderedItem = <ItemComponent key={item.key} {...item}/>;
+      const renderedItem = <ItemComponent key={item.key} {...item} {...other}/>;
 
       if (!separateBy) {
         return renderedItem;

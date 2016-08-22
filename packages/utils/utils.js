@@ -49,21 +49,11 @@ Utils = _.extend(Utils || {}, {
   session: function(a) {
     return Session.get(a);
   },
-  get: function(obj, p) {
-    var path = p;
-
-    if (typeof path === 'string') {
-      path = path.split('.');
-    }
-    if (!path || !path.length) {
-      return obj;
-    }
-
-    if (path[0] in obj) {
-      return Utils.get(obj[path[0]], path.slice(1));
-    }
-
-    return void 0;
+  get: function(obj, path) {
+    path = path.split('.');
+    let val = obj;
+    while (path.length && (val = val[path.shift()]));
+    return val;
   },
   join: function(array, delimiter) {
     return array.join(delimiter);
@@ -79,6 +69,9 @@ Utils = _.extend(Utils || {}, {
       // Clean up words that started with upper.
       .replace(/^-/, '')
       .replace(/\/-/g, '/');
+  },
+  toSplitWords(string) {
+    return this.capitalize(string.replace(/([A-Z])/g, (c) => ` ${c}`));
   },
   clamp(v, min, max) {
     return v < min ? min : v > max ? max : v; // eslint-disable-line
@@ -100,5 +93,70 @@ Utils = _.extend(Utils || {}, {
       }
     });
     return result;
+  },
+  formatKVP(obj) {
+    const f = (v) => v instanceof Date ? v.toISOString() : // eslint-disable-line
+                    typeof v === 'string' ? `'${v}'` :
+                    v;
+    return _.map(obj, (v, k) => [k, f(v)].join(': ')).join(' ');
+  },
+  throttledIncrement(collection, selector, d, extraModifier) {
+    let acc = {};
+    let timeout = null;
+    const fun = () => {
+      if (acc && _.keys(acc).length) {
+        collection.update(selector, _.extend({$inc: acc}, extraModifier && extraModifier()));
+        acc = {};
+      }
+    };
+    return (modifier) => {
+      _.each(modifier, (v, k) => {
+        acc[k] = acc[k] || 0;
+        acc[k] += v;
+      });
+      if (timeout) Meteor.clearTimeout(timeout);
+      timeout = Meteor.setTimeout(() => {
+        timeout = null;
+        fun();
+      }, d);
+    };
+  },
+  cache(collection, selector = {}, options = {}, key = '_id') {
+    const c = {};
+    collection.find(selector, options).map((o) => { c[o[key]] = o; });
+    return c;
+  },
+  liveCache(collection, selector = {}, options = {}, key = '_id') {
+    const result = {
+      cache: {},
+      observer: null
+    };
+    const keyMap = {};
+    const cursor = collection.find(selector, options);
+    result.observer = cursor.observeChanges({
+      added: (id, fields) => {
+        const o = _.extend(fields, {_id: id});
+        if (key in o) {
+          keyMap[id] = o[key];
+          result.cache[o[key]] = fields;
+        }
+      },
+      changed: (id, fields) => {
+        if (id in keyMap) {
+          _.extend(result.cache[keyMap[id]], fields);
+        }
+      },
+      removed: (id) => {
+        if (id in keyMap) {
+          delete result.cache[keyMap[id]];
+        }
+      }
+    });
+    return result;
+  },
+  prefixer(prefix) {
+    return function(msg) {
+      return [prefix, msg].join(': ');
+    };
   }
 });

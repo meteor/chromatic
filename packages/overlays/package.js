@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:overlays',
-  version: '0.1.0',
+  version: '0.2.0',
   summary: 'Overlay layout and mechanism to drive overlays',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -11,9 +11,10 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'less',
-    'mdg:borealis@0.1.0',
-    'mdg:chromatic@0.1.0',
-    'mdg:animations@0.1.0'
+    'mdg:borealis@0.2.0',
+    'mdg:chromatic@0.2.0',
+    'mdg:animations@0.2.0',
+    'react-meteor-data',
   ], 'client');
   api.addFiles([
     'OverlayLayout.jsx',

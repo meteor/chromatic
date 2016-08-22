@@ -1,7 +1,7 @@
 /* global Forms:true */
-/* global React StyleguideSpec */
-import React from 'react';
+/* global StyleguideSpec */
 
+import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 Forms = React.createClass({
@@ -43,6 +43,10 @@ Forms = React.createClass({
             specName="basic"/>
           <StyleguideSpec entry={Chromatic.entry('Input')}
             specName="basic-error"/>
+          <StyleguideSpec entry={Chromatic.entry('Input')}
+            specName="secondary"/>
+          <StyleguideSpec entry={Chromatic.entry('Input')}
+            specName="secondary-error"/>
           <StyleguideSpec entry={Chromatic.entry('Input')}
             specName="right"/>
           <StyleguideSpec entry={Chromatic.entry('Input')}

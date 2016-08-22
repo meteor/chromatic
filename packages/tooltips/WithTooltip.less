@@ -25,12 +25,19 @@ span.tooltip-trigger { display: inline-block; }
       border-radius: 3px; // needs to be replicated here for masking purposes
       overflow: hidden;
     }
-    
+
     // Default tooltip style
     .message {
       display: inline-block;
       padding: 1rem 1rem;
       text-align: center;
+
+      &.left {
+        text-align: left;
+      }
+
+      p { margin: 0; }
+      p + p { margin:.75em 0 0; }
 
       .link {
         .subheading-caps(center);
@@ -51,6 +58,10 @@ span.tooltip-trigger { display: inline-block; }
     // global/list.less shim
     .list {
       width: 180px;
+
+      &.wide {
+        width: auto;
+      }
 
       & + .list { margin-top: .5rem; }
     }
