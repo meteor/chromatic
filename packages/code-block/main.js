@@ -5,4 +5,4 @@ checkNpmVersions({
   'classnames': '^2.2.5'
 }, 'mdg:callout');
 
-export { Codeblock } from './CodeBlock.jsx';
+export { CodeBlock } from './CodeBlock.jsx';
