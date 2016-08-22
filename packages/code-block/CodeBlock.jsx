@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-CodeBlock = React.createClass({
+export const CodeBlock = React.createClass({
   propTypes: {
     code: React.PropTypes.string,
     className: React.PropTypes.string
