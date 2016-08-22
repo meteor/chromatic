@@ -13,7 +13,7 @@ Package.onUse(function(api) {
     'mdg:borealis@0.2.0',
     'mdg:chromatic@0.2.0',
     'underscore',
-    'mdg:form-components@0.2.0',
+    'mdg:form-components@0.2.1',
     'mdg:animations@0.2.0'
   ], 'client');
   api.addFiles([

@@ -66,7 +66,19 @@ Form = React.createClass({
   },
   onError(error) {
     if ((error instanceof ValidationError || error.error === 'validation-error') && error.details) {
-      this.setState({errors: error.details});
+      let errorMap = {};
+      // Transform ValidationError with details array to {fieldName: errorMessage} map.
+      // Note: this is somewhat of a kludge but for now we just support 1 error per name entry
+      // in the form.
+      if (_.isArray(error.details)) {
+        errorMap = _.reduce(error.details, (m, e) => {
+          m[e.name] = e[name];
+          return m;
+        });
+      } else if (_.isObject(error.details)) {
+        errorMap = error.details;
+      }
+      this.setState({errors: errorMap});
     } else {
       console.warn(error); // eslint-disable-line
     }

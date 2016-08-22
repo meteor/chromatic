@@ -17,7 +17,7 @@ Package.onUse(function(api) {
     'kadira:flow-router@2.4.0',
     'mdg:flow-router-extensions@0.2.0',
     'mdg:chromatic-api@0.2.0',
-    'mdg:form-components@0.2.0',
+    'mdg:form-components@0.2.1',
     'mdg:color-grid@0.2.0',
     'mdg:outlines@0.2.0'
   ], 'client');

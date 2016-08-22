@@ -1,5 +1,5 @@
 /* global Form FormInput FormTextarea FormRadio FormSelect FormCheckbox FormStepper
-  ValidationError FormMaskedInput */
+  ValidationError FormMaskedInput SubmitButton */
 
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
@@ -17,7 +17,7 @@ let FormStyleguide = React.createClass({
   },
   onSubmit(values) {
     if (values.name !== 'tom') {
-      throw new ValidationError({name: 'must be tom!'});
+      throw new ValidationError([{name: 'must be tom!', type: 'out-of-range'}]);
     } else {
       console.log('The form worked!', values); // eslint-disable-line no-console
     }
@@ -49,9 +49,7 @@ let FormStyleguide = React.createClass({
         <FormFormattedInput mask="99/9999" name="expiry" label="Expiration" placeholder="mm/yyyy"
           maskChar=' '/>
 
-        <button className="btn primary" type="submit" disabled={!this.state.canSubmit}>
-          Submit Form
-        </button>
+        <SubmitButton className="btn primary" title="Submit Form" disabled={!this.state.canSubmit}/>
       </Form>
     );
   }
