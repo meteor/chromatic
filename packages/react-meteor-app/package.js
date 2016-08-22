@@ -10,7 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use([
     'ecmascript',
-    'react-meteor-data',
+    'react-meteor-data@0.2.9',
     'mdg:flow-router-extensions@0.2.0'
   ], 'client');
   api.addFiles([

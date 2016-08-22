@@ -17,7 +17,7 @@ Package.onUse(function(api) {
     'mdg:chromatic-api@0.2.0',
     'mdg:buttons@0.2.0',
     'mdg:tooltips@0.2.0',
-    'numeral:numeral'
+    'numeral:numeral@1.5.3_1'
   ], 'client');
 
   api.addFiles([

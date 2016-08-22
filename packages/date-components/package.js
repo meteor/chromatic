@@ -13,7 +13,7 @@ Package.onUse(function(api) {
     'mdg:borealis@0.2.0',
     'mdg:chromatic-api@0.2.0',
     'momentjs:moment@2.10.6',
-    'react-meteor-data',
+    'react-meteor-data@0.2.9',
     'tracker'], 'client');
   api.addFiles([
     'DateVar.js',

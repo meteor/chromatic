@@ -12,7 +12,7 @@ Package.onUse(function(api) {
     'ecmascript',
     'mdg:borealis@0.2.0',
     'mdg:chromatic-api@0.2.0',
-    'tmeasday:check-npm-versions'
+    'tmeasday:check-npm-versions@0.3.1'
   ], 'client');
 
   api.mainModule('main.js', 'client');
