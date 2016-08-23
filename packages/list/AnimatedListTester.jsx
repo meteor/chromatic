@@ -1,8 +1,9 @@
 /* globals AnimatedListTester:true */
-/* globals List Form FormSelect Animations */
+/* globals List Form FormSelect */
 
 import React from 'react';
 import {VelocityTransitionGroup} from 'velocity-react';
+import {Animations} from 'meteor/mdg:animations';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const ItemComponent = React.createClass({ // eslint-disable-line react/no-multi-comp
