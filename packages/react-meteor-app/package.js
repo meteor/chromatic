@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:react-meteor-app',
-  version: '0.2.0',
+  version: '0.2.1',
   summary: 'Baseline for React component rendering and Meteor + FlowRouter integration',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -11,6 +11,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'react-meteor-data@0.2.9',
+    'kadira:flow-router@2.4.0',
     'mdg:flow-router-extensions@0.2.0'
   ], 'client');
   api.addFiles([
