@@ -15,28 +15,30 @@ ComponentSpec = React.createClass({
     };
   },
   componentWillMount() {
-    $('body').addClass('styleguide-white');
+    $('body').addClass('styleguide-white fill-iframe');
   },
   render() {
     const {entryName, specName} = this.data;
     const entry = Chromatic.entry(entryName);
+    let specNames = [];
 
-    if (specName === 'all') {
-      let instances = [];
-      instances = entry.specs.map(s => {
-        return (
-          <div key={s.name}>
-            <StyleguideSpec entry={entry} specName={s.name}/>
-          </div>
-        );
-      });
+    const makeSpec = (name) => {
       return (
-        <div className="styleguide spec-container">{instances}</div>
+        <div key={`spec-${name}`} className="spec">
+          <StyleguideSpec entry={entry} specName={name}/>
+        </div>
       );
     }
+
+    if (specName === 'all') {
+      specNames = entry.specs.map(s => s.name);
+    } else {
+      specNames = [specName];
+    }
+
     return (
       <div className="styleguide spec-container">
-        <StyleguideSpec entry={entry} specName={specName}/>
+        {specNames.map(makeSpec)}
       </div>
     );
   }
