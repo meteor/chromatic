@@ -2,12 +2,15 @@
 /* global */
 
 import React from 'react';
+const {Chromatic} = Package['chromatic-api'] || {};
 
-const {Chromatic} = Package['mdg:chromatic-api'] || {};
+const INFINITE_SCROLL_BOTTOM_THRESHOLD = 10;
 
 List = React.createClass({
   propTypes: {
     ListComponent: React.PropTypes.any,
+    infiniteScroll: React.PropTypes.bool,
+    infiniteScrollBottomThreshold: React.PropTypes.number,
     items: React.PropTypes.array.isRequired,
     ItemComponent: React.PropTypes.any.isRequired,
     count: React.PropTypes.number,
@@ -15,18 +18,64 @@ List = React.createClass({
     requested: React.PropTypes.number.isRequired,
     PlaceholderComponent: React.PropTypes.any.isRequired,
     onLoadMore: React.PropTypes.func.isRequired,
-    loadMoreLink: React.PropTypes.node.isRequired,
+    loadMoreLink: React.PropTypes.node,
+    showingAllMessage: React.PropTypes.node,
     separateBy: React.PropTypes.func,
     Separator: React.PropTypes.any,
   },
   getDefaultProps() {
     return {
-      ListComponent: 'div'
+      ListComponent: 'div',
+      loadMoreLink: (<div></div>)
     };
   },
+  getInitialState() {
+    return {
+      loadingMore: false
+    };
+  },
+  onLoadMore() {
+    const {count, onLoadMore, items} = this.props;
+    if (items.length >= count || this.state.loadingMore) {
+      return;
+    }
+    this.setState({loadingMore: true});
+    if (onLoadMore) {
+      onLoadMore();
+    }
+  },
+  componentDidMount() {
+    const threshold = this.props.infiniteScrollBottomThreshold || INFINITE_SCROLL_BOTTOM_THRESHOLD;
+    if (this.props.infiniteScroll) {
+      const $window = $(window);
+      this.handleScroll = _.debounce(() => {
+        const bottomDist = Math.abs($window.scrollTop() + $window.height() - $(document).height());
+        if (!this.state.loadingMore && bottomDist <= threshold) {
+          this.onLoadMore();
+        }
+      }, 50);
+
+      $window.on('scroll', this.handleScroll);
+    }
+  },
+  componentWillReceiveProps(nextProps) {
+    const {requested, items, count, countReady} = nextProps;
+    if (this.state.loadingMore
+      && (items.length >= requested || (countReady && items.length >= count))) {
+      this.setState({loadingMore: false});
+    }
+  },
+  componentWillUnmount() {
+    const $window = $(window);
+    if (this.handleScroll) {
+      $window.off('scroll', this.handleScroll);
+    }
+  },
   render() {
-    const {ListComponent, items, ItemComponent, count, countReady, requested, PlaceholderComponent,
-      onLoadMore, loadMoreLink, separateBy, Separator, ...other} = this.props;
+    const {ListComponent, infiniteScroll, items, ItemComponent, count,
+      countReady, requested, PlaceholderComponent, loadMoreLink, separateBy, showingAllMessage,
+      Separator, onLoadMore, ...other} = this.props;
+    const {loadingMore} = this.state;
 
     let lastValue;
     const renderedItems = items.map(item => {
@@ -47,20 +96,35 @@ List = React.createClass({
 
     // We need to figure out how many placeholders to place. If we know the count,
     //   we can get this exactly. Otherwise, we just make a best guess
-    const needed = countReady ? Math.min(count, requested) : requested;
-    const placeholders = _.times(needed - items.length, (i) => {
+    let numPlaceholders = requested;
+    if (countReady) {
+      numPlaceholders = Math.min(count, requested);
+      if (items.length > 0) {
+        numPlaceholders = Math.max(0, numPlaceholders - items.length);
+      }
+      if (loadingMore && !numPlaceholders) {
+        numPlaceholders = 1;
+      }
+    }
+
+    const placeholders = _.times(numPlaceholders, (i) => {
       return <PlaceholderComponent key={i}/>;
     });
 
+    const canLoadMore = numPlaceholders === 0 && count > requested;
+    const showingAll = countReady && !canLoadMore && !loadingMore;
     return (
-      <ListComponent {...other}>
-        {renderedItems}
+      <div>
+        <ListComponent {...other}>
+          {renderedItems}
+          <div className="load-more" onClick={this.onLoadMore}>
+            {canLoadMore && loadMoreLink}
+          </div>
+        </ListComponent>
         {placeholders}
-        <div className="load-more" onClick={onLoadMore}>
-          {(needed === items.length && count > requested) && loadMoreLink}
-        </div>
-      </ListComponent>
-    );
+        {showingAll && showingAllMessage}
+      </div>
+      );
   }
 });
 
