@@ -27,7 +27,7 @@ mdg:code-block
 mdg:color-grid
 mdg:date-components
 mdg:form-components
-#mdg:list
+mdg:list
 mdg:loading-spinner
 mdg:overlays
 mdg:sortable

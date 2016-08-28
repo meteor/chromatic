@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:animations',
-  version: '0.2.0',
+  version: '0.2.3',
   summary: 'A set of defined, reusable animations for velocity',
   git: 'https://github.com/meteor/chromatic',
   documentation: null

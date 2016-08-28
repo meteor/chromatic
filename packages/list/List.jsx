@@ -1,8 +1,7 @@
 /* global List:true */
-/* global */
 
 import React from 'react';
-const {Chromatic} = Package['chromatic-api'] || {};
+const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const INFINITE_SCROLL_BOTTOM_THRESHOLD = 10;
 
