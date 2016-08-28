@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic-explorer',
-  version: '0.2.3',
+  version: '0.2.4',
   summary: 'chromatic component explorer',
   git: 'https://github.com/meteor/chromatic',
   debugOnly: true,
@@ -14,6 +14,7 @@ Package.onUse(function(api) {
     'ecmascript',
     'less',
     'check',
+    'react-meteor-data@0.2.9',
     'kadira:flow-router@2.4.0',
     'mdg:flow-router-extensions@0.2.3',
     'mdg:chromatic-api@0.2.3',
