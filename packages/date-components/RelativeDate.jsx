@@ -1,5 +1,5 @@
 /* global RelativeDate:true */
-/* global moment DateVar  ReactMeteorData */
+/* global moment DateVar WithTooltip ReactMeteorData */
 
 import classnames from 'classnames';
 import React from 'react';
@@ -23,7 +23,7 @@ RelativeDate = React.createClass({
     // Use the reactive date consts to force a re-render every...
     const momentDate = moment(this.props.date);
     if (momentDate.isAfter(moment().subtract(1, 'minute'))) {
-      return {currentDate: dateVars.second.get()};
+      return {currentDate: dateVars.second.get(), noTooltip: true};
     }
     if (momentDate.isAfter(moment().subtract(1, 'hour'))) {
       return {currentDate: dateVars.minute.get()};
@@ -32,33 +32,51 @@ RelativeDate = React.createClass({
       return {currentDate: dateVars.hour.get()};
     }
     // we aren't going to re-render
-    return new Date();
+    return {currentDate: new Date()};
   },
   render() {
     const {className, date, showAsDuration, ...other} = this.props;
 
     let formattedDate;
     const momentDate = moment(date);
-    const currentDate = this.data.currentDate;
+    const currentMoment = moment(this.data.currentDate);
+    const tooltipDate = momentDate.toString();
 
     if (showAsDuration) {
-      const duration = moment.duration(moment(currentDate).diff(momentDate));
+      const duration = moment.duration(currentMoment.diff(momentDate));
       formattedDate = duration.days() + 'd ' + moment(duration._data).format('H[h] m[m]');
-    } else if (momentDate.isBefore(moment(currentDate).subtract(1, 'day'))) {
-      if (momentDate.isBefore(moment(currentDate).subtract(2, 'days'))) {
-        if (momentDate.isBefore(moment(currentDate).subtract(1, 'year'))) {
-          formattedDate = momentDate.format('MMMM D, YYYY');
-        } else {
-          formattedDate = momentDate.format('MMMM Do [at] h:mma');
-        }
-      } else {
-        formattedDate = momentDate.format('[Yesterday at] h:mma');
-      }
     } else {
-      formattedDate = momentDate.from(currentDate);
+      formattedDate = momentDate.calendar(currentMoment, {
+        sameDay: () => {
+          // This function needs to return a format string, so use []-escaping.
+          return `[${ momentDate.from(currentMoment) }]`;
+        },
+        lastDay: '[Yesterday at] h:mma',
+        lastWeek: 'dddd [at] h:mma',
+        sameElse: () => {
+          if (momentDate.isBefore(currentMoment.subtract(1, 'year'))) {
+            return 'MMMM D, YYYY';
+          }
+          return 'MMMM Do [at] h:mma';
+        }
+      });
     }
 
-    return <span {...other} className={classnames('timestamp', className)}>{formattedDate}</span>;
+    const span = (
+      <span {...other} className={classnames('timestamp', className)}>
+            {formattedDate}
+      </span>
+    );
+
+    // Every time we re-render, the tooltip goes away. Most of the time the text
+    // changes too, but for the "a few seconds ago" one, the text doesn't
+    // change. It feels really flaky for the tooltip to flicker in and out, so
+    // it's better to just not display it for timestamps within a minute.
+    if (this.data.noTooltip) {
+      return span;
+    }
+
+    return <WithTooltip tooltip={<div>{tooltipDate}</div>}>{span}</WithTooltip>;
   }
 });
 
@@ -71,11 +89,17 @@ if (Chromatic) {
       new Chromatic.Spec('within an hour', {
         props: {date: moment().subtract(32, 'minutes').toDate()}
       }),
-      new Chromatic.Spec('within the last day', {
+      new Chromatic.Spec('within the last day, probably', {
         props: {date: moment().subtract(3, 'hours').subtract(10, 'minutes').toDate()}
       }),
-      new Chromatic.Spec('within the last 2 days', {
-        props: {date: moment().subtract(32, 'hours').toDate()}
+      new Chromatic.Spec('last night', {
+        props: {date: moment().startOf('day').subtract(2, 'hours').toDate()}
+      }),
+      new Chromatic.Spec('night before last', {
+        props: {date: moment().startOf('day').subtract(26, 'hours').toDate()}
+      }),
+      new Chromatic.Spec('within the last 4 days', {
+        props: {date: moment().subtract(4, 'days').toDate()}
       }),
       new Chromatic.Spec('within the last year', {
         props: {date: moment().subtract(32, 'days').toDate()}

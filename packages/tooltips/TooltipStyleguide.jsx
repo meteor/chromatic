@@ -1,4 +1,4 @@
-/* global WithTooltip RelativeDate */
+/* global WithTooltip */
 
 import React from 'react';
 
@@ -43,7 +43,6 @@ const TooltipStyleguide = React.createClass({
             <span className="icon-download"></span>
             <div className="meta">
               <div className="description"><em>Zoltan</em> stopped <em>new-york.hostname.com</em> in aws-us-east.</div>
-              <div className="timestamp"><RelativeDate date={new Date()}/></div>
             </div>
           </div>
           }>
