@@ -5,7 +5,7 @@
 # but you can also edit it by hand.
 
 meteor-base@1.0.4             # Packages every Meteor app needs to have
-mongo@1.1.11                   # The database Meteor supports right now
+mongo@1.1.12                   # The database Meteor supports right now
 session@1.1.6                 # Client-side reactive dictionary for your app
 jquery@1.11.9                  # Helpful client-side library
 tracker@1.1.0                 # Meteor's client-side reactive programming library
@@ -34,4 +34,4 @@ mdg:sortable
 mdg:tooltips
 mdg:outlines
 numeral:numeral
-shell-server
+shell-server@0.2.1
