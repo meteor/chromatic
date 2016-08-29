@@ -30,7 +30,10 @@ export const Chromatic = {
       throw new Meteor.Error('argument-error', 'Cannot have specs for a styleguide page entry');
     }
 
-    this.name = (options && options.name) || component.displayName;
+    this.name = (options && options.name) || component.displayName || component.name;
+    if (!this.name) {
+      throw new Meteor.Error('argument-error', 'Cannot determine name from component');
+    }
     this.component = component;
     this.specs = (options && options.specs) || [Chromatic.defaultSpec()];
     this.isPage = (options && options.isPage) || false;
