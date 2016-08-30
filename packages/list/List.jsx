@@ -59,8 +59,7 @@ List = React.createClass({
   },
   componentWillReceiveProps(nextProps) {
     const {requested, items, count, countReady} = nextProps;
-    if (this.state.loadingMore
-      && (items.length >= requested || (countReady && items.length >= count))) {
+    if (items.length >= requested || (countReady && items.length >= count)) {
       this.setState({loadingMore: false});
     }
   },
