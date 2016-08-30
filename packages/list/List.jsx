@@ -38,10 +38,11 @@ List = React.createClass({
     if (items.length >= count || this.state.loadingMore) {
       return;
     }
-    this.setState({loadingMore: true});
-    if (onLoadMore) {
-      onLoadMore();
-    }
+    this.setState({loadingMore: true}, () => {
+      if (onLoadMore) {
+        onLoadMore();
+      }
+    });
   },
   componentDidMount() {
     const threshold = this.props.infiniteScrollBottomThreshold || INFINITE_SCROLL_BOTTOM_THRESHOLD;
@@ -59,8 +60,8 @@ List = React.createClass({
   },
   componentWillReceiveProps(nextProps) {
     const {requested, items, count, countReady} = nextProps;
-    if (this.state.loadingMore
-      && (items.length >= requested || (countReady && items.length >= count))) {
+    const {loadingMore} = this.state;
+    if (loadingMore && (items.length >= requested || (countReady && items.length >= count))) {
       this.setState({loadingMore: false});
     }
   },
