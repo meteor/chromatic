@@ -77,7 +77,8 @@ WithTooltip = React.createClass({
     tooltip: React.PropTypes.node.isRequired,
     mode: React.PropTypes.oneOf(['hover', 'click', 'manual']),
     show: React.PropTypes.bool,
-    options: React.PropTypes.object
+    options: React.PropTypes.object,
+    style: React.PropTypes.object
   },
   getDefaultProps() {
     return {
@@ -132,10 +133,10 @@ WithTooltip = React.createClass({
     return this.lastTooltipDiv;
   },
   render() {
-    let {className} = this.props;
+    let {className, style} = this.props;
     className = `tooltip-trigger ${(className || '')}`;
 
     const tag = this.props.tag || React.DOM.span;
-    return tag({ref: 'tooltipContainer', className: className}, this.props.children);
+    return tag({ref: 'tooltipContainer', className: className, style: style}, this.props.children);
   }
 });
