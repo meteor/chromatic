@@ -39,7 +39,7 @@ Sortable = React.createClass({
       classNames.push('sortable');
       const direction = inverted ? -1 : 1;
       if (specifier[field] === direction) {
-        icon = 'icon-arrow-up';
+        icon = 'icon-arrow-down';
         classNames.push('ascending');
       } else {
         icon = 'icon-arrow-up';
