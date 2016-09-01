@@ -1,6 +1,8 @@
 /* global FlowRouter */
-
+import React from 'react';
 // TODO -- should I just extend flow router here?
+
+const ReactClassProtoype = (Object.getPrototypeOf(Object.getPrototypeOf(new (React.createClass({ render () {} }))())));
 
 FlowRouter.getRouteHandler = function() {
   // Semantically it seems like I should use .watchPathChange() here, but
@@ -20,8 +22,10 @@ FlowRouter.getRouteHandler = function() {
 const oldRoute = FlowRouter.route.bind(FlowRouter);
 FlowRouter.route = (path, options) => {
   // a react component
-  if (options && options.displayName) {
-    return oldRoute(path, {name: options.displayName, component: options});
+  const componentName = (React.Component.isPrototypeOf(options) && options.name)
+   || (ReactClassProtoype.isPrototypeOf(options) && options.displayName);
+  if (componentName) {
+    return oldRoute(path, {name: componentName, component: options});
   }
 
   return oldRoute(path, options);

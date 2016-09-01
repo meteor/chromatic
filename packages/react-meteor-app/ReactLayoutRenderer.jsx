@@ -25,7 +25,7 @@ ReactLayoutRenderer = React.createClass({
     return {
       render(props) {
         return (
-          <Comp {...other} key={Comp.displayName} boxedChild={boxedChild} {...props}/>
+          <Comp {...other} key={Comp.displayName || Comp.name} boxedChild={boxedChild} {...props}/>
         );
       }
     };
@@ -37,7 +37,7 @@ ReactLayoutRenderer = React.createClass({
       if (Comp.layout) {
         return walk(Comp.layout, this.box(Comp, boxedChild));
       }
-      return <Comp key={Comp.displayName} {...other} boxedChild={boxedChild}/>;
+      return <Comp key={Comp.displayName || Comp.name} {...other} boxedChild={boxedChild}/>;
     };
 
     return walk(Component);
