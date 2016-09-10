@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic-explorer',
-  version: '0.2.4',
+  version: '0.2.5',
   summary: 'chromatic component explorer',
   git: 'https://github.com/meteor/chromatic',
   debugOnly: true,
