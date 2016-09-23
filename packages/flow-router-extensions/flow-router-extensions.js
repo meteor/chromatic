@@ -3,7 +3,7 @@ import React from 'react';
 // TODO -- should I just extend flow router here?
 
 const ReactClassPrototypePrototype = (Object.getPrototypeOf(Object.getPrototypeOf(new (React.createClass({ render () {} }))())));
-const ReactClassPrototype = (Object.getPrototypeOf(new (React.createClass({ render () {} }))()));
+const ReactClassPrototype = Object.getPrototypeOf(React.createClass({ render () {} }));
 
 FlowRouter.getRouteHandler = function() {
   // Semantically it seems like I should use .watchPathChange() here, but
