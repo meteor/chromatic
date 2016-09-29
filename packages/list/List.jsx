@@ -16,7 +16,7 @@ const Empty = React.createClass({
   },
   render() {
     const { message } = this.props;
-    return (<div class="empty">{ message }</div>);
+    return (<div className="empty">{ message }</div>);
   }
 })
 

@@ -45,7 +45,7 @@ mdg:color-grid@0.2.3
 mdg:date-components@0.2.3
 mdg:flow-router-extensions@0.2.7
 mdg:form-components@0.2.3
-mdg:list@0.2.5
+mdg:list@0.2.6
 mdg:loading-spinner@0.2.3
 mdg:outlines@0.2.3
 mdg:overlays@0.2.4
