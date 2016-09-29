@@ -11,7 +11,7 @@ const Empty = React.createClass({
   },
   getDefaultProps() {
     return {
-      message: 'There are no items to show'
+      message: ''
     };
   },
   render() {
