@@ -5,6 +5,21 @@ const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const INFINITE_SCROLL_BOTTOM_THRESHOLD = 10;
 
+const Empty = React.createClass({
+  propTypes: {
+    message: React.PropTypes.string
+  },
+  getDefaultProps() {
+    return {
+      message: 'There are no items to show'
+    };
+  },
+  render() {
+    const { message } = this.props;
+    return (<div class="empty">{ message }</div>);
+  }
+})
+
 List = React.createClass({
   propTypes: {
     ListComponent: React.PropTypes.any,
@@ -21,11 +36,14 @@ List = React.createClass({
     showingAllMessage: React.PropTypes.node,
     separateBy: React.PropTypes.func,
     Separator: React.PropTypes.any,
+    EmptyComponent: React.PropTypes.any,
+    emptyProps: React.PropTypes.object,
   },
   getDefaultProps() {
     return {
       ListComponent: 'div',
-      loadMoreLink: (<div></div>)
+      loadMoreLink: (<div></div>),
+      EmptyComponent: Empty,
     };
   },
   getInitialState() {
@@ -74,7 +92,7 @@ List = React.createClass({
   render() {
     const {ListComponent, infiniteScroll, items, ItemComponent, count,
       countReady, requested, PlaceholderComponent, loadMoreLink, separateBy, showingAllMessage,
-      Separator, onLoadMore, ...other} = this.props;
+      Separator, onLoadMore, EmptyComponent, emptyProps, ...other} = this.props;
     const {loadingMore} = this.state;
 
     let lastValue;
@@ -113,14 +131,19 @@ List = React.createClass({
 
     const canLoadMore = numPlaceholders === 0 && count > requested;
     const showingAll = countReady && !canLoadMore && !loadingMore;
-    return (
-      <div>
-        <ListComponent {...other}>
+
+    const isEmpty = showingAll && (!count);
+    const component = isEmpty ? (<EmptyComponent {...emptyProps} />) :
+      (<ListComponent {...other}>
           {renderedItems}
           <div className="load-more" onClick={this.onLoadMore}>
             {canLoadMore && loadMoreLink}
           </div>
-        </ListComponent>
+        </ListComponent>);
+
+    return (
+      <div>
+        {component}
         {placeholders}
         {showingAll && showingAllMessage}
       </div>
@@ -169,6 +192,21 @@ if (Chromatic) {
       count: 24,
       countReady: true,
       requested: 12
+    })}),
+    new Chromatic.Spec('empty', { props: _.extend({}, defaults, {
+      items: [],
+      count: 0,
+      countReady: true,
+      requested: 0
+    })}),
+    new Chromatic.Spec('empty-custom', { props: _.extend({}, defaults, {
+      items: [],
+      count: 0,
+      countReady: true,
+      requested: 0,
+      emptyProps: {
+        message: 'there is no data to show, this is a custom message'
+      }
     })}),
     new Chromatic.Spec('loading-low-count', {props: _.extend({}, defaults, {
       items: [],
