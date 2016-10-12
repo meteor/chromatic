@@ -34,7 +34,7 @@ OverlayLayout = React.createClass({
   render() {
     const {children, className} = this.props;
     return (
-      <div className={`overlay${className}`}>
+      <div className={`overlay ${className}`}>
         <a className="overlay-close" onClick={this.onCloseClick}>
           <span className="icon-cross"/>
         </a>

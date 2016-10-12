@@ -23,7 +23,7 @@ Overlay = React.createClass({
   renderContent() {
     const {Component} = this.data;
     if (Component) {
-      return <OverlayLayout key="overlay"><Component/></OverlayLayout>;
+      return <OverlayLayout key="overlay"><Component className={Component.displayName}/></OverlayLayout>;
     }
     return <div key="no-overlay"/>;
   }
