@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:callout',
-  version: '0.2.3',
+  version: '0.2.4',
   summary: 'an important thing at the top of the screen',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -12,7 +12,7 @@ Package.onUse(function(api) {
     'dfischer:faker@1.0.8',
     'ecmascript',
     'less',
-    'mdg:borealis@0.2.3',
+    'mdg:borealis@0.2.5',
     'mdg:chromatic-api@0.2.3',
   ], 'client');
 

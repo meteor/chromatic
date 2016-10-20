@@ -11,8 +11,8 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'less',
-    'mdg:borealis@0.2.3',
-    'mdg:chromatic@0.2.3',
+    'mdg:borealis@0.2.5',
+    'mdg:chromatic@0.2.4',
     'mdg:animations@0.2.3',
     'react-meteor-data@0.2.9',
     'kadira:flow-router@2.4.0'
