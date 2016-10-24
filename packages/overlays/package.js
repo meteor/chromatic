@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:overlays',
-  version: '0.2.6',
+  version: '0.2.7',
   summary: 'Overlay layout and mechanism to drive overlays',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -12,7 +12,7 @@ Package.onUse(function(api) {
     'ecmascript',
     'less',
     'mdg:borealis@0.2.5',
-    'mdg:chromatic@0.2.4',
+    'mdg:chromatic@0.2.6',
     'mdg:animations@0.2.3',
     'react-meteor-data@0.2.9',
     'kadira:flow-router@2.4.0'
