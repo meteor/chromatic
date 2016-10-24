@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:list',
-  version: '0.2.8',
+  version: '0.2.9',
   summary: 'A infinite-scroll list component',
   git: 'https://github.com/meteor/chromatic',
   documentation: null

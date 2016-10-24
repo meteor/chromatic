@@ -116,7 +116,7 @@ List = React.createClass({
     //   we can get this exactly. Otherwise, we just make a best guess
     let numPlaceholders = requested;
     if (countReady) {
-      numPlaceholders = Math.min(count, requested);
+      numPlaceholders = Math.min(count || 0, requested);
       if (items.length > 0) {
         numPlaceholders = Math.max(0, numPlaceholders - items.length);
       }
@@ -125,7 +125,7 @@ List = React.createClass({
       }
     }
 
-    const placeholders = _.times(numPlaceholders, (i) => {
+    const placeholders = _.times(numPlaceholders || 0, (i) => {
       return <PlaceholderComponent key={i}/>;
     });
 
