@@ -26,7 +26,7 @@ Checkbox = React.createClass({
     return (
       <label className={classNames}>
         <input {...other} type="checkbox" value={ourValue} checked={_.include(value, ourValue)}
-          onChange={this.onChange} />
+          onChange={(e) => this.onChange(e)} />
         <span className="text">{label}</span>
       </label>
     );
