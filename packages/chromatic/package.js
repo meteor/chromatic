@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'mdg:chromatic-api@0.2.3',
-    'mdg:chromatic-explorer@0.2.5'
+    'mdg:chromatic-explorer@0.2.6'
   ], 'client');
 
   api.mainModule('main.js', 'client');
