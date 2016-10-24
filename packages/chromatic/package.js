@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic',
-  version: '0.2.6',
+  version: '0.2.7',
   summary: 'a visualizer for react components',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'mdg:chromatic-api@0.2.4',
-    'mdg:chromatic-explorer@0.2.7'
+    'mdg:chromatic-explorer@0.2.8'
   ], 'client');
 
   api.mainModule('main.js', 'client');

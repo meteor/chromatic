@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:form-components',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'Simple React form components that use method validation',
   documentation: 'README.md',
   git: 'https://github.com/meteor/chromatic'
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     'mdg:validation-error@0.5.1',
     'mdg:borealis@0.2.5',
     'mdg:chromatic-api@0.2.4',
-    'mdg:buttons@0.2.4',
+    'mdg:buttons@0.2.5',
     'mdg:tooltips@0.2.4',
     'numeral:numeral@1.5.3_1'
   ], 'client');
