@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic',
-  version: '0.2.4',
+  version: '0.2.5',
   summary: 'a visualizer for react components',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
