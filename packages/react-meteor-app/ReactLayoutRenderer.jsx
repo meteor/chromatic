@@ -36,7 +36,7 @@ ReactLayoutRenderer = React.createClass({
     const walk = (Comp, boxedChild) => {
       if (typeof Comp.layout === 'function') {
         const layout = Comp.layout.prototype instanceof React.Component ? Comp.layout : Comp.layout();
-        return laayout ? walk(layout, this.box(Comp, boxedChild)) : Comp;
+        return layout ? walk(layout, this.box(Comp, boxedChild)) : Comp;
       }
       return <Comp key={Comp.displayName || Comp.name} {...other} boxedChild={boxedChild}/>;
     };

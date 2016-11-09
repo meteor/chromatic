@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:react-meteor-app',
-  version: '0.2.6',
+  version: '0.2.7',
   summary: 'Baseline for React component rendering and Meteor + FlowRouter integration',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
