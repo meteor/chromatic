@@ -88,6 +88,9 @@ WithTooltip = React.createClass({
     };
   },
   attach() {
+    require("./jquery.qtip.js");
+    require("./WithTooltip.less");
+
     const options = _.extend(MODES[this.props.mode], this.props.options, {
       content: { text: this.drawTooltip()}
     });

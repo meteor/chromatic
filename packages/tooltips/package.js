@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:tooltips',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'Basic tooltip wrapper for elements',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -15,11 +15,11 @@ Package.onUse(function(api) {
     'mdg:borealis@0.2.5',
     'mdg:chromatic-api@0.2.4'
   ], 'client');
+
   api.addFiles([
-    'jquery.qtip.js',
-    'jquery.qtip.import.less',
     'WithTooltip.jsx',
-    'WithTooltip.less',
-    'TooltipStyleguide.jsx'], 'client');
+    'TooltipStyleguide.jsx'
+  ], 'client');
+
   api.export('WithTooltip', 'client');
 });
