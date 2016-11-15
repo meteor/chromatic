@@ -16,8 +16,15 @@ FlowRouter.getRouteHandler = function() {
   // See https://github.com/meteor/galaxy-server/issues/367 for instance.
   FlowRouter.getParam('foobar');
 
-  var current = FlowRouter.current();
-  return current.route.options.component;
+  const current = FlowRouter.current();
+  const options = current.route.options;
+
+  if (typeof options.getComponent === "function") {
+    // Allow the component to be loaded lazily.
+    options.component = options.getComponent();
+  }
+
+  return options.component;
 };
 
 const oldRoute = FlowRouter.route.bind(FlowRouter);
