@@ -1,14 +1,28 @@
 /* global OverlayController:true */
 /* global FlowRouter */
 
+import assert from "assert";
+
 // This is essentially equivalent to the Router.
 class OverlayRouter {
   constructor() {
-    this._routes = {};
+    this._routeGetters = Object.create(null);
   }
-  route(component) {
-    this._routes[component.displayName] = component;
+
+  route(name, getter) {
+    if (typeof name === "string") {
+      assert.strictEqual(typeof getter, "function");
+    } else {
+      const component = name;
+      name = component.displayName;
+      assert.strictEqual(typeof name, "string");
+      assert.strictEqual(typeof component, "function");
+      getter = () => component;
+    }
+
+    this._routeGetters[name] = getter;
   }
+
   open(name, params) {
     // NOTE: workaround for https://github.com/meteor/react-packages/issues/136
     //
@@ -20,6 +34,7 @@ class OverlayRouter {
       FlowRouter.setQueryParams(queryParams);
     });
   }
+
   close() {
     Meteor.setTimeout(() => {
       const unsetQueryParams = {
@@ -29,9 +44,13 @@ class OverlayRouter {
       FlowRouter.setQueryParams(unsetQueryParams);
     });
   }
+
   getComponent() {
     const name = FlowRouter.getQueryParam('overlay');
-    return this._routes[name];
+    const getter = this._routeGetters[name];
+    const component = getter();
+    assert.strictEqual(component.displayName, name);
+    return component;
   }
 }
 
