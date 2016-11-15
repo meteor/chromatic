@@ -1,5 +1,5 @@
 /* global SortableTableExample:true */
-/* global Sortable faker */
+/* global Sortable */
 
 import React from 'react';
 
@@ -8,6 +8,7 @@ const {Chromatic} = Package['mdg:chromatic-api'] || {};
 SortableTableExample = React.createClass({
   componentWillMount() {
     this.sortableData = new Mongo.Collection(null);
+    const faker = require("faker");
     _.times(5, () => {
       this.sortableData.insert({
         name: faker.name.findName(),

@@ -19,6 +19,7 @@
   "dependencies": {
     "autosize": "3.0.15",
     "classnames": "^2.2.5",
+    "faker": "^3.1.0",
     "react": "^15.2.1",
     "react-addons-create-fragment": "^15.2.1",
     "react-addons-css-transition-group": "^15.2.1",
