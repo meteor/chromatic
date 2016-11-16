@@ -5,20 +5,20 @@
 # but you can also edit it by hand.
 
 meteor-base@1.0.4             # Packages every Meteor app needs to have
-mongo@1.1.13                   # The database Meteor supports right now
-session@1.1.6                 # Client-side reactive dictionary for your app
-jquery@1.11.9                  # Helpful client-side library
-tracker@1.1.0                 # Meteor's client-side reactive programming library
+mongo@1.1.14                   # The database Meteor supports right now
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.1                 # Meteor's client-side reactive programming library
 
-es5-shim@4.6.14_1                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.5.8_1              # Enable ECMAScript2015+ syntax in app code
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
 
 kadira:flow-router
 mdg:react-meteor-app
 mdg:chromatic
 
-standard-minifier-css@1.2.0_1
-standard-minifier-js@1.2.0_1
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
 
 mdg:animations
 mdg:buttons
@@ -35,4 +35,4 @@ mdg:tooltips
 mdg:outlines
 numeral:numeral
 shell-server@0.2.1
-less@2.7.5_1
+less@2.7.8
