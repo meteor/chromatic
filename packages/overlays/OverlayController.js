@@ -48,9 +48,11 @@ class OverlayRouter {
   getComponent() {
     const name = FlowRouter.getQueryParam('overlay');
     const getter = this._routeGetters[name];
-    const component = getter();
-    assert.strictEqual(component.displayName, name);
-    return component;
+    if (getter) {
+      const component = getter();
+      assert.strictEqual(component.displayName, name);
+      return component;
+    }
   }
 }
 
