@@ -34,7 +34,7 @@ logging@1.1.16
 mdg:animations@0.2.3
 mdg:borealis@0.2.5
 mdg:buttons@0.2.5
-mdg:callout@0.2.5
+mdg:callout@0.2.6
 mdg:chromatic@0.2.7
 mdg:chromatic-api@0.2.4
 mdg:chromatic-explorer@0.2.8

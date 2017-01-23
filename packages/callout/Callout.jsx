@@ -30,13 +30,25 @@ if (Chromatic) {
         className: 'primary',
         children: 'Generic primay callout'
       }}),
+      new Chromatic.Spec('primary-with-link', {props: {
+        className: 'primary',
+        children: <span>Linky <a className="link" href="https://www.meteor.com/">primary</a> callout</span>
+      }}),
       new Chromatic.Spec('secondary', {props: {
         className: 'secondary',
         children: 'Generic secondary callout'
       }}),
+      new Chromatic.Spec('secondary-with-link', {props: {
+        className: 'secondary',
+        children: <span>Linky <a className="link" href="https://www.meteor.com/">secondary</a> callout</span>
+      }}),
       new Chromatic.Spec('alert', {props: {
         className: 'alert',
         children: 'Generic alert callout'
+      }}),
+      new Chromatic.Spec('alert-with-link', {props: {
+        className: 'alert',
+        children: <span>Linky <a className="link" href="https://www.meteor.com/">alert</a> callout</span>
       }})
     ]
   });

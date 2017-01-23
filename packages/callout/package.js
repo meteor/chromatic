@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:callout',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'an important thing at the top of the screen',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
