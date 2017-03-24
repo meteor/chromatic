@@ -15,6 +15,7 @@ Cardinal = React.createClass({
     // TODO: rename this to "symbol" or something more intuitive
     half: React.PropTypes.string,
     name: React.PropTypes.string,
+    subtext: React.PropTypes.string,
     tooltip: React.PropTypes.node,
     scrollSelector: React.PropTypes.string,
     children: React.PropTypes.node,
@@ -29,7 +30,7 @@ Cardinal = React.createClass({
     }
   },
   render() {
-    const {half, name, tooltip, scrollSelector, children, className, format}
+    const {half, name, subtext, tooltip, scrollSelector, children, className, format}
       = this.props;
     const value = this.props.numeral;
     let formattedValue = '--';
@@ -41,6 +42,7 @@ Cardinal = React.createClass({
       }
     }
 
+    const subtextDisplay = subtext ? (<div className="cardinal-subtext">{subtext}</div>) : null;
     const isStatic = !(tooltip || scrollSelector);
     const cardinal = (
       <div className={classnames('cardinal', className, {static: isStatic})}
@@ -50,6 +52,7 @@ Cardinal = React.createClass({
           {half && <span className="cardinal-half">{half}</span>}
         </div>
         <div className="cardinal-name">{name}</div>
+        {subtextDisplay}
         {children}
       </div>
     );
@@ -77,6 +80,12 @@ if (Chromatic) {
         numeral: 27,
         half: '%',
         name: 'CPU'
+      }}),
+      new Chromatic.Spec('with-subtext', {props: {
+        numeral: 99,
+        half: '%',
+        name: 'CPU',
+        subtext: 'Watch Out!'
       }}),
       new Chromatic.Spec('with-children-small', {props: {
         numeral: 27,

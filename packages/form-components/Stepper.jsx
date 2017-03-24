@@ -17,6 +17,7 @@ Stepper = React.createClass({
     min: React.PropTypes.number,
     maxLength: React.PropTypes.number,
     name: React.PropTypes.string.isRequired,
+    subtext: React.PropTypes.string,
     className: React.PropTypes.string
   },
   getInitialState() {
@@ -78,7 +79,7 @@ Stepper = React.createClass({
     }
   },
   render() {
-    const {ready, value, max, min, name, className} = this.props;
+    const {ready, value, max, min, name, subtext, className} = this.props;
     const atMax = value >= max;
     const atMin = value <= min;
 
@@ -86,12 +87,13 @@ Stepper = React.createClass({
     if (ready) {
       input = (
         <AutosizeInput className="cardinal-input" type="number" value={this.state.inputValue}
-          onChange={this.onInputChange} onBlur={this.onInputConfirm}
+          onChange={this.onInputChange} onBlur={this.onInputConfirm} minWidth="24"
           onKeyDown={this.onInputKeyDown}/>
       );
     } else {
       input = <span className="cardinal-input">--</span>;
     }
+    const subtextDisplay = subtext ? (<div className="cardinal-subtext">{subtext}</div>) : null;
 
     return (
       <div className="cardinal static">
@@ -113,6 +115,7 @@ Stepper = React.createClass({
           </button>
         </div>
         <div className="cardinal-name">{name}</div>
+        {subtextDisplay}
       </div>
     );
   }
@@ -137,6 +140,15 @@ if (Chromatic) {
         min: 1,
         max: 10,
         name: 'Containers',
+        onChange
+      }}),
+      new Chromatic.Spec('withSubtext', {props: {
+        ready: true,
+        value: 3,
+        min: 1,
+        max: 1000,
+        name: 'Containers',
+        subtext: 'Standard Pro Size',
         onChange
       }}),
       new Chromatic.Spec('at-min', {props: {

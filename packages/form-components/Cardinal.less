@@ -11,7 +11,7 @@
 		text-align: center;
 		vertical-align: top;
 
-		&:not(.small) { padding: .125rem 0 .75rem; }
+		&:not(.small) { padding: .125rem 0 0 }
 	}
 
 	&.static {
@@ -202,21 +202,25 @@
 // Occurs when two cardinal numbers are displayed alongside one another w/o separators
 // e.g., rolling updates
 .cardinal-wrapper {
-	.cardinal-subtext {
-		float: left;
-
-		.font-s1;
-		color: @color-mediumdark;
-		line-height: 1;
-	}
 	@media screen and (min-width: @breakpoint) {
 		display: inline-block;
 		position: relative;
-
-		.cardinal-subtext {
-			float: none;
-
-			.position(absolute, auto, 0, -.125rem, 0);
-		}
 	}
 }
+
+.cardinal-subtext {
+	float: left;
+	margin-left: 1em;
+
+	.font-s1;
+	color: @color-mediumdark;
+	line-height: 2.25;
+
+	@media screen and (min-width: @breakpoint) {
+		float: none;
+		line-height: 1;
+		margin-left: 0;
+		margin-top: 0.25em;
+	}
+}
+
