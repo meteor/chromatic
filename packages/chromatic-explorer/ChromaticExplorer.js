@@ -14,29 +14,39 @@ ChromaticExplorer = {
 
   configure: function(options) {
     check(options, {
-      basePath: String
+      basePath: String,
+      onRouteEnter: Match.Optional(Function)
+    });
+
+    const chromaticRoutes = FlowRouter.group({
+      prefix: options.basePath,
+      triggersEnter: [(context, redirect) => {
+        if (options.onRouteEnter) {
+          options.onRouteEnter(context, redirect);
+        }
+      }]
     });
 
     // add routes for any app-defined pages
     const pages = Chromatic.allPages();
     pages.forEach(page => {
-      FlowRouter.route(`${options.basePath}/${page.name}/:entryName?`, {
+      chromaticRoutes.route(`/${page.name}/:entryName?`, {
         name: `chromatic-${page.name}-styleguide`,
         component: page.component
       });
     });
     //  add iframe routes for each component
-    FlowRouter.route(`${options.basePath}/_component/:entryName?/:specName?`, {
+    chromaticRoutes.route('/_component/:entryName?/:specName?', {
       name: 'chromatic-component-iframe',
       component: ComponentSpec
     });
     //  add iframe routes for 'all' spec option for each component
-    FlowRouter.route(`${options.basePath}/_component/:entryName?/all`, {
+    chromaticRoutes.route('/_component/:entryName?/all', {
       name: 'chromatic-component-iframe',
       component: ComponentSpec
     });
 
-    FlowRouter.route(options.basePath, {
+    chromaticRoutes.route('/', {
       action: () => {
         FlowRouter.go(`chromatic-${pages[0].name}-styleguide`);
       }

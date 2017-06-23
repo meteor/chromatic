@@ -9,6 +9,7 @@ ComponentsPage = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     return {
+      entries: Chromatic.allEntries(),
       entryName: FlowRouter.getParam('entryName'),
       filterParam: FlowRouter.getQueryParam('filter')
     };
@@ -50,7 +51,7 @@ ComponentsPage = React.createClass({
     this.updateRecents(evt.target.title);
   },
   render() {
-    const {entryName, filterParam} = this.data;
+    const {entries, entryName, filterParam} = this.data;
     const {recents, showRecents, filterState} = this.state;
     const filterString = filterParam || filterState;
 
@@ -60,9 +61,15 @@ ComponentsPage = React.createClass({
 
     return (
       <ChromaticLayout showSidebar={true} sidebar={
-          <ComponentsPageSidebar recents={recents} filter={filterString} showRecents={showRecents}
-            onFilterInput={this.onFilterInput} onFilterSubmit={this.onFilterSubmit}
-            onEntryClick={this.onEntryClick}/>} >
+          <ComponentsPageSidebar
+            entries={entries}
+            recents={recents}
+            filter={filterString}
+            showRecents={showRecents}
+            onFilterInput={this.onFilterInput}
+            onFilterSubmit={this.onFilterSubmit}
+            onEntryClick={this.onEntryClick}/>}
+          >
         <div className="styleguide-content">
           <StyleguideReadme/>
         </div>
