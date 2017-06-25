@@ -1,5 +1,6 @@
 /* global Chromatic:true */
 import React from 'react';
+import {ReactiveDict} from 'meteor/reactive-dict';
 
 /**
  * Chromatic API
@@ -85,26 +86,27 @@ export const Chromatic = {
   addEntry(entry) {
     check(entry, Chromatic.Entry);
     Chromatic._entries[entry.name] = entry;
+    this._entriesDict.set(entry.name, true);
   },
 
   /**
-   * Gets a styleguide entry
+   * Gets a styleguide entry (reactive)
    * @param {String} name - the name of the entry
    * @returns {Object} entry - an instance of Chromatic.Entry
    */
   entry(name) {
     check(name, String);
-    return Chromatic._entries[name];
+    return this._entriesDict.get(name) ? Chromatic._entries[name] : null;
   },
 
   /**
-   * Returns the list of non-page styleguide entries
+   * Returns the list of non-page styleguide entries (reactive)
    * @returns {[Chromatic.Entry]}
    */
   allEntries: function() {
+    this._entriesDict.allDeps.depend();
     const entries = _.values(Chromatic._entries);
-    const componentEntries = _.filter(entries, (entry) => !entry.isPage);
-    return _.sortBy(componentEntries, (entry) => entry.name);
+    return _.filter(entries, (entry) => !entry.isPage);
   },
 
   /**
@@ -120,4 +122,5 @@ export const Chromatic = {
    * A dict that contains the list of styleguide entries
    */
   _entries: {},
+  _entriesDict: new ReactiveDict()
 };

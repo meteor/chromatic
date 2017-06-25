@@ -2,6 +2,7 @@
 /* global FlowRouter PageToggleButton Form */
 
 import React from 'react';
+import { _ } from 'meteor/underscore';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 ComponentsPageSidebar = React.createClass({
@@ -9,19 +10,19 @@ ComponentsPageSidebar = React.createClass({
     onFilterInput: React.PropTypes.func.isRequired,
     onFilterSubmit: React.PropTypes.func.isRequired,
     onEntryClick: React.PropTypes.func.isRequired,
+    entries: React.PropTypes.array.isRequired,
     recents: React.PropTypes.array.isRequired,
     showRecents: React.PropTypes.bool,
     filter: React.PropTypes.string
   },
   render() {
-    const {onFilterInput, onFilterSubmit, recents, filter, showRecents} = this.props;
+    const {onFilterInput, onFilterSubmit, recents, entries, filter, showRecents} = this.props;
 
     //  TODO: use better regex
     const filterRE = new RegExp(filter, 'i');
-    const entries = Chromatic.allEntries();
-    const entryLinks = entries.filter(e => {
+    const entryLinks = _.sortBy(entries.filter(e => {
       return filterRE.test(e.name);
-    }).map(e => {
+    }), 'name').map(e => {
       const n = e.name;
       return (
         <a href={FlowRouter.path('chromatic-components-styleguide', {entryName: n})}
