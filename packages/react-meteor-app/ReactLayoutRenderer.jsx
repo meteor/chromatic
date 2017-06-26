@@ -5,6 +5,7 @@
 //   recursively. Any props that are passed in (in this case the current route), are passed to all
 //   components in the layout heirarchy (via the box mechanism below)
 import React from 'react';
+import {isReactClassOrComponent} from 'meteor/mdg:flow-router-extensions';
 
 ReactLayoutRenderer = React.createClass({
   propTypes: {
@@ -35,7 +36,7 @@ ReactLayoutRenderer = React.createClass({
 
     const walk = (Comp, boxedChild) => {
       if (typeof Comp.layout === 'function') {
-        const layout = Comp.layout.prototype instanceof React.Component ? Comp.layout : Comp.layout();
+        const layout = isReactClassOrComponent(Comp.layout) ? Comp.layout : Comp.layout();
         return layout ? walk(layout, this.box(Comp, boxedChild)) : Comp;
       }
       return <Comp key={Comp.displayName || Comp.name} {...other} boxedChild={boxedChild}/>;
