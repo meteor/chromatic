@@ -2,8 +2,17 @@
 import React from 'react';
 // TODO -- should I just extend flow router here?
 
-const ReactClassPrototypePrototype = (Object.getPrototypeOf(Object.getPrototypeOf(new (React.createClass({ render () {} }))())));
-const ReactClassPrototype = Object.getPrototypeOf(React.createClass({ render () {} }));
+const ReactClassPrototypePrototype =
+  (Object.getPrototypeOf(Object.getPrototypeOf(new (React.createClass({ render() {} }))())));
+
+const ReactClassPrototype =
+  Object.getPrototypeOf(React.createClass({ render() {} })); // eslint-disable-line
+
+export function isReactClassOrComponent(obj) {
+  return React.Component.isPrototypeOf(obj)
+    || ReactClassPrototype.isPrototypeOf(obj)
+    || ReactClassPrototypePrototype.isPrototypeOf(obj);
+}
 
 FlowRouter.getRouteHandler = function() {
   // Semantically it seems like I should use .watchPathChange() here, but
@@ -30,9 +39,7 @@ FlowRouter.getRouteHandler = function() {
 const oldRoute = FlowRouter.route.bind(FlowRouter);
 FlowRouter.route = (path, options) => {
   // a react component
-  const componentName = (React.Component.isPrototypeOf(options) && options.name)
-   || (ReactClassPrototype.isPrototypeOf(options) && options.displayName)
-   || (ReactClassPrototypePrototype.isPrototypeOf(options) && options.displayName);
+  const componentName = isReactClassOrComponent(options) && (options.name || options.displayName);
   if (componentName) {
     return oldRoute(path, {name: componentName, component: options});
   }
