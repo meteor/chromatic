@@ -34,22 +34,19 @@ Sortable = React.createClass({
   render() {
     const {field, specifier, onSort, inverted, className, children, Component, ...other} = this.props;
     const classNames = [className];
-    let icon;
     if (specifier[field]) {
       classNames.push('sortable');
       const direction = inverted ? -1 : 1;
       if (specifier[field] === direction) {
-        icon = 'icon-arrow-down';
         classNames.push('ascending');
       } else {
-        icon = 'icon-arrow-up';
         classNames.push('descending');
       }
     }
 
     return (
       <Component className={classnames(classNames)} onClick={this.onClick} {...other}>
-        <span>{children}<span className={icon}></span></span>
+        <span>{children}<span className="icon-arrow-down"></span></span>
       </Component>
     );
   }
