@@ -3,21 +3,6 @@
 
 import React from 'react';
 
-const recontextChildren = function(children) {
-  // NOTE: This is a bit of a hack to make this element the owner (as well as the parent) of
-  //   the child element. See https://github.com/facebook/react/issues/3392#issuecomment-78772905
-  // In React 0.14 we won't need to do this any more, but this works for now.
-  return React.Children.map(children, (child) => {
-    if (_.isString(child)) {
-      return child;
-    }
-    if (child.props && child.props.children) {
-      return React.cloneElement(child, {}, recontextChildren(child.props.children));
-    }
-    return React.cloneElement(child);
-  });
-};
-
 Form = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func,
@@ -125,11 +110,9 @@ Form = React.createClass({
   render() {
     const {onSubmit, onChange, defaults, onSubmitError, children, ...other} = this.props;
 
-    const contextedChildren = recontextChildren(children);
-
     return (
       <form {...other} onSubmit={this.onSubmit}>
-        {contextedChildren}
+        {children}
       </form>
     );
   }
