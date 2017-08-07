@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:loading-spinner',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'Basic in-place spinner',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -12,7 +12,6 @@ Package.onUse(function(api) {
     'ecmascript',
     'less',
     'mdg:borealis@0.2.5',
-    'mdg:chromatic@0.2.6',
   ]);
   api.addFiles([
     'LoadingSpinner.jsx',
