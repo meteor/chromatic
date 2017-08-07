@@ -21,7 +21,6 @@
     cursor: pointer;
     font-size: 1em;
 
-
     @media screen and (min-width: @breakpoint) {
       right: .75rem;
       top: .75rem;
@@ -36,7 +35,9 @@
       color: @color-mediumdark;
 
       .font-s2;
-      @media screen and (min-width: @breakpoint) { .font-m2; }
+      @media screen and (min-width: @breakpoint) {
+        .font-m2;
+      }
     }
   }
 }
@@ -67,7 +68,7 @@
       .font-l3;
     }
   }
-  
+
   .form-actions {
     .font-s1;
     margin-top: 1rem;
