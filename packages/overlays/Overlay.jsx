@@ -1,6 +1,7 @@
 import React, { Component as ReactComponent } from 'react';
 import { parse } from 'query-string';
 import { withRouter } from 'react-router-dom';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 import { OverlayController } from './OverlayController';
 import { OverlayLayout } from './OverlayLayout';
@@ -50,7 +51,16 @@ class Overlay extends ReactComponent {
   }
 
   render() {
-    return this.renderContent();
+    return (
+      <VelocityTransitionGroup
+        className="overlay-container"
+        component="div"
+        enter={{ animation: 'transition.fadeIn', duration: 350 }}
+        leave={{ animation: 'transition.fadeOut', duration: 300 }}
+      >
+        {this.renderContent()}
+      </VelocityTransitionGroup>
+    );
   }
 }
 

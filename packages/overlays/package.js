@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:overlays',
-  version: '0.2.10',
+  version: '0.2.11',
   summary: 'Overlay layout and mechanism to drive overlays',
   git: 'https://github.com/meteor/chromatic',
   documentation: null,
