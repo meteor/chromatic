@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:tooltips',
-  version: '0.2.6',
+  version: '0.2.11',
   summary: 'Basic tooltip wrapper for elements',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
