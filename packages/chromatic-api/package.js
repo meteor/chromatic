@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic-api',
-  version: '0.3.0',
+  version: '0.3.1',
   summary: 'chromatic dev include',
   git: 'https://github.com/meteor/chromatic',
   debugOnly: true,
@@ -12,7 +12,8 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'underscore',
-    'check'
+    'check',
+    'reactive-dict'
   ], 'client');
   api.mainModule('chromatic-api.js', 'client');
 });
