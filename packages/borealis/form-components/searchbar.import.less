@@ -1,0 +1,36 @@
+@import "../util/index.import.less";
+
+.search-box {
+  .icon-search {
+    cursor: pointer;
+  }
+
+  .reveal-search {
+    .transition(all 300ms @easing);
+    overflow: hidden;
+    max-width: 24px;
+    white-space: nowrap;
+
+    input[type="text"] {
+      background: transparent !important;
+
+      &.nochrome {
+        display: inline-block;
+        position: relative;
+        top: -1px; //visual adjustment
+        margin-left: 0;
+      }
+    }
+
+    &.active {
+      max-width: 100%; // needed for animation
+      input[type="text"] {
+        padding-left: 30px !important;
+      }
+    }
+  }
+}
+
+.section-heading > .action-group > .search-box {
+  margin-top: -1rem;
+}
