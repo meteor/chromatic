@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "maw dev",
+    "build": "maw build"
+  },
+  "devDependencies": {
+    "maw": "^0.5.5"
+  }
+}
