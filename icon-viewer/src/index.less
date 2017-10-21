@@ -1,1 +1,19 @@
-@import '../../packages/borealis/index.import.less';
+@import '../node_modules/mdg-borealis/index.import.less';
+
+body {
+  color: white;
+  width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+span {
+  display: inline-block;
+  width: 150px;
+  padding: 20px;
+  font-size: 0.8em;
+
+  &::before {
+    font-size: 2em;
+  }
+}

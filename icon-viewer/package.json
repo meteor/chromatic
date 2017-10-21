@@ -5,5 +5,8 @@
   },
   "devDependencies": {
     "maw": "^0.5.5"
+  },
+  "dependencies": {
+    "mdg-borealis": "^1.0.8"
   }
 }
