@@ -1,3 +1,5 @@
+**Note:** This project is no longer maintained. We suggest using [Storybook](https://storybook.js.org/) as your [component explorer](https://blog.hichroma.com/the-crucial-tool-for-modern-frontend-engineers-fb849b06187a). The creators of this project now build [Chromatic QA](https://www.chromaticqa.com/) an automated visual testing tool for UI components and component libraries. 
+
 # Chromatic
 Explore, visualize, and prototype your UI components.
 
