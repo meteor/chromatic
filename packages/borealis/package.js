@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'a style system',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
@@ -41,6 +41,7 @@ Package.onUse(function(api) {
     'global/table.import.less',
     'global/transition.import.less',
     'global/global.import.less',
+    'overlays/overlays.import.less',
     'index.import.less',
   ], 'client');
 });
