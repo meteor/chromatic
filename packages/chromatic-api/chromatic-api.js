@@ -6,6 +6,10 @@ import {ReactiveDict} from 'meteor/reactive-dict';
  * Chromatic API
  */
 export const Chromatic = {
+  // Note: both Entry and Spec must be function-valued properties, and
+  // cannot be defined with method shorthand syntax, because they will be
+  // invoked as constructors, and methods do not have a .prototype.
+
   /**
    * Constructs a styleguided component entry
    * @param {React.Component} component
@@ -16,7 +20,7 @@ export const Chromatic = {
    *    name: {Optional String} - change the entry's name (from it's displayName)
    * @returns {Object} the constructed component object
    */
-  Entry(component, options) {
+  Entry: function Entry(component, options) {
     check(component, Function);
 
     // how to check this?
@@ -49,7 +53,7 @@ export const Chromatic = {
    *    props: {Optional Object|Function} - the props of the spec
    * @returns {Object} the constructed spec object
    */
-  Spec(name, options) {
+  Spec: function Spec(name, options) {
     check(name, String);
     check(options, {
       setup: Match.Optional(Function),

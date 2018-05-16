@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:chromatic-api',
-  version: '0.3.1',
+  version: '0.3.2',
   summary: 'chromatic dev include',
   git: 'https://github.com/meteor/chromatic',
   debugOnly: true,
