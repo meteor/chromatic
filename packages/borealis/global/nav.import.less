@@ -1,35 +1,45 @@
 .nav {
-	.std-xpadding;
-	.transform(translate3d(0,0,0));
-	text-align: center;
-	z-index: 3;
+  .std-xpadding;
+  .transform(translate3d(0, 0, 0));
+  text-align: center;
+  z-index: 3;
 
   .position(absolute, 0, 0, auto, 0, auto, 3rem);
-	@media screen and (min-width: @breakpoint) { height: 4rem; }
+  @media screen and (min-width: @breakpoint) {
+    height: 4rem;
+  }
 
   &.dark {
     color: @color-darker;
-    svg { fill: @color-darkest; }
+    svg {
+      fill: @color-darkest;
+    }
   }
 
   &.light {
     color: @color-lightest;
-    svg { fill: @color-lightest; }
+    svg {
+      fill: @color-lightest;
+    }
   }
 
-	svg {
-		position: relative;
-		top: .75rem;
-		@media screen and (min-width: @breakpoint) { top: 1.25rem; }
-		height: 10px;
+  svg {
+    position: relative;
+    top: 0.75rem;
+    @media screen and (min-width: @breakpoint) {
+      top: 1.25rem;
+    }
+    height: 25px;
 
-		.subheading-caps(center);
+    .subheading-caps(center);
   }
 
   .nav-group {
     .position(absolute, 0, auto, auto, 0);
-		@media screen and (min-width: @breakpoint) { top: .5rem; }
-		.std-xpadding;
+    @media screen and (min-width: @breakpoint) {
+      top: 0.5rem;
+    }
+    .std-xpadding;
     z-index: 1;
 
     &.right {
@@ -45,31 +55,33 @@
     height: 3rem;
     vertical-align: top;
 
-		& + .nav-item {
-			margin-left: .75rem;
-			@media screen and (min-width: @breakpoint) { margin-left: 1.875rem;  }
-		}
+    & + .nav-item {
+      margin-left: 0.75rem;
+      @media screen and (min-width: @breakpoint) {
+        margin-left: 1.875rem;
+      }
+    }
 
     .link {
-			.font-s2;
-			line-height: 1;
+      .font-s2;
+      line-height: 1;
 
-			.type-semibold;
-		}
+      .type-semibold;
+    }
 
-		.btn {
-	    vertical-align: middle;
-	  }
+    .btn {
+      vertical-align: middle;
+    }
 
     .icon-menu {
-			.font-s3;
+      .font-s3;
       line-height: 1;
       vertical-align: text-top;
     }
 
-		.account-menu-wrapper {
-			display: inline-block; //necessary for accounts loading state
-			margin-top: .75rem;
-		}
+    .account-menu-wrapper {
+      display: inline-block; //necessary for accounts loading state
+      margin-top: 0.75rem;
+    }
   }
 }

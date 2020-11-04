@@ -1,9 +1,9 @@
 .type-primary() {
-  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Pulpdisplay', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .type-light() { font-weight: 300; }
-.type-normal() { font-weight: 400; }
+.type-normal() { font-weight: 500; }
 .type-italic() { font-style: italic; }
 .type-semibold() { font-weight: 600; }
 .type-bold() { font-weight: 700; }
@@ -22,7 +22,7 @@
 
 // Large
 .font-l3() {
-  font-size: 48px;
+  font-size: 36px;
   line-height: 1;
 }
 
@@ -32,39 +32,51 @@
 }
 
 .font-l1() {
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1;
 }
 
 // Medium
 .font-m3() {
   font-size: 28px;
+  .type-bold;
   line-height: 1;
 }
 
 .font-m2() {
   font-size: 24px;
+  .type-bold;
   line-height: 1;
 }
 
 .font-m1() {
-  font-size: 20px;
+  font-size: 18px;
+  .type-bold;
   line-height: 1;
 }
 
 // Small
 .font-s3() { //this sets the baseline for the layout but gets overridden per template
-  font-size: 16px;
+  font-size: 20px;
+  .type-bold;
   line-height: 24px;
 }
 
 .font-s2() {
   font-size: 14px;
+  .type-light;
   line-height: 20px;
 }
 
 .font-s1() {
   font-size: 12px;
+  .type-light;
+  line-height: 16px;
+}
+
+.font-btn() {
+  font-size: 15px;
+  .type-normal;
   line-height: 16px;
 }
 

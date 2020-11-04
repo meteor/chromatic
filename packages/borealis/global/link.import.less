@@ -17,7 +17,7 @@ a,
 	&.primary { .link(@color-primary); }
 	&.secondary { .link(@color-secondary); }
 	&.tertiary { .link(@color-dark); }
-	&.complementary { .link(@color-complementary); }
+	&.complementary { .link(lighten(@color-primary, 7%)); }
 
 	// When a file uploading is dressed as a link
 	&.upload {

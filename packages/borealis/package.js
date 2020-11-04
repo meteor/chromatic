@@ -7,15 +7,19 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3');
+  api.versionsFrom('1.11');
   api.use([
+    'ecmascript',
     'less',
     'percolate:icons@0.0.12'
   ]);
 
   api.imply(['percolate:icons'], 'client');
+  api.mainModule('index.js', 'client');
+  api.export("LogoLight")
 
   api.addFiles([
+    'icons/logo/LogoLight.js',
     'form-components/cardinal.import.less',
     'form-components/checkbox.import.less',
     'form-components/form-components.import.less',
@@ -55,4 +59,5 @@ Package.onUse(function(api) {
     'util/ui.import.less',
     'index.import.less',
   ], 'client');
+
 });

@@ -11,10 +11,12 @@
 	text-decoration: none;
 	vertical-align: top;
 	white-space: nowrap;
+	text-transform: uppercase;
 	.user-select(none);
+	border-radius: 5px;
 
 	.font-s1;
-	.subheading-caps(center);
+	.subheading-without-caps(center);
 
 	// Pill shaped
 	&.round { border-radius: 3em; }
@@ -60,9 +62,9 @@
 	}
 
 	&.tertiary {
-		@color-button: lighten(@color-medium, 7%);
+		@color-button: @color-secondary;
 		background-color: @color-button;
-		color: @color-darkest;
+		color: @color-lightest;
 
 		&:hover{ background-color: darken(@color-button, 5%); }
     &:active { box-shadow: fade((darken(@color-button, 50%)), 30%) 0 0px 0px 3em inset; }
@@ -374,7 +376,7 @@
 .pagination {
 	.count {
 		.font-s1;
-		.subheading-caps;
+		.subheading-without-caps;
 		display: inline-block;
 		line-height: 40px;
 		margin-left: 1rem;
