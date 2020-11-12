@@ -3,61 +3,61 @@ Package.describe({
   version: '0.2.7',
   summary: 'a style system',
   git: 'https://github.com/meteor/chromatic',
-  documentation: null
+  documentation: null,
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.11');
-  api.use([
-    'ecmascript',
-    'less',
-    'percolate:icons@0.0.12'
-  ]);
+  api.use(['ecmascript', 'less', 'percolate:icons@0.0.12']);
 
   api.imply(['percolate:icons'], 'client');
   api.mainModule('index.js', 'client');
-  api.export("LogoLight")
+  api.export(['LogoLight', 'HeaderLogo']);
 
-  api.addFiles([
-    'icons/logo/LogoLight.js',
-    'form-components/cardinal.import.less',
-    'form-components/checkbox.import.less',
-    'form-components/form-components.import.less',
-    'form-components/form.import.less',
-    'form-components/index.import.less',
-    'form-components/input.import.less',
-    'form-components/radio.import.less',
-    'form-components/searchbar.import.less',
-    'form-components/select.import.less',
-    'form-components/textarea.import.less',
-    'global/animation.import.less',
-    'global/base.import.less',
-    'global/button.import.less',
-    'global/drawer.import.less',
-    'global/formatting.import.less',
-    'global/global.import.less',
-    'global/header.import.less',
-    'global/link.import.less',
-    'global/list.import.less',
-    'global/mobile.import.less',
-    'global/nav.import.less',
-    'global/normalize.import.less',
-    'global/section.import.less',
-    'global/table.import.less',
-    'global/transition.import.less',
-    'icons/icons.import.less',
-    'overlays/overlays.import.less',
-    'util/clearfix.import.less',
-    'util/color.import.less',
-    'util/easing.import.less',
-    'util/helper.import.less',
-    'util/index.import.less',
-    'util/lesshat.import.less',
-    'util/link.import.less',
-    'util/text.import.less',
-    'util/typography.import.less',
-    'util/ui.import.less',
-    'index.import.less',
-  ], 'client');
-
+  api.addFiles(
+    [
+      'react-components/NavigationBar.js',
+      'icons/logo/LogoLight.js',
+      'icons/logo/HeaderLogo.js',
+      'form-components/cardinal.import.less',
+      'form-components/checkbox.import.less',
+      'form-components/form-components.import.less',
+      'form-components/form.import.less',
+      'form-components/index.import.less',
+      'form-components/input.import.less',
+      'form-components/radio.import.less',
+      'form-components/searchbar.import.less',
+      'form-components/select.import.less',
+      'form-components/textarea.import.less',
+      'global/animation.import.less',
+      'global/base.import.less',
+      'global/button.import.less',
+      'global/drawer.import.less',
+      'global/formatting.import.less',
+      'global/global.import.less',
+      'global/header.import.less',
+      'global/link.import.less',
+      'global/list.import.less',
+      'global/mobile.import.less',
+      'global/nav.import.less',
+      'global/normalize.import.less',
+      'global/section.import.less',
+      'global/table.import.less',
+      'global/transition.import.less',
+      'icons/icons.import.less',
+      'overlays/overlays.import.less',
+      'util/clearfix.import.less',
+      'util/color.import.less',
+      'util/easing.import.less',
+      'util/helper.import.less',
+      'util/index.import.less',
+      'util/lesshat.import.less',
+      'util/link.import.less',
+      'util/text.import.less',
+      'util/typography.import.less',
+      'util/ui.import.less',
+      'index.import.less',
+    ],
+    'client'
+  );
 });

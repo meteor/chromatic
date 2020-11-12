@@ -10,6 +10,7 @@
   padding-top: 3rem;
   @media screen and (min-width: @breakpoint) {
     padding-top: 4rem;
+    height: 282px;
   }
 
   .background-image(
@@ -187,6 +188,10 @@
   .header-tabs {
     margin: 0 auto;
     text-align: center;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
 
     .tab {
       .transition(all 300ms ease-out);
@@ -263,24 +268,34 @@
   }
 }
 
+.background-image{
+  .background-image(
+          linear-gradient(
+                  95deg,
+                  fade(@header-gradient-stop1, 95%) 0%,
+                  fade(@header-gradient-stop2, 95%) 100%
+          )
+  );
+}
+
 .subheader {
   .transform(translate3d(0, 0, 0));
   .position(relative, 0, 0, auto, 0, auto, 3rem);
   text-align: left;
   z-index: 3;
+  .background-image(
+          linear-gradient(
+                  95deg,
+                  fade(@header-gradient-stop1, 95%) 0%,
+                  fade(@header-gradient-stop2, 95%) 100%
+          )
+  );
 
   @media screen and (min-width: @breakpoint) {
     height: 4rem;
     text-align: center;
   }
 
-  .background-image(
-    linear-gradient(
-      95deg,
-      fade(@header-gradient-stop1, 95%) 0%,
-      fade(@header-gradient-stop2, 95%) 100%
-    )
-  );
 
   .title-subheader {
     .type-light;

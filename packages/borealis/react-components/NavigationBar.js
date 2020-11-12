@@ -1,0 +1,5 @@
+NavigationBar = () => (
+
+    <span> OI</span>
+
+)
