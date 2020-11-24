@@ -1,0 +1,39 @@
+.four-boxes {
+  .box-bg,
+  .box-shadowed {
+    flex-basis: 305px;
+  }
+  justify-content: space-evenly;
+  flex-direction: row;
+  display: flex;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+@media screen and (max-width: @breakpoint) {
+  .four-boxes {
+    flex-direction: column;
+  }
+}
+.header-boxes {
+  position: absolute;
+  bottom: -122px;
+  left: 0px;
+  right: 0px;
+}
+.box-shadowed {
+  /* Primary / White */
+
+  background: #ffffff;
+  /* Shadow / Medium */
+  height: 272px;
+  box-shadow: 0px 30px 40px -20px rgba(27, 36, 72, 0.16);
+  border-radius: 12px;
+}
+.box-bg {
+  background: #ffffff;
+  height: 337px;
+  border-radius: 12px;
+  background-image: url(packages/mdg_borealis/icons/box-bg.png);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
