@@ -12,14 +12,26 @@ Package.onUse(function(api) {
 
   api.imply(['percolate:icons'], 'client');
   api.mainModule('index.js', 'client');
-  api.export(['LogoLight', 'HeaderLogo', 'NavigationBar', 'LogoDark', 'Header']);
+  api.export([
+    'LogoLight',
+    'HeaderLogo',
+    'NavigationBar',
+    'LogoDark',
+    'Header',
+  ]);
 
-  api.addAssets([
+  api.addAssets(
+    [
       'icons/fonts/PulpDisplay-Bold.ttf',
       'icons/fonts/PulpDisplay-Light.ttf',
       'icons/fonts/PulpDisplay-Medium.ttf',
       'icons/box-bg.png',
-  ], 'client');
+      'icons/forums.svg',
+      'icons/slack.svg',
+      'icons/tutorials.svg',
+    ],
+    'client'
+  );
   api.addFiles(
     [
       'react-components/NavigationBar.js',

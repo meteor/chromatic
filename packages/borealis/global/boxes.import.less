@@ -1,9 +1,26 @@
 .four-boxes {
   .box-bg,
-  .box-shadowed {
+  .box-shadowed,
+  .box-empty {
+    padding: 32px;
     flex-basis: 305px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    p {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 150%;
+      color: #8d91a3;
+    }
+    h3 {
+      &:not(:first-child) {
+        margin-top: 34px;
+      }
+    }
   }
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: row;
   display: flex;
   margin-left: 80px;
@@ -29,11 +46,31 @@
   height: 272px;
   box-shadow: 0px 30px 40px -20px rgba(27, 36, 72, 0.16);
   border-radius: 12px;
+  @media screen and (min-width: @breakpoint) {
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
 }
 .box-bg {
   background: #ffffff;
   height: 337px;
   border-radius: 12px;
   background-image: url(packages/mdg_borealis/icons/box-bg.png);
-  transform: matrix(-1, 0, 0, 1, 0, 0);
+  background-size: contain;
+  @media screen and (min-width: @breakpoint) {
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
+.box-empty {
+  background: #ffffff;
+  height: 337px;
+  border-radius: 12px;
+  @media screen and (min-width: @breakpoint) {
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
 }
