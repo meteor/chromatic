@@ -18,6 +18,7 @@ Package.onUse(function(api) {
     'NavigationBar',
     'LogoDark',
     'Header',
+    'HeaderProvider',
   ]);
 
   api.addAssets(
@@ -35,6 +36,7 @@ Package.onUse(function(api) {
   api.addFiles(
     [
       'react-components/NavigationBar.js',
+      'react-components/useHeaderInfo.js',
       'react-components/Header.js',
       'icons/logo/LogoLight.js',
       'icons/logo/LogoDark.js',
