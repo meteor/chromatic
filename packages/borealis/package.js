@@ -7,11 +7,10 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.11');
+  api.versionsFrom('1.3');
   api.use(['ecmascript', 'less', 'percolate:icons@0.0.12']);
 
   api.imply(['percolate:icons'], 'client');
-  api.mainModule('index.js', 'client');
   api.export([
     'LogoLight',
     'HeaderLogo',

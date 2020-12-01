@@ -1,57 +1,64 @@
-import React from 'react';
-import {useFetch} from "./useFetch";
+import React, { useState } from 'react';
 
-export const LIGHT_VARIANT = "light";
-NavigationBar = ({variant = LIGHT_VARIANT}) => {
-    const response = useFetch('https://1jzxrj179.lp.gql.zone/graphql', {
-        method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: '{ posts { title } }' }),
-    });
+export const LIGHT_VARIANT = 'light';
+NavigationBar = ({ variant = LIGHT_VARIANT, apolloClient, gql }) => {
+  const [active, setActive] = useState({});
+  const query = gql`
+    {
+      menu {
+        _id
+        title
+        actionUrl
+        items {
+          _id
+          title
+          actionUrl
+        }
+      }
+    }
+  `;
+  const data = apolloClient.query({ fetchPolicy: 'cache-first', query });
+  console.log(data);
 
-    return <nav>
-        {variant === LIGHT_VARIANT ? <LogoLight className="logo"/> : <LogoDark className="logo"/>}
-        <div className='links'>
-            <div data-delay="0" data-hover="1" className="w-dropdown">
-                <a className={variant}>Applications</a>
-                <nav className="dropdown-list w-dropdown-list w--open">
-                    <a
-                        href="{{pathFor 'install'}}"
-                        className="dropdown-link w-dropdown-link"
-                    >Install</a
-                    >
-                </nav>
-            </div>
-            <div data-delay="0" data-hover="1" className="w-dropdown">
-                <a className={variant}>Applications</a>
-                <nav className="dropdown-list w-dropdown-list w--open">
-                    <a
-                        href="{{pathFor 'install'}}"
-                        className="dropdown-link w-dropdown-link"
-                    >Install</a
-                    >
-                </nav>
-            </div>
-            <div data-delay="0" data-hover="1" className="w-dropdown">
-                <a className={variant}>Applications</a>
-                <nav className="dropdown-list w-dropdown-list w--open">
-                    <a
-                        href="{{pathFor 'install'}}"
-                        className="dropdown-link w-dropdown-link"
-                    >Install</a
-                    >
-                </nav>
-            </div>
-            <div data-delay="0" data-hover="1" className="w-dropdown">
-                <a className={variant}>Applications</a>
-                <nav className="dropdown-list w-dropdown-list w--open">
-                    <a
-                        href="{{pathFor 'install'}}"
-                        className="dropdown-link w-dropdown-link"
-                    >Install</a
-                    >
-                </nav>
-            </div>
+  return (
+    <nav>
+      {variant === LIGHT_VARIANT ? (
+        <LogoLight className="logo" />
+      ) : (
+        <LogoDark className="logo" />
+      )}
+      <div className="links">
+        <div data-delay="0" data-hover="1" className="w-dropdown">
+          <a className={variant}>Applications</a>
+          <nav
+            className={`dropdown-list w-dropdown-list ${
+              active['0'] ? 'w--open' : ''
+            } `}
+          >
+            <a
+              href="{{pathFor 'install'}}"
+              className="dropdown-link w-dropdown-link"
+            >
+              Install
+            </a>
+          </nav>
         </div>
-    </nav>;
-}
+        <div data-delay="0" data-hover="1" className="w-dropdown">
+          <a className={variant}>Applications</a>
+          <nav
+            className={`dropdown-list w-dropdown-list ${
+              active['1'] ? 'w--open' : ''
+            } `}
+          >
+            <a
+              href="{{pathFor 'install'}}"
+              className="dropdown-link w-dropdown-link"
+            >
+              Install
+            </a>
+          </nav>
+        </div>
+      </div>
+    </nav>
+  );
+};
