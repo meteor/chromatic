@@ -1,7 +1,7 @@
 import React from 'react';
 
-if(!React.useState){
-   return;
+if (!React.createContext) {
+  return;
 }
 
 const HeaderContext = React.createContext({});
@@ -27,7 +27,9 @@ HeaderProvider = ({ children }) => {
 };
 
 export const useHeaderInfo = () => {
-  const { title, setTitle, showBack, setShowBack } = React.useContext(HeaderContext);
+  const { title, setTitle, showBack, setShowBack } = React.useContext(
+    HeaderContext
+  );
   return {
     title,
     setTitle,
