@@ -1,10 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
+
+if(!React.useState){
+   return;
+}
 
 const HeaderContext = React.createContext({});
 
 HeaderProvider = ({ children }) => {
-  const [title, setTitle] = useState('');
-  const [showBack, setShowBack] = useState(false);
+  const [title, setTitle] = React.useState('');
+  const [showBack, setShowBack] = React.useState(false);
   return (
     <HeaderContext.Provider
       value={{
@@ -23,7 +27,7 @@ HeaderProvider = ({ children }) => {
 };
 
 export const useHeaderInfo = () => {
-  const { title, setTitle, showBack, setShowBack } = useContext(HeaderContext);
+  const { title, setTitle, showBack, setShowBack } = React.useContext(HeaderContext);
   return {
     title,
     setTitle,
