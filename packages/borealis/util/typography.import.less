@@ -1,18 +1,29 @@
 .type-primary() {
-  font-family: 'Pulpdisplay', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Pulpdisplay', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.type-light() { font-weight: 300; }
-.type-normal() { font-weight: 500; }
-.type-italic() { font-style: italic; }
-.type-semibold() { font-weight: 600; }
-.type-bold() { font-weight: 700; }
+.type-light() {
+  font-weight: 300;
+}
+.type-normal() {
+  font-weight: 500;
+}
+.type-italic() {
+  font-style: italic;
+}
+.type-semibold() {
+  font-weight: 600;
+}
+.type-bold() {
+  font-weight: 700;
+  color: black;
+}
 
 .type-code() {
-  font-family: "Andale Mono WT", "Andale Mono", "Menlo", "Lucida Console", "Lucida Sans Typewriter", Monaco, monospace;
+  font-family: 'Andale Mono WT', 'Andale Mono', 'Menlo', 'Lucida Console',
+    'Lucida Sans Typewriter', Monaco, monospace;
   font-weight: 400;
 }
-
 
 // X-Large
 .font-x1 {
@@ -56,7 +67,8 @@
 }
 
 // Small
-.font-s3() { //this sets the baseline for the layout but gets overridden per template
+.font-s3() {
+  //this sets the baseline for the layout but gets overridden per template
   font-size: 20px;
   .type-bold;
   line-height: 24px;

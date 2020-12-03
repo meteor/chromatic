@@ -11,8 +11,8 @@
 nav {
   z-index: 9999;
   position: absolute;
-  width: 100%;
-  height: 88px;
+  min-width: 100%;
+  min-height: 88px;
   left: 0px;
   top: 0px;
 
@@ -81,9 +81,9 @@ nav {
   margin-top: 27px;
 }
 .w-dropdown-list.w--open {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
-
 .dropdown-list {
   border-radius: 8px;
   background-color: #fff;

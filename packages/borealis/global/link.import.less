@@ -1,7 +1,6 @@
 a,
 .link {
   .transition(all 250ms ease-out);
-  .type-bold;
   cursor: pointer;
   text-decoration: none;
 
@@ -98,5 +97,17 @@ a,
   span:first-child {
     margin-right: 7px;
     margin-top: 1px;
+  }
+  &.primary {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    /* Primary / Orange */
+
+    color: #ff6a3e;
   }
 }

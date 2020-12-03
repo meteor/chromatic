@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
 
@@ -19,50 +20,62 @@ class NavigationBarComponent extends React.Component {
       headers: { Authorization: `Bearer ${dashboardToken}` },
       cache: 'default',
     };
+    const username = Meteor._localStorage.getItem('navBarUsername');
 
-    fetch(`${DASHBOARD_MENU_ENDPOINT}?app=${app}`, options)
+    fetch(`${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${username}`, options)
       .then(result => result.json())
       .then(items => {
         this.setState({ items });
       });
   }
+  // eslint-disable-next-line no-undef
+  timeout = {};
 
   render() {
     const { variant } = this.props;
     const { items = [] } = this.state;
 
+    const onMouseEnter = _id => {
+      if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
+      this.setState({
+        ...this.state,
+        [_id]: true,
+      });
+    };
+    const onMouseLeave = _id => {
+      this.timeout[_id] = Meteor.setTimeout(() => {
+        this.setState({
+          ...this.state,
+          [_id]: false,
+        });
+      }, 100);
+    };
     return (
       <nav>
-        {variant === LIGHT_VARIANT ? (
-          <LogoLight className="logo" />
-        ) : (
-          <LogoDark className="logo" />
-        )}
+        <a href="/">
+          {variant === LIGHT_VARIANT ? (
+            <LogoLight className="logo" />
+          ) : (
+            <LogoDark className="logo" />
+          )}
+        </a>
         <div className="links">
           {items.map(({ _id, label, actionLink, items: subItems }) => (
             <div key={label} className="w-dropdown">
               <a
                 className={variant}
                 href={actionLink}
-                onMouseEnter={() =>
-                  this.setState({
-                    ...this.state,
-                    _id: true,
-                  })
-                }
-                onMouseLeave={() =>
-                  this.setState({
-                    ...this.state,
-                    _id: false,
-                  })
-                }
+                onMouseEnter={() => onMouseEnter(_id)}
+                onMouseLeave={() => onMouseLeave(_id)}
               >
                 {label}
               </a>
               {subItems && (
                 <nav
+                  onMouseEnter={() => onMouseEnter(_id)}
+                  onMouseLeave={() => onMouseLeave(_id)}
                   className={`dropdown-list w-dropdown-list ${
-                    this.state.active[_id] ? 'w--open' : ''
+                    this.state[_id] ? 'w--open' : ''
                   } `}
                 >
                   {subItems.map(subitem => (
