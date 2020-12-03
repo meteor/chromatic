@@ -4,29 +4,32 @@ import { LetterAvatar } from './LetterAvatar';
 
 export const LIGHT_VARIANT = 'light';
 
+const DASHBOARD_MENU_ENDPOINT = '/rest/menu-items';
+
 class NavigationBarComponent extends React.Component {
   // eslint-disable-next-line no-undef
   state = {
     active: {},
+    items: [],
   };
+  componentDidMount() {
+    const { dashboardToken, app = 'dashboard' } = this.props;
+    const options = {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${dashboardToken}` },
+      cache: 'default',
+    };
+
+    fetch(`${DASHBOARD_MENU_ENDPOINT}?app=${app}`, options)
+      .then(result => result.json())
+      .then(items => {
+        this.setState({ items });
+      });
+  }
+
   render() {
-    const { variant, apolloClient, gql } = this.props;
-    const query = gql`
-      {
-        menu {
-          _id
-          title
-          actionUrl
-          items {
-            _id
-            title
-            actionUrl
-          }
-        }
-      }
-    `;
-    const data = apolloClient.query({ fetchPolicy: 'cache-first', query });
-    console.log(data);
+    const { variant } = this.props;
+    const { items = [] } = this.state;
 
     return (
       <nav>
@@ -36,36 +39,45 @@ class NavigationBarComponent extends React.Component {
           <LogoDark className="logo" />
         )}
         <div className="links">
-          <div data-delay="0" data-hover="1" className="w-dropdown">
-            <a className={variant}>Applications</a>
-            <nav
-              className={`dropdown-list w-dropdown-list ${
-                this.state.active['0'] ? 'w--open' : ''
-              } `}
-            >
+          {items.map(({ _id, label, actionLink, items: subItems }) => (
+            <div key={label} className="w-dropdown">
               <a
-                href="{{pathFor 'install'}}"
-                className="dropdown-link w-dropdown-link"
+                className={variant}
+                href={actionLink}
+                onMouseEnter={() =>
+                  this.setState({
+                    ...this.state,
+                    _id: true,
+                  })
+                }
+                onMouseLeave={() =>
+                  this.setState({
+                    ...this.state,
+                    _id: false,
+                  })
+                }
               >
-                Install
+                {label}
               </a>
-            </nav>
-          </div>
-          <div data-delay="0" data-hover="1" className="w-dropdown">
-            <a className={variant}>Applications</a>
-            <nav
-              className={`dropdown-list w-dropdown-list ${
-                this.state.active['1'] ? 'w--open' : ''
-              } `}
-            >
-              <a
-                href="{{pathFor 'install'}}"
-                className="dropdown-link w-dropdown-link"
-              >
-                Install
-              </a>
-            </nav>
-          </div>
+              {subItems && (
+                <nav
+                  className={`dropdown-list w-dropdown-list ${
+                    this.state.active[_id] ? 'w--open' : ''
+                  } `}
+                >
+                  {subItems.map(subitem => (
+                    <a
+                      key={subitem.label}
+                      href={subitem.actionLink}
+                      className="dropdown-link w-dropdown-link"
+                    >
+                      {subitem.label}
+                    </a>
+                  ))}
+                </nav>
+              )}
+            </div>
+          ))}
           <LetterAvatar
             size={40}
             bgColor="white"
@@ -86,9 +98,14 @@ class NavigationBarComponent extends React.Component {
 
 NavigationBarComponent.propTypes = {
   variant: PropTypes.string,
-  apolloClient: PropTypes.any,
-  gql: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  loggedUser: PropTypes.object,
+  dashboardToken: PropTypes.string,
 };
 
-NavigationBarComponent.defaultProps = { variant: LIGHT_VARIANT };
+NavigationBarComponent.defaultProps = {
+  variant: LIGHT_VARIANT,
+  dashboardToken: null,
+  loggedUser: { username: 'ND' },
+};
 NavigationBar = NavigationBarComponent;
