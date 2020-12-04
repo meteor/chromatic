@@ -27,6 +27,33 @@
   }
 }
 
+.container-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.row-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &.margin {
+    margin-top: 60px;
+  }
+  &.full-width {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.bordered-section {
+  border: 2px solid #f3f4f5;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background-color: white;
+  display: flex;
+  padding: 20px;
+}
+
 .section-cardinal {
   .std-xpadding;
   .std-ypadding;

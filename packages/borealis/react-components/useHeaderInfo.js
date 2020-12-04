@@ -26,10 +26,16 @@ HeaderProvider = ({ children }) => {
   );
 };
 
-export const useHeaderInfo = () => {
+export const useHeaderInfo = (newTitle, newShowBack) => {
   const { title, setTitle, showBack, setShowBack } = React.useContext(
     HeaderContext
   );
+  if (newTitle) {
+    setTitle(newTitle);
+  }
+  if (newShowBack !== null) {
+    setShowBack(newShowBack);
+  }
   return {
     title,
     setTitle,

@@ -96,7 +96,7 @@ class NavigationBarComponent extends React.Component {
             bgColor="white"
             textColor="#595dff"
             onClick={() => {
-              window.path = 'https://dashboard.meteor.com/profile';
+              window.href = 'https://dashboard.meteor.com/profile';
             }}
           >
             {this.props.loggedUser

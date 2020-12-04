@@ -1,4 +1,4 @@
-@import "../util/index.import.less";
+@import '../util/index.import.less';
 
 // Form Spacing
 // Generic spacing for form elements
@@ -6,11 +6,11 @@
 .fieldset {
   .clearfix;
 
-	@fieldset-spacing: 1.25rem; //20px
+  @fieldset-spacing: 1.25rem; //20px
 
-	// All form components are wrapped in custom DOM
+  // All form components are wrapped in custom DOM
   // This is generic spacing for labelled and minimal forms
-	// NOTE: Wrap any custom layouts in .fieldset-group
+  // NOTE: Wrap any custom layouts in .fieldset-group
 
   > .input-label,
   > .input-symbol,
@@ -24,13 +24,15 @@
   }
 
   //Minimal form spacing
-	> .input-symbol,
+  > .input-symbol,
   > .textarea,
   > .select,
   > .note-form,
   > .btn-group {
     margin-bottom: 1px;
-    &:last-child:not(:only-child) { margin-bottom: 0; }
+    &:last-child:not(:only-child) {
+      margin-bottom: 0;
+    }
   }
 
   //Labelled form spacing
@@ -39,23 +41,24 @@
   > .select-label,
   .fieldset-group {
     margin-bottom: @fieldset-spacing;
-    &:last-child { margin-bottom: 0; }
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   //Checkbox & Radio spacing
   > label.checkbox,
- 	> label.radio {
+  > label.radio {
     .font-s2;
-    margin-bottom: @fieldset-spacing - .25rem;
+    margin-bottom: @fieldset-spacing - 0.25rem;
 
-		// Affordance for visual space when the checkbox is sandwiched
-		// between a form element and a button
-		& + .btn {
-			margin-top: @fieldset-spacing - .5rem;
-		}
+    // Affordance for visual space when the checkbox is sandwiched
+    // between a form element and a button
+    & + .btn {
+      margin-top: @fieldset-spacing - 0.5rem;
+    }
   }
 }
-
 
 /* Generic */
 legend {
@@ -63,55 +66,58 @@ legend {
   margin-bottom: 1em;
   width: 100%; // Forces 100% width, not a block element
 
-	.font-s1;
-	.subheading-caps;
-	color: @color-dark;
+  .font-s1;
+  .subheading-caps;
+  color: @color-dark;
 }
-
 
 label {
   .font-s2;
-	.type-bold;
+  .type-bold;
   clear: both;
   display: block;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 
-  &.hidden { display: none; }
+  &.hidden {
+    display: none;
+  }
 
-	.sublabel,
+  .sublabel,
   .alert {
-		.font-s1;
-		.type-normal;
+    .font-s1;
+    .type-normal;
 
-		margin-left: .5em;
+    margin-left: 0.5em;
 
     color: @color-dark;
   }
 
-	.alert {
-		.type-italic;
-		color: @color-negative;
-	}
+  .alert {
+    .type-italic;
+    color: @color-negative;
+  }
 }
 
 // Character counts and help text beneath forms
 .subtext-form {
   .font-s1;
-	.ellipsized;
+  .ellipsized;
 
   display: block;
   line-height: 2em;
-	padding: 0 1.16em; //0 14px
+  padding: 0 1.16em; //0 14px
 
-	background-color: @color-light;
+  background-color: @color-light;
   color: @color-mediumdark;
 
-	&.nochrome {
-		background-color: transparent;
+  &.nochrome {
+    background-color: transparent;
     padding: 0;
-	}
+  }
 
-  &.right { text-align: right; }
+  &.right {
+    text-align: right;
+  }
 
   .alert {
     .type-italic;
@@ -120,10 +126,33 @@ label {
 }
 
 .note-form {
-  padding: .7111em 1em;
+  padding: 0.7111em 1em;
   text-align: center;
 
   .font-s2;
   background-color: @color-neutral;
   color: @color-darker;
+}
+
+.form-flex {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  justify-content: flex-start;
+}
+
+.three-section {
+  list-style: none;
+  flex: 0 0 33.333333%;
+  &:not(:nth-child(3n + 1)):not(:first-child) {
+    margin-left: 50px;
+  }
+}
+.four-section {
+  list-style: none;
+  flex: 0 0 22%;
+  margin-bottom: 20px;
+  &:not(:nth-child(4n + 1)):not(:first-child) {
+    margin-left: 20px;
+  }
 }
