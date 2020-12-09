@@ -5,7 +5,8 @@ import { LetterAvatar } from './LetterAvatar';
 
 export const LIGHT_VARIANT = 'light';
 
-const DASHBOARD_MENU_ENDPOINT = '/rest/menu-items';
+const DASHBOARD_URL = Meteor.settings.public.dashboardUrl;
+const DASHBOARD_MENU_ENDPOINT = `${DASHBOARD_URL}/rest/menu-items`;
 
 class NavigationBarComponent extends React.Component {
   // eslint-disable-next-line no-undef
@@ -17,6 +18,7 @@ class NavigationBarComponent extends React.Component {
     const { dashboardToken, app = 'dashboard' } = this.props;
     const options = {
       method: 'GET',
+      mode: 'cors',
       headers: { Authorization: `Bearer ${dashboardToken}` },
       cache: 'default',
     };
@@ -32,7 +34,7 @@ class NavigationBarComponent extends React.Component {
   timeout = {};
 
   render() {
-    const { variant } = this.props;
+    const { variant, app = 'dashboard' } = this.props;
     const { items = [] } = this.state;
 
     const onMouseEnter = _id => {
@@ -79,13 +81,27 @@ class NavigationBarComponent extends React.Component {
                   } `}
                 >
                   {subItems.map(subitem => (
-                    <a
-                      key={subitem.label}
-                      href={subitem.actionLink}
-                      className="dropdown-link w-dropdown-link"
-                    >
-                      {subitem.label}
-                    </a>
+                    <div className="dropdown-link w-dropdown-link">
+                      <a
+                        key={subitem.label}
+                        href={subitem.actionLink}
+                        className="dropdown-link w-dropdown-link"
+                      >
+                        {subitem.label}
+                      </a>
+                      {subitem.alternativeLink ? (
+                        <a href={subitem.alternativeLink}>
+                          <img
+                            style={{ width: 30 }}
+                            src={`/packages/mdg_borealis/icons/${
+                              app === 'galaxy' ? 'dashboard' : 'galaxy'
+                            }-logo.svg`}
+                          />
+                        </a>
+                      ) : (
+                        ''
+                      )}
+                    </div>
                   ))}
                 </nav>
               )}
