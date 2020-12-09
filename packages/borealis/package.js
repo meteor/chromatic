@@ -1,8 +1,7 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '1.0.0-beta.1',
+  version: '0.2.6-beta.1',
   summary: 'a style system',
-  git: 'https://github.com/meteor/chromatic',
   documentation: null,
 });
 
