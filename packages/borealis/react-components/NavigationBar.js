@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Meteor } from 'meteor/meteor';
 import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
@@ -8,6 +8,10 @@ export const LIGHT_VARIANT = 'light';
 const DASHBOARD_URL = Meteor.settings.public.dashboardUrl;
 const DASHBOARD_MENU_ENDPOINT = `${DASHBOARD_URL}/rest/menu-items`;
 
+const SPECIAL_ITEMS = {
+  ACCOUNT: 'Account',
+  LOG_OUT: 'Log Out',
+};
 class NavigationBarComponent extends React.Component {
   // eslint-disable-next-line no-undef
   state = {
@@ -52,6 +56,40 @@ class NavigationBarComponent extends React.Component {
         });
       }, 100);
     };
+    const mapSubitems = (subItems, _id) => (
+      <nav
+        onMouseEnter={() => onMouseEnter(_id)}
+        onMouseLeave={() => onMouseLeave(_id)}
+        className={`dropdown-list w-dropdown-list ${
+          this.state[_id] ? 'w--open' : ''
+        } `}
+      >
+        {subItems.map(subitem => (
+          <div className="dropdown-link w-dropdown-link">
+            <a
+              key={subitem.label}
+              href={subitem.actionLink}
+              className="dropdown-link w-dropdown-link no-padding"
+            >
+              {subitem.label}
+            </a>
+            {subitem.alternativeLink ? (
+              <a href={subitem.alternativeLink}>
+                <img
+                  style={{ width: 30 }}
+                  src={`/packages/mdg_borealis/icons/${
+                    app === 'galaxy' ? 'dashboard' : 'galaxy'
+                  }-logo.svg`}
+                />
+              </a>
+            ) : (
+              ''
+            )}
+          </div>
+        ))}
+      </nav>
+    );
+
     return (
       <nav>
         <a href="/">
@@ -62,63 +100,39 @@ class NavigationBarComponent extends React.Component {
           )}
         </a>
         <div className="links">
-          {items.map(({ _id, label, actionLink, items: subItems }) => (
-            <div key={label} className="w-dropdown">
-              <a
-                className={variant}
-                href={actionLink}
-                onMouseEnter={() => onMouseEnter(_id)}
-                onMouseLeave={() => onMouseLeave(_id)}
-              >
-                {label}
-              </a>
-              {subItems && (
-                <nav
+          {items.map(({ _id, label, actionLink, items: itemSubitems }) => {
+            if (label === SPECIAL_ITEMS.ACCOUNT) {
+              return (
+                <Fragment>
+                  <LetterAvatar
+                    size={40}
+                    bgColor="white"
+                    textColor="#595dff"
+                    onMouseEnter={() => onMouseEnter(_id)}
+                    onMouseLeave={() => onMouseLeave(_id)}
+                  >
+                    {this.props.loggedUser
+                      ? this.props.loggedUser.username.toUpperCase()
+                      : 'ND'}
+                  </LetterAvatar>
+                  {mapSubitems(itemSubitems, _id)}
+                </Fragment>
+              );
+            }
+            return (
+              <div key={label} className="w-dropdown">
+                <a
+                  className={variant}
+                  href={actionLink}
                   onMouseEnter={() => onMouseEnter(_id)}
                   onMouseLeave={() => onMouseLeave(_id)}
-                  className={`dropdown-list w-dropdown-list ${
-                    this.state[_id] ? 'w--open' : ''
-                  } `}
                 >
-                  {subItems.map(subitem => (
-                    <div className="dropdown-link w-dropdown-link">
-                      <a
-                        key={subitem.label}
-                        href={subitem.actionLink}
-                        className="dropdown-link w-dropdown-link"
-                      >
-                        {subitem.label}
-                      </a>
-                      {subitem.alternativeLink ? (
-                        <a href={subitem.alternativeLink}>
-                          <img
-                            style={{ width: 30 }}
-                            src={`/packages/mdg_borealis/icons/${
-                              app === 'galaxy' ? 'dashboard' : 'galaxy'
-                            }-logo.svg`}
-                          />
-                        </a>
-                      ) : (
-                        ''
-                      )}
-                    </div>
-                  ))}
-                </nav>
-              )}
-            </div>
-          ))}
-          <LetterAvatar
-            size={40}
-            bgColor="white"
-            textColor="#595dff"
-            onClick={() => {
-              window.href = 'https://dashboard.meteor.com/profile';
-            }}
-          >
-            {this.props.loggedUser
-              ? this.props.loggedUser.username.toUpperCase()
-              : 'ND'}
-          </LetterAvatar>
+                  {label}
+                </a>
+                {itemSubitems && mapSubitems(itemSubitems, _id)}
+              </div>
+            );
+          })}
         </div>
       </nav>
     );

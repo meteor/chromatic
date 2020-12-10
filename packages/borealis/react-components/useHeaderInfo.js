@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Only available for new react versions, otherwise this component is not defined
 if (!React.createContext) {
   return;
 }
@@ -30,12 +31,15 @@ export const useHeaderInfo = (newTitle, newShowBack) => {
   const { title, setTitle, showBack, setShowBack } = React.useContext(
     HeaderContext
   );
-  if (newTitle) {
-    setTitle(newTitle);
-  }
-  if (newShowBack !== null) {
-    setShowBack(newShowBack);
-  }
+  React.useEffect(() => {
+    if (newTitle) {
+      setTitle(newTitle);
+    }
+    if (newShowBack !== null) {
+      setShowBack(newShowBack);
+    }
+  });
+
   return {
     title,
     setTitle,

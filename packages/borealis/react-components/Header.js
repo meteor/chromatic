@@ -19,7 +19,7 @@ Header = ({ variant = LIGHT_VARIANT, children }) => {
           </a>
         )}
 
-        <h1>{title || 'My Dev Account'}</h1>
+        <h1>{title}</h1>
       </div>
       <HeaderLogo className="absolute-background" />
       {children}

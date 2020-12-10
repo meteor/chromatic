@@ -2,23 +2,26 @@ import React from 'react';
 
 const getPercentFromValue = (percent, value) => (value * percent) / 100;
 
-export const LetterAvatar = props => {
-  const {
-    onClick,
-    bgColor,
-    textColor,
-    size,
-    children,
-    bgOpacity = '1.0',
-    margin = true,
-  } = props;
-  const halfSize = getPercentFromValue(50, props.size);
+export const LetterAvatar = ({
+  onClick,
+  bgColor,
+  textColor,
+  size,
+  children,
+  bgOpacity = '1.0',
+  margin = true,
+  className,
+  ...props
+}) => {
+  const halfSize = getPercentFromValue(50, size);
   return (
     <svg
-      height={props.size}
-      width={props.size}
-      className={`avatar ${margin && 'margin'}`}
+      height={size}
+      width={size}
+      style={{ width: size, height: size }}
+      className={`avatar ${margin && 'margin'} ${className}`}
       onClick={onClick}
+      {...props}
     >
       <circle
         cx={halfSize}
