@@ -74,7 +74,7 @@ class NavigationBarComponent extends React.Component {
               {subitem.label}
             </a>
             {subitem.alternativeLink ? (
-              <a href={subitem.alternativeLink}>
+              <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
                 <img
                   style={{ width: 30 }}
                   src={`/packages/mdg_borealis/icons/${
