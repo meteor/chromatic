@@ -20,6 +20,13 @@ class NavigationBarComponent extends React.Component {
   };
   componentDidMount() {
     const { dashboardToken, app = 'dashboard' } = this.props;
+    const authToken = new URLSearchParams(window.location.search).get(
+      'authToken'
+    );
+    if (authToken) {
+      Meteor.loginWithToken(authToken);
+    }
+
     const options = {
       method: 'GET',
       mode: 'cors',

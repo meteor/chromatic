@@ -5,6 +5,7 @@ Package.describe({
   documentation: null,
 });
 
+const icons = ['lock.svg', 'lock-ok.svg', 'lock-ok-empty.svg', 'svg/check.svg'];
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use(['ecmascript', 'less', 'percolate:icons@0.0.12']);
@@ -17,6 +18,7 @@ Package.onUse(function(api) {
     'LogoDark',
     'Header',
     'HeaderProvider',
+    'PlanRibbon',
   ]);
 
   api.addAssets(
@@ -32,6 +34,7 @@ Package.onUse(function(api) {
       'icons/apm-logo.svg',
       'icons/slack.svg',
       'icons/tutorials.svg',
+      ...icons.map(icon => `icons/${icon}`),
     ],
     'client'
   );
@@ -40,10 +43,12 @@ Package.onUse(function(api) {
       'react-components/NavigationBar.js',
       'react-components/useHeaderInfo.js',
       'react-components/Header.js',
+      'react-components/PlanRibbon.js',
       'icons/logo/LogoLight.js',
       'icons/logo/LogoDark.js',
       'icons/logo/HeaderLogo.js',
       'form-components/cardinal.import.less',
+      'form-components/ribbon.import.less',
       'form-components/checkbox.import.less',
       'form-components/form-components.import.less',
       'form-components/form.import.less',
