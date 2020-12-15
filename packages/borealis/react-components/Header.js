@@ -1,11 +1,10 @@
 import React from 'react';
-import { LIGHT_VARIANT } from './NavigationBar';
 import { useHeaderInfo } from './useHeaderInfo';
 
-Header = ({ variant = LIGHT_VARIANT, children }) => {
+Header = ({ className, children }) => {
   const { showBack, title } = useHeaderInfo();
   return (
-    <header className="header background-image">
+    <header className={`header background-image ${className}`}>
       <div className="header-title">
         {showBack && (
           <a
