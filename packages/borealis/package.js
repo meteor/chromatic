@@ -1,11 +1,18 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '0.2.8-beta.4',
+  version: '0.2.8-beta.5',
   summary: 'a style system',
   documentation: null,
 });
 
-const icons = ['lock.svg', 'lock-ok.svg', 'lock-ok-empty.svg', 'svg/check.svg'];
+const icons = [
+  'lock.svg',
+  'lock-ok.svg',
+  'lock-ok-empty.svg',
+  'svg/check.svg',
+  'svg/headerLogo.svg',
+  'svg/logoLight.svg',
+];
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use(['ecmascript', 'less', 'percolate:icons@0.0.12']);
