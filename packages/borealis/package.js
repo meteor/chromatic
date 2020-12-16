@@ -1,18 +1,10 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '0.2.8-beta.6',
+  version: '0.2.8-beta.7',
   summary: 'a style system',
   documentation: null,
 });
 
-const icons = [
-  'lock.svg',
-  'lock-ok.svg',
-  'lock-ok-empty.svg',
-  'svg/check.svg',
-  'svg/headerLogo.svg',
-  'svg/logoLight.svg',
-];
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
   api.use(['ecmascript', 'less', 'percolate:icons@0.0.12']);
@@ -41,7 +33,13 @@ Package.onUse(function(api) {
       'icons/apm-logo.svg',
       'icons/slack.svg',
       'icons/tutorials.svg',
-      ...icons.map(icon => `icons/${icon}`),
+      'icons/lock.svg',
+      'icons/lock-ok.svg',
+      'icons/lock-ok-empty.svg',
+      'icons/svg/check.svg',
+      'icons/svg/headerLogo.svg',
+      'icons/svg/logoLight.svg',
+      'icons/svg/logoDark.svg'
     ],
     'client'
   );
