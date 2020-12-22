@@ -18,8 +18,31 @@ class NavigationBarComponent extends React.Component {
     active: {},
     items: [],
   };
+  fetchItems = () => {
+    const { dashboardToken, app, loggedUser = {} } = this.props;
+    if(!dashboardToken) return;
+
+    const options = {
+      method: 'GET',
+      mode: 'cors',
+      headers: {Authorization: `Bearer ${dashboardToken}`},
+      cache: 'default',
+    };
+
+    fetch(`${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${loggedUser ? loggedUser.username : 'null'}`, options)
+        .then(result => result.json())
+        .then(items => {
+          this.setState({items});
+        });
+
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(prevProps.dashboardToken !== this.props.dashboardToken) {
+      this.fetchItems();
+    }
+  }
+
   componentDidMount() {
-    const { dashboardToken, app = 'dashboard' } = this.props;
     const authToken = new URLSearchParams(window.location.search).get(
       'authToken'
     );
@@ -27,26 +50,15 @@ class NavigationBarComponent extends React.Component {
       Meteor.loginWithToken(authToken);
     }
 
-    const options = {
-      method: 'GET',
-      mode: 'cors',
-      headers: { Authorization: `Bearer ${dashboardToken}` },
-      cache: 'default',
-    };
-    const username = Meteor._localStorage.getItem('navBarUsername');
-
-    fetch(`${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${username}`, options)
-      .then(result => result.json())
-      .then(items => {
-        this.setState({ items });
-      });
+    this.fetchItems();
   }
   // eslint-disable-next-line no-undef
   timeout = {};
 
   render() {
-    const { variant, app = 'dashboard' } = this.props;
-    const { items = [] } = this.state;
+    const { variant, app = 'dashboard', applicationItems = [] } = this.props;
+    let { items = [] } = this.state;
+    items = [...applicationItems, ...items];
 
     const onMouseEnter = _id => {
       if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
@@ -107,7 +119,7 @@ class NavigationBarComponent extends React.Component {
           )}
         </a>
         <div className="links">
-          {items.map(({ _id, label, actionLink, items: itemSubitems }) => {
+          {items.map(({ _id, label, actionLink, onClick, items: itemSubitems }) => {
             if (label === SPECIAL_ITEMS.ACCOUNT) {
               return (
                 <Fragment>
@@ -130,7 +142,7 @@ class NavigationBarComponent extends React.Component {
               <div key={label} className="w-dropdown">
                 <a
                   className={variant}
-                  href={actionLink}
+                  {...(onClick ? {onClick} : {href: actionLink})}
                   onMouseEnter={() => onMouseEnter(_id)}
                   onMouseLeave={() => onMouseLeave(_id)}
                 >
