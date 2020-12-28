@@ -18,26 +18,31 @@ class NavigationBarComponent extends React.Component {
     active: {},
     items: [],
   };
+  // eslint-disable-next-line no-undef
   fetchItems = () => {
     const { dashboardToken, app, loggedUser = {} } = this.props;
-    if(!dashboardToken) return;
+    if (!dashboardToken) return;
 
     const options = {
       method: 'GET',
       mode: 'cors',
-      headers: {Authorization: `Bearer ${dashboardToken}`},
+      headers: { Authorization: `Bearer ${dashboardToken}` },
       cache: 'default',
     };
 
-    fetch(`${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${loggedUser ? loggedUser.username : 'null'}`, options)
-        .then(result => result.json())
-        .then(items => {
-          this.setState({items});
-        });
-
-  }
+    fetch(
+      `${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${
+        loggedUser ? loggedUser.username : 'null'
+      }`,
+      options
+    )
+      .then(result => result.json())
+      .then(items => {
+        this.setState({ items });
+      });
+  };
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(prevProps.dashboardToken !== this.props.dashboardToken) {
+    if (prevProps.dashboardToken !== this.props.dashboardToken) {
       this.fetchItems();
     }
   }
@@ -119,39 +124,41 @@ class NavigationBarComponent extends React.Component {
           )}
         </a>
         <div className="links">
-          {items.map(({ _id, label, actionLink, onClick, items: itemSubitems }) => {
-            if (label === SPECIAL_ITEMS.ACCOUNT) {
+          {items.map(
+            ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
+              if (label === SPECIAL_ITEMS.ACCOUNT) {
+                return (
+                  <Fragment>
+                    <LetterAvatar
+                      size={40}
+                      bgColor="white"
+                      textColor="#595dff"
+                      onMouseEnter={() => onMouseEnter(_id)}
+                      onMouseLeave={() => onMouseLeave(_id)}
+                    >
+                      {this.props.loggedUser
+                        ? this.props.loggedUser.username.toUpperCase()
+                        : 'ND'}
+                    </LetterAvatar>
+                    {mapSubitems(itemSubitems, _id)}
+                  </Fragment>
+                );
+              }
               return (
-                <Fragment>
-                  <LetterAvatar
-                    size={40}
-                    bgColor="white"
-                    textColor="#595dff"
+                <div key={label} className="w-dropdown">
+                  <a
+                    className={variant}
+                    {...(onClick ? { onClick } : { href: actionLink })}
                     onMouseEnter={() => onMouseEnter(_id)}
                     onMouseLeave={() => onMouseLeave(_id)}
                   >
-                    {this.props.loggedUser
-                      ? this.props.loggedUser.username.toUpperCase()
-                      : 'ND'}
-                  </LetterAvatar>
-                  {mapSubitems(itemSubitems, _id)}
-                </Fragment>
+                    {label}
+                  </a>
+                  {itemSubitems && mapSubitems(itemSubitems, _id)}
+                </div>
               );
             }
-            return (
-              <div key={label} className="w-dropdown">
-                <a
-                  className={variant}
-                  {...(onClick ? {onClick} : {href: actionLink})}
-                  onMouseEnter={() => onMouseEnter(_id)}
-                  onMouseLeave={() => onMouseLeave(_id)}
-                >
-                  {label}
-                </a>
-                {itemSubitems && mapSubitems(itemSubitems, _id)}
-              </div>
-            );
-          })}
+          )}
         </div>
       </nav>
     );

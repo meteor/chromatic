@@ -1,9 +1,10 @@
-.reveal-search{
+.reveal-search {
   color: black;
   border: 0px;
 }
 
-button, .btn {
+button,
+.btn {
   /* Primary / Dodger Blue */
   text-transform: uppercase;
   /* Primary / Dodger Blue */
@@ -49,7 +50,9 @@ button, .btn {
       background: clear;
     }
   }
-  &.tertiary, &.scale, &.ancillary {
+  &.tertiary,
+  &.scale,
+  &.ancillary {
     background: white;
     border: 0px solid #595dff;
     box-sizing: border-box;
@@ -63,4 +66,35 @@ button, .btn {
     text-transform: uppercase;
     padding: 8px;
   }
+  &.active {
+    color: @color-primary;
+  }
+
+  &.small {
+    font-size: 14px !important;
+  }
+}
+.btn,
+button {
+  .loading-bar {
+    display: none;
+  }
+  .active {
+    display: none;
+  }
+  .rest {
+    display: block;
+  }
+  &.loading-active {
+    .loading-bar {
+      display: block;
+    }
+    .active {
+      display: block;
+    }
+    .rest {
+      display: none;
+    }
+  }
+
 }
