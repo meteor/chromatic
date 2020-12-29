@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
@@ -92,7 +92,12 @@ class NavigationBarComponent extends React.Component {
           <div className="dropdown-link w-dropdown-link">
             <a
               key={subitem.label}
-              href={subitem.actionLink}
+              href={subitem.actionLink || undefined}
+              onClick={
+                subitem.label === SPECIAL_ITEMS.LOG_OUT
+                  ? () => Meteor.logout()
+                  : undefined
+              }
               className="dropdown-link w-dropdown-link no-padding"
             >
               {subitem.label}
@@ -128,7 +133,7 @@ class NavigationBarComponent extends React.Component {
             ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
               if (label === SPECIAL_ITEMS.ACCOUNT) {
                 return (
-                  <Fragment>
+                  <div>
                     <LetterAvatar
                       size={40}
                       bgColor="white"
@@ -141,7 +146,7 @@ class NavigationBarComponent extends React.Component {
                         : 'ND'}
                     </LetterAvatar>
                     {mapSubitems(itemSubitems, _id)}
-                  </Fragment>
+                  </div>
                 );
               }
               return (
