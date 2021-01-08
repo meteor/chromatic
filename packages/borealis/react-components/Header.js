@@ -4,7 +4,7 @@ import { useHeaderInfo } from './useHeaderInfo';
 Header = ({ className, children }) => {
   const { showBack, title } = useHeaderInfo();
   return (
-    <header className={`header background-image ${className}`}>
+    <header className={`header header-image ${className}`}>
       <div className="header-title">
         {showBack && (
           <a
