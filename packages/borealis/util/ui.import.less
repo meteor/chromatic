@@ -1,6 +1,11 @@
 @breakpoint: 600px;
 @page-margin: 5.55555%;
 
+@xs: ~"only screen and (min-width: 360px)";
+@sm: ~"only screen and (min-width: 600px)";
+@md: ~"only screen and (min-width: 960px)";
+@lg: ~"only screen and (min-width: 1280px)";
+@xl: ~"only screen and (min-width: 1920px)";
 
 .page-margins() {
   @media screen and (min-width: (@breakpoint * 1)) { margin: 0 2*@page-margin; }

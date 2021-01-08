@@ -377,10 +377,21 @@
 }
 
 .header-title {
-  left: 80px;
-  top: 179px;
-  position: absolute;
+  margin-left: 8px;
+  margin-top: 80px;
   h1 {
     color: white;
+  }
+}
+
+@media @sm {
+  .header-title {
+    margin-left: 16px;
+  }
+}
+
+@media @md {
+  .header-title {
+    margin-left: 50px;
   }
 }
