@@ -32,7 +32,19 @@ nav {
     left: 25px;
     top: 0px;
   }
-
+  .menu-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    position: absolute;
+    right: 40px;
+    top: 36px;
+    color: white;
+  }
+  .links {
+    display: none;
+  }
   @media @sm {
     .logo {
       left: 44px;
@@ -46,46 +58,48 @@ nav {
       left: 70px;
       top: 27px;
     }
-  }
-
-  .links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    position: absolute;
-    height: 40px;
-    right: 80px;
-    top: 24px;
-    .w-dropdown {
-      margin-left: 20px;
+    .menu-button {
+      display: none;
     }
-    .dark {
-      /* Body Medium */
+    .links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      position: absolute;
+      height: 40px;
+      right: 80px;
+      top: 24px;
+      .w-dropdown {
+        margin-left: 20px;
+      }
+      .dark {
+        /* Body Medium */
 
-      .font-semibold;
-      line-height: 100%;
-      /* identical to box height, or 16px */
+        .font-semibold;
+        line-height: 100%;
+        /* identical to box height, or 16px */
 
-      /* Primary / Cloud Burst */
+        /* Primary / Cloud Burst */
 
-      color: #1b2448;
+        color: #1b2448;
 
-      /* Inside Auto Layout */
+        /* Inside Auto Layout */
 
-      flex: none;
-      order: 2;
-      align-self: center;
-      flex-grow: 0;
-    }
-    .light {
-      /* Body Medium */
+        flex: none;
+        order: 2;
+        align-self: center;
+        flex-grow: 0;
+      }
+      .light {
+        /* Body Medium */
 
-      .font-semibold;
-      color: #ffffff;
+        .font-semibold;
+        color: #ffffff;
 
-      align-self: center;
-      flex-grow: 0;
+        align-self: center;
+        flex-grow: 0;
+      }
     }
   }
 }
@@ -401,14 +415,6 @@ nav {
 }
 
 @media screen and (max-width: 767px) {
-  .menu-button {
-    position: relative;
-    z-index: 20;
-    display: block;
-    width: 16px;
-    height: 12px;
-    max-height: 14px;
-  }
   .navbar__logo {
     margin-top: 0px;
   }

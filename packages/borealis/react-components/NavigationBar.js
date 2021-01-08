@@ -231,6 +231,7 @@ class NavigationBarComponent extends React.Component {
             }
           )}
         </div>
+        <span className="menu-button icon-menu" />
       </nav>
     );
   }
