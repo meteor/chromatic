@@ -8,6 +8,12 @@
   height: 50%;
 }
 
+.account-icon {
+  nav {
+    left: unset;
+    right: 0;
+  }
+}
 nav {
   z-index: 9999;
   position: absolute;
@@ -203,7 +209,6 @@ nav {
   display: inline-block;
   position: relative;
   text-align: left;
-  margin-left: auto;
   margin-right: auto;
   z-index: 900;
 }
@@ -220,7 +225,6 @@ nav {
   text-decoration: none;
   padding: 20px;
   text-align: left;
-  margin-left: auto;
   margin-right: auto;
   white-space: nowrap;
 }
@@ -255,7 +259,7 @@ nav {
 }
 
 .dropdown-list.w--open {
-  margin-top: 28px;
+  margin-top: 40px;
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -283,11 +287,34 @@ nav {
   align-self: flex-start;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+  color: white;
+}
 .dropdown-link {
   padding: 8px 10px 8px 16px;
   color: #8d91a3 !important;
   font-size: 16px !important;
   font-weight: 700;
+  ul {
+    display: none;
+    padding: 0;
+    margin: 6px 0 0 6px;
+    list-style-type: none;
+    li {
+      display: flex;
+      margin-top: 6px;
+      align-items: center;
+      a {
+        padding: 0;
+        margin: 0 0 0 6px;
+      }
+    }
+  }
+  ul.ul--open {
+    display: block;
+  }
 }
 
 .dropdown-link:hover {
