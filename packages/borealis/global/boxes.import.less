@@ -62,6 +62,19 @@
   margin-top: 20px;
 }
 
+
+.box-empty-white,.box-shadowed, .box-bg, .box-empty {
+  margin-bottom: 8px;
+
+  @media @md {
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
+
 .box-empty-white {
   /* Primary / White */
 
@@ -80,16 +93,6 @@
   /* Shadow / Medium */
   box-shadow: 0px 30px 40px -20px rgba(27, 36, 72, 0.16);
   border-radius: 12px;
-
-  margin-bottom: 8px;
-
-  @media @md {
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      margin-left: 20px;
-    }
-  }
 }
 
 .box-bg {
@@ -97,27 +100,8 @@
   border-radius: 12px;
   background-image: url(packages/mdg_borealis/icons/box-bg.png);
   background-size: contain;
-  margin-bottom: 8px;
-
-  @media @md {
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      margin-left: 20px;
-    }
-  }
 }
 .box-empty {
   background: #ffffff;
   border-radius: 12px;
-
-  margin-bottom: 8px;
-
-  @media @md {
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      margin-left: 20px;
-    }
-  }
 }
