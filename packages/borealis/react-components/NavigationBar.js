@@ -25,7 +25,7 @@ class NavigationBarComponent extends React.Component {
     this.eventListener = () => {
       this.setState({ currentPath: window.location.pathname });
     };
-    window.addEventListener('popstate', this.eventListener);
+    this.intervalId = Meteor.setInterval(this.eventListener, 1000);
   }
   // eslint-disable-next-line no-undef
   state = {
@@ -76,7 +76,9 @@ class NavigationBarComponent extends React.Component {
     }
   }
   componentWillUnmount() {
-    window.removeEventListener('popstate', this.eventListener);
+    if (this.intervalId) {
+      Meteor.clearInterval(this.intervalId);
+    }
   }
 
   // eslint-disable-next-line no-undef

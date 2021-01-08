@@ -19,22 +19,33 @@ nav {
   position: absolute;
   min-width: 100%;
   min-height: 88px;
-  left: 0px;
-  top: 0px;
-
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
   .logo {
-    /* Auto Layout */
-
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 0px;
-
     position: absolute;
-    width: 251px;
-    height: 33.92px;
-    left: 80px;
-    top: 27px;
+    width: auto;
+    height: 93px;
+    left: 25px;
+    top: 0px;
+  }
+
+  @media @sm {
+    .logo {
+      left: 44px;
+    }
+  }
+  @media @md {
+    .logo {
+      position: absolute;
+      width: 251px;
+      height: 33.92px;
+      left: 70px;
+      top: 27px;
+    }
   }
 
   .links {
