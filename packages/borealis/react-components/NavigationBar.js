@@ -2,6 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
+import keyBy from 'lodash.keyby';
 
 export const LIGHT_VARIANT = 'light';
 
@@ -12,12 +13,27 @@ const SPECIAL_ITEMS = {
   ACCOUNT: 'Account',
   LOG_OUT: 'Log Out',
 };
+const ImageLogo = ({ app }) => (
+  <img
+    style={{ width: 30 }}
+    src={`/packages/mdg_borealis/icons/${app}-logo.svg`}
+  />
+);
 class NavigationBarComponent extends React.Component {
+  constructor() {
+    super();
+    this.eventListener = () => {
+      this.setState({ currentPath: window.location.pathname });
+    };
+    window.addEventListener('popstate', this.eventListener);
+  }
   // eslint-disable-next-line no-undef
   state = {
     active: {},
     items: [],
+    currentPath: window.location.pathname,
   };
+
   // eslint-disable-next-line no-undef
   fetchItems = () => {
     const { dashboardToken, app, loggedUser = {} } = this.props;
@@ -41,11 +57,6 @@ class NavigationBarComponent extends React.Component {
         this.setState({ items });
       });
   };
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.dashboardToken !== this.props.dashboardToken) {
-      this.fetchItems();
-    }
-  }
 
   componentDidMount() {
     const authToken = new URLSearchParams(window.location.search).get(
@@ -57,13 +68,35 @@ class NavigationBarComponent extends React.Component {
 
     this.fetchItems();
   }
+
+  // eslint-disable-next-line no-unused-vars
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.dashboardToken !== this.props.dashboardToken) {
+      this.fetchItems();
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.eventListener);
+  }
+
   // eslint-disable-next-line no-undef
   timeout = {};
 
   render() {
     const { variant, app = 'dashboard', applicationItems = [] } = this.props;
     let { items = [] } = this.state;
-    items = [...applicationItems, ...items];
+    const { currentPath } = this.state;
+    const match = currentPath.match(/\/app\/(.*)/);
+    const currentApplication = match && match.length >= 2 ? match[1] : null;
+    items = [...applicationItems, ...items].filter(Boolean);
+    const applicationsNavItem = items.find(
+      ({ label }) => label === 'Applications'
+    );
+    const applicationsMap = applicationsNavItem
+      ? keyBy(applicationsNavItem.items, 'label')
+      : {};
+    const currentApplicationInfo =
+      currentApplication && applicationsMap[currentApplication];
 
     const onMouseEnter = _id => {
       if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
@@ -88,34 +121,55 @@ class NavigationBarComponent extends React.Component {
           this.state[_id] ? 'w--open' : ''
         } `}
       >
-        {subItems.map(subitem => (
-          <div className="dropdown-link w-dropdown-link">
-            <a
-              key={subitem.label}
-              href={subitem.actionLink || undefined}
-              onClick={
-                subitem.label === SPECIAL_ITEMS.LOG_OUT
-                  ? () => Meteor.logout()
-                  : undefined
-              }
-              className="dropdown-link w-dropdown-link no-padding"
+        {subItems.map(subitem => {
+          const subSubItemOpenId = `${subitem.label}-thirdlevel`;
+          return (
+            <div
+              className="dropdown-link w-dropdown-link"
+              onMouseEnter={() => onMouseEnter(subSubItemOpenId)}
+              onMouseLeave={() => onMouseLeave(subSubItemOpenId)}
             >
-              {subitem.label}
-            </a>
-            {subitem.alternativeLink ? (
-              <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
-                <img
-                  style={{ width: 30 }}
-                  src={`/packages/mdg_borealis/icons/${
-                    app === 'galaxy' ? 'dashboard' : 'galaxy'
-                  }-logo.svg`}
-                />
+              <a
+                key={subitem.label}
+                href={subitem.actionLink || undefined}
+                onClick={
+                  subitem.label === SPECIAL_ITEMS.LOG_OUT
+                    ? () => Meteor.logout()
+                    : undefined
+                }
+                className="dropdown-link w-dropdown-link no-padding"
+              >
+                {subitem.label}
               </a>
-            ) : (
-              ''
-            )}
-          </div>
-        ))}
+              {subitem.items && subitem.items.length && (
+                <ul
+                  className={`${
+                    this.state[subSubItemOpenId] ? 'ul--open' : ''
+                  } `}
+                >
+                  {(subitem.items || []).map(subSubItem => (
+                    <li key={`${subitem.label}-${subSubItem.label}`}>
+                      <ImageLogo app={subSubItem.label.toLowerCase()} />
+                      <a
+                        href={subSubItem.actionLink || undefined}
+                        className="dropdown-link w-dropdown-link"
+                      >
+                        {subSubItem.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {subitem.alternativeLink ? (
+                <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
+                  <ImageLogo app={app} />
+                </a>
+              ) : (
+                ''
+              )}
+            </div>
+          );
+        })}
       </nav>
     );
 
@@ -129,11 +183,21 @@ class NavigationBarComponent extends React.Component {
           )}
         </a>
         <div className="links">
+          {currentApplication && currentApplicationInfo && (
+            <div className="flex">
+              <span style={{ marginRight: 16 }}>{currentApplication}</span>
+              <PlanRibbon>{currentApplicationInfo.tier}</PlanRibbon>
+            </div>
+          )}
           {items.map(
             ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
               if (label === SPECIAL_ITEMS.ACCOUNT) {
                 return (
-                  <div>
+                  <div
+                    key="accounts"
+                    className="w-dropdown account-icon"
+                    style={{ marginLeft: 0 }}
+                  >
                     <LetterAvatar
                       size={40}
                       bgColor="white"
