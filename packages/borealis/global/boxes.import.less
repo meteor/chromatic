@@ -1,12 +1,15 @@
 .four-boxes,
 .three-boxes,
-.two-boxes,
-.boxes {
+.two-boxes {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 
   flex-grow: 1;
+
+  @media @md {
+    flex-direction: row;
+  }
 
   .box-bg,
   .box-shadowed,
@@ -30,13 +33,10 @@
   }
 }
 
-@media screen and (max-width: @breakpoint) {
-  .four-boxes,
-  .three-boxes,
-  .two-boxes {
-    flex-direction: column;
-  }
+.four-boxes {
+  max-width: 1200px;
 }
+
 .four-boxes > div {
   flex-basis: 25%;
 }
@@ -57,9 +57,11 @@
     margin-left: 34px;
   }
 }
+
 .header-boxes {
   margin-top: 20px;
 }
+
 .box-empty-white {
   /* Primary / White */
 
@@ -70,6 +72,7 @@
     0px 10px 20px -10px rgba(13, 17, 33, 0.2497);
   border-radius: 8px;
 }
+
 .box-shadowed {
   /* Primary / White */
 
@@ -78,18 +81,28 @@
   min-height: 272px;
   box-shadow: 0px 30px 40px -20px rgba(27, 36, 72, 0.16);
   border-radius: 12px;
-  @media screen and (min-width: @breakpoint) {
+
+  margin-bottom: 8px;
+
+  @media @md {
+    margin-bottom: 0;
+
     &:not(:first-child) {
       margin-left: 20px;
     }
   }
 }
+
 .box-bg {
   background: #ffffff;
   border-radius: 12px;
   background-image: url(packages/mdg_borealis/icons/box-bg.png);
   background-size: contain;
-  @media screen and (min-width: @breakpoint) {
+  margin-bottom: 8px;
+
+  @media @md {
+    margin-bottom: 0;
+
     &:not(:first-child) {
       margin-left: 20px;
     }
@@ -98,7 +111,12 @@
 .box-empty {
   background: #ffffff;
   border-radius: 12px;
-  @media screen and (min-width: @breakpoint) {
+
+  margin-bottom: 8px;
+
+  @media @md {
+    margin-bottom: 0;
+
     &:not(:first-child) {
       margin-left: 20px;
     }
