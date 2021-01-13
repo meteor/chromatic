@@ -16,6 +16,36 @@ const SPECIAL_ITEMS = {
   REGIONS: 'Regions',
 };
 
+const Link = ({ RouterComponent, href, children, ...props }) => {
+  if (RouterComponent && href) {
+    let to = href;
+    if (href.startsWith('http')) {
+      const url = new URL(href);
+      const currentPath = new URL(window.location.href);
+
+      if (url.origin === currentPath.origin) {
+        to = url.toString().substring(url.origin.length);
+      } else {
+        return (
+          <a href={href} {...props}>
+            {children}
+          </a>
+        );
+      }
+    }
+    return (
+      <RouterComponent to={to} {...props}>
+        {children}{' '}
+      </RouterComponent>
+    );
+  }
+  return (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+};
+
 const ImageLogo = ({ app }) => (
   <img
     style={{ width: 30 }}
@@ -25,7 +55,7 @@ const ImageLogo = ({ app }) => (
 const ArrowIcon = ({ direction = 'right', ...props }) => (
   <img
     {...props}
-    style={{ width: 13, marginLeft: 8, cursor: 'pointer' }}
+    style={{ width: 13, marginRight: 8, marginLeft: 8, cursor: 'pointer' }}
     src={`/packages/mdg_borealis/icons/svg/arrow-${direction}.svg`}
   />
 );
@@ -96,7 +126,12 @@ class NavigationBarComponent extends React.Component {
   timeout = {};
 
   render() {
-    const { variant, app = 'dashboard', applicationItems = [] } = this.props;
+    const {
+      variant,
+      app = 'dashboard',
+      applicationItems = [],
+      RouterComponent = 'a',
+    } = this.props;
     let { items = [] } = this.state;
     const { currentPath } = this.state;
     const match = currentPath.match(/\/app\/(.*)/);
@@ -130,7 +165,7 @@ class NavigationBarComponent extends React.Component {
           ...this.state,
           [_id]: false,
         });
-      }, 100);
+      }, 300);
     };
     const mapSubitems = (subItems, _id, Decorator = null) => (
       <nav
@@ -147,7 +182,7 @@ class NavigationBarComponent extends React.Component {
             window.location.href = 'https://www.meteor.com';
           };
           return (
-            <div>
+            <div style={{ width: '100%' }}>
               <div
                 className={classNames(
                   {
@@ -157,10 +192,17 @@ class NavigationBarComponent extends React.Component {
                   'dropdown-link',
                   'w-dropdown-link'
                 )}
+                onClick={e => {
+                  if (subitem.items && subitem.items.length) {
+                    e.stopPropagation();
+                    toggleState(subSubItemOpenId);
+                  }
+                }}
               >
-                <a
+                <Link
                   key={subitem.label}
                   href={subitem.actionLink || undefined}
+                  RouterComponent={RouterComponent}
                   onClick={
                     subitem.label === SPECIAL_ITEMS.LOG_OUT
                       ? logoutFunction
@@ -175,7 +217,7 @@ class NavigationBarComponent extends React.Component {
                     />
                   ) : null}
                   {subitem.label}
-                </a>
+                </Link>
                 {subitem.items && subitem.items.length && (
                   <ArrowIcon
                     direction={this.state[subSubItemOpenId] ? 'right' : 'down'}
@@ -183,9 +225,13 @@ class NavigationBarComponent extends React.Component {
                   />
                 )}
                 {subitem.alternativeLink ? (
-                  <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
+                  <Link
+                    href={subitem.alternativeLink}
+                    style={{ marginLeft: 10 }}
+                    RouterComponent={RouterComponent}
+                  >
                     <ImageLogo app={app} />
-                  </a>
+                  </Link>
                 ) : (
                   ''
                 )}
@@ -200,12 +246,13 @@ class NavigationBarComponent extends React.Component {
                     {(subitem.items || []).map(subSubItem => (
                       <li key={`${subitem.label}-${subSubItem.label}`}>
                         <ImageLogo app={subSubItem.label.toLowerCase()} />
-                        <a
+                        <Link
                           href={subSubItem.actionLink || undefined}
+                          RouterComponent={RouterComponent}
                           className="dropdown-link w-dropdown-link"
                         >
                           {subSubItem.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -219,13 +266,13 @@ class NavigationBarComponent extends React.Component {
 
     return (
       <nav>
-        <a href="/">
+        <Link href="/" RouterComponent={RouterComponent}>
           {variant === LIGHT_VARIANT ? (
             <LogoLight className="logo" />
           ) : (
             <LogoDark className="logo" />
           )}
-        </a>
+        </Link>
         <div className="links">
           {currentApplication && currentApplicationInfo && (
             <div className="flex">
@@ -257,12 +304,11 @@ class NavigationBarComponent extends React.Component {
                   </div>
                 );
               } else if (label === SPECIAL_ITEMS.REGIONS) {
-                const currentRegion = itemSubitems.find(({ actionLink }) => {
-                  return (
-                    new URL(actionLink).hostname ===
+                const currentRegion = itemSubitems.find(
+                  ({ actionLink: regionActionLink }) =>
+                    new URL(regionActionLink).hostname ===
                     new URL(window.location.href).hostname
-                  );
-                });
+                );
                 const Decorator = ({ item: { label: regionLabel }, style }) => (
                   <img
                     style={style}
@@ -272,7 +318,8 @@ class NavigationBarComponent extends React.Component {
 
                 return (
                   <div key={label} className="w-dropdown">
-                    <a
+                    <Link
+                      RouterComponent={RouterComponent}
                       className={variant}
                       {...(onClick ? { onClick } : { href: actionLink })}
                       onMouseEnter={() => onMouseEnter(_id)}
@@ -283,7 +330,7 @@ class NavigationBarComponent extends React.Component {
                         style={{ height: 25, float: 'right', marginLeft: 5 }}
                         src={`/packages/mdg_borealis/icons/countries/${currentRegion.label}.svg`}
                       />
-                    </a>
+                    </Link>
                     {(itemSubitems &&
                       itemSubitems.length &&
                       mapSubitems(itemSubitems, _id, Decorator)) ||
@@ -293,14 +340,15 @@ class NavigationBarComponent extends React.Component {
               }
               return (
                 <div key={label} className="w-dropdown">
-                  <a
+                  <Link
+                    RouterComponent={RouterComponent}
                     className={variant}
                     {...(onClick ? { onClick } : { href: actionLink })}
                     onMouseEnter={() => onMouseEnter(_id)}
                     onMouseLeave={() => onMouseLeave(_id)}
                   >
                     {label}
-                  </a>
+                  </Link>
                   {(itemSubitems &&
                     itemSubitems.length &&
                     mapSubitems(itemSubitems, _id)) ||
