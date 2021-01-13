@@ -8,19 +8,11 @@
   height: 100%;
 }
 
-.account-icon {
-  nav {
-    left: unset;
-    right: 0;
-  }
-}
 nav {
   z-index: 9999;
   position: absolute;
   min-width: 100%;
   min-height: 88px;
-  left: 0;
-  top: 0;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -44,6 +36,10 @@ nav {
   }
   .links {
     display: none;
+    .nav {
+      left: unset;
+      right: 0;
+    }
   }
   @media @sm {
     .logo {
@@ -70,6 +66,10 @@ nav {
       height: 40px;
       right: 80px;
       top: 24px;
+      .nav {
+        left: unset;
+        right: 0;
+      }
       .expandable-dropdown {
         .chevron {
           margin-left: auto;
@@ -289,7 +289,9 @@ nav {
 }
 
 .dropdown-list.w--open {
-  margin-top: 40px;
+  margin-top: 10px;
+  left: unset;
+  right: 0;
   padding-top: 8px;
   padding-bottom: 8px;
 }
