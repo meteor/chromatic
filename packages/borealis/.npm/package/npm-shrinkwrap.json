@@ -1,0 +1,10 @@
+{
+  "lockfileVersion": 1,
+  "dependencies": {
+    "lodash.keyby": {
+      "version": "4.6.0",
+      "resolved": "https://registry.npmjs.org/lodash.keyby/-/lodash.keyby-4.6.0.tgz",
+      "integrity": "sha1-f2oavak/0k4icopNNh7YvLpaQ1Q="
+    }
+  }
+}

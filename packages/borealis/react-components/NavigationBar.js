@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
 import keyBy from 'lodash.keyby';
+import classNames from 'classnames';
 
 export const LIGHT_VARIANT = 'light';
 
@@ -12,20 +13,30 @@ const DASHBOARD_MENU_ENDPOINT = `${DASHBOARD_URL}/rest/menu-items`;
 const SPECIAL_ITEMS = {
   ACCOUNT: 'Account',
   LOG_OUT: 'Log Out',
+  REGIONS: 'Regions',
 };
+
 const ImageLogo = ({ app }) => (
   <img
     style={{ width: 30 }}
     src={`/packages/mdg_borealis/icons/${app}-logo.svg`}
   />
 );
+const ArrowIcon = ({ direction = 'right', ...props }) => (
+  <img
+    {...props}
+    style={{ width: 13, marginLeft: 8, cursor: 'pointer' }}
+    src={`/packages/mdg_borealis/icons/svg/arrow-${direction}.svg`}
+  />
+);
+
 class NavigationBarComponent extends React.Component {
   constructor() {
     super();
     this.eventListener = () => {
       this.setState({ currentPath: window.location.pathname });
     };
-    this.intervalId = Meteor.setInterval(this.eventListener, 1000);
+    this.intervalId = Meteor.setInterval(() => {}, 1000);
   }
   // eslint-disable-next-line no-undef
   state = {
@@ -107,6 +118,12 @@ class NavigationBarComponent extends React.Component {
         [_id]: true,
       });
     };
+    const toggleState = _id => {
+      this.setState({
+        ...this.state,
+        [_id]: !this.state[_id],
+      });
+    };
     const onMouseLeave = _id => {
       this.timeout[_id] = Meteor.setTimeout(() => {
         this.setState({
@@ -115,7 +132,7 @@ class NavigationBarComponent extends React.Component {
         });
       }, 100);
     };
-    const mapSubitems = (subItems, _id) => (
+    const mapSubitems = (subItems, _id, Decorator = null) => (
       <nav
         onMouseEnter={() => onMouseEnter(_id)}
         onMouseLeave={() => onMouseLeave(_id)}
@@ -125,49 +142,74 @@ class NavigationBarComponent extends React.Component {
       >
         {subItems.map(subitem => {
           const subSubItemOpenId = `${subitem.label}-thirdlevel`;
+          const logoutFunction = () => {
+            Meteor.logout();
+            window.location.href = 'https://www.meteor.com';
+          };
           return (
-            <div
-              className="dropdown-link w-dropdown-link"
-              onMouseEnter={() => onMouseEnter(subSubItemOpenId)}
-              onMouseLeave={() => onMouseLeave(subSubItemOpenId)}
-            >
-              <a
-                key={subitem.label}
-                href={subitem.actionLink || undefined}
-                onClick={
-                  subitem.label === SPECIAL_ITEMS.LOG_OUT
-                    ? () => Meteor.logout()
-                    : undefined
-                }
-                className="dropdown-link w-dropdown-link no-padding"
+            <div>
+              <div
+                className={classNames(
+                  {
+                    'expandable-dropdown':
+                      subitem.items && subitem.items.length,
+                  },
+                  'dropdown-link',
+                  'w-dropdown-link'
+                )}
               >
-                {subitem.label}
-              </a>
-              {subitem.items && subitem.items.length && (
-                <ul
-                  className={`${
-                    this.state[subSubItemOpenId] ? 'ul--open' : ''
-                  } `}
+                <a
+                  key={subitem.label}
+                  href={subitem.actionLink || undefined}
+                  onClick={
+                    subitem.label === SPECIAL_ITEMS.LOG_OUT
+                      ? logoutFunction
+                      : undefined
+                  }
+                  className="dropdown-link w-dropdown-link no-padding"
                 >
-                  {(subitem.items || []).map(subSubItem => (
-                    <li key={`${subitem.label}-${subSubItem.label}`}>
-                      <ImageLogo app={subSubItem.label.toLowerCase()} />
-                      <a
-                        href={subSubItem.actionLink || undefined}
-                        className="dropdown-link w-dropdown-link"
-                      >
-                        {subSubItem.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {subitem.alternativeLink ? (
-                <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
-                  <ImageLogo app={app} />
+                  {Decorator ? (
+                    <Decorator
+                      item={subitem}
+                      style={{ marginRight: 5, float: 'left' }}
+                    />
+                  ) : null}
+                  {subitem.label}
                 </a>
-              ) : (
-                ''
+                {subitem.items && subitem.items.length && (
+                  <ArrowIcon
+                    direction={this.state[subSubItemOpenId] ? 'right' : 'down'}
+                    onClick={() => toggleState(subSubItemOpenId)}
+                  />
+                )}
+                {subitem.alternativeLink ? (
+                  <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
+                    <ImageLogo app={app} />
+                  </a>
+                ) : (
+                  ''
+                )}
+              </div>
+              {subitem.items && subitem.items.length && (
+                <div className="third-level-items">
+                  <ul
+                    className={`${
+                      this.state[subSubItemOpenId] ? 'ul--open' : ''
+                    } `}
+                  >
+                    {(subitem.items || []).map(subSubItem => (
+                      <li key={`${subitem.label}-${subSubItem.label}`}>
+                        <ImageLogo app={subSubItem.label.toLowerCase()} />
+                        <a
+                          href={subSubItem.actionLink || undefined}
+                          className="dropdown-link w-dropdown-link"
+                        >
+                          {subSubItem.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
           );
@@ -214,6 +256,40 @@ class NavigationBarComponent extends React.Component {
                     {mapSubitems(itemSubitems, _id)}
                   </div>
                 );
+              } else if (label === SPECIAL_ITEMS.REGIONS) {
+                const currentRegion = itemSubitems.find(({ actionLink }) => {
+                  return (
+                    new URL(actionLink).hostname ===
+                    new URL(window.location.href).hostname
+                  );
+                });
+                const Decorator = ({ item: { label: regionLabel }, style }) => (
+                  <img
+                    style={style}
+                    src={`/packages/mdg_borealis/icons/countries/${regionLabel}.svg`}
+                  />
+                );
+
+                return (
+                  <div key={label} className="w-dropdown">
+                    <a
+                      className={variant}
+                      {...(onClick ? { onClick } : { href: actionLink })}
+                      onMouseEnter={() => onMouseEnter(_id)}
+                      onMouseLeave={() => onMouseLeave(_id)}
+                    >
+                      {currentRegion.label}
+                      <img
+                        style={{ height: 25, float: 'right', marginLeft: 5 }}
+                        src={`/packages/mdg_borealis/icons/countries/${currentRegion.label}.svg`}
+                      />
+                    </a>
+                    {(itemSubitems &&
+                      itemSubitems.length &&
+                      mapSubitems(itemSubitems, _id, Decorator)) ||
+                      null}
+                  </div>
+                );
               }
               return (
                 <div key={label} className="w-dropdown">
@@ -225,7 +301,10 @@ class NavigationBarComponent extends React.Component {
                   >
                     {label}
                   </a>
-                  {itemSubitems && mapSubitems(itemSubitems, _id)}
+                  {(itemSubitems &&
+                    itemSubitems.length &&
+                    mapSubitems(itemSubitems, _id)) ||
+                    null}
                 </div>
               );
             }

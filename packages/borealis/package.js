@@ -4,6 +4,9 @@ Package.describe({
   summary: 'a style system',
   documentation: null,
 });
+Npm.depends({
+  'lodash.keyby': '4.6.0',
+});
 
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
@@ -36,10 +39,17 @@ Package.onUse(function(api) {
       'icons/lock.svg',
       'icons/lock-ok.svg',
       'icons/lock-ok-empty.svg',
+      'icons/svg/arrow-down.svg',
+      'icons/svg/arrow-right.svg',
       'icons/svg/check.svg',
       'icons/svg/headerLogo.svg',
       'icons/svg/logoLight.svg',
-      'icons/svg/logoDark.svg'
+      'icons/svg/logoDark.svg',
+      'icons/countries/ap-southeast-2.svg',
+      'icons/countries/eu-west-1.svg',
+      'icons/countries/staging.svg',
+      'icons/countries/us-east-1.svg',
+      'icons/countries/localhost.svg',
     ],
     'client'
   );

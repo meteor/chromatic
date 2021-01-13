@@ -18,6 +18,7 @@
   },
   "version": "1.0.10",
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "lodash.keyby": "^4.6.0"
   }
 }
