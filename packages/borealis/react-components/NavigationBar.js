@@ -4,6 +4,7 @@ import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
 import keyBy from 'lodash.keyby';
 import classNames from 'classnames';
+import { NAVIGATION_BAR_MOCK_DATA } from './NavigationBarMockData';
 
 export const LIGHT_VARIANT = 'light';
 
@@ -66,20 +67,31 @@ class NavigationBarComponent extends React.Component {
     this.eventListener = () => {
       this.setState({ currentPath: window.location.pathname });
     };
-    this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
-    this.pollingIntervalId = Meteor.setInterval(() => this.fetchItems(), 5000);
+    if (!NAVIGATION_BAR_MOCK_DATA) {
+      this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
+      this.pollingIntervalId = Meteor.setInterval(
+        () => this.fetchItems(),
+        5000
+      );
+    }
   }
   // eslint-disable-next-line no-undef
   state = {
     active: {},
     items: [],
     currentPath: window.location.pathname,
+    showMobileMenu: !!NAVIGATION_BAR_MOCK_DATA,
+    mainLabel: null,
   };
 
   // eslint-disable-next-line no-undef
   fetchItems = () => {
+    console.log(`fetchItems`);
+
     const { dashboardToken, app, loggedUser = {} } = this.props;
-    if (!dashboardToken) return;
+    if (!dashboardToken) {
+      return;
+    }
 
     const options = {
       method: 'GET',
@@ -87,6 +99,11 @@ class NavigationBarComponent extends React.Component {
       headers: { Authorization: `Bearer ${dashboardToken}` },
       cache: 'default',
     };
+
+    if (NAVIGATION_BAR_MOCK_DATA) {
+      this.setState({ items: NAVIGATION_BAR_MOCK_DATA });
+      return;
+    }
 
     fetch(
       `${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${
@@ -97,7 +114,8 @@ class NavigationBarComponent extends React.Component {
       .then(result => result.json())
       .then(items => {
         this.setState({ items });
-      });
+      })
+      .catch(e => console.error('Error fetching NavigationBar data', e));
   };
 
   componentDidMount() {
@@ -125,6 +143,14 @@ class NavigationBarComponent extends React.Component {
       Meteor.clearInterval(this.pollingIntervalId);
     }
   }
+
+  toggleMobileMenu = () => {
+    this.setState({ showMobileMenu: !this.state.showMobileMenu });
+  };
+
+  toggleNavMobileMenu = () => {
+    this.setState({ mainLabel: null });
+  };
 
   // eslint-disable-next-line no-undef
   timeout = {};
@@ -171,13 +197,17 @@ class NavigationBarComponent extends React.Component {
         });
       }, 300);
     };
-    const mapSubitems = (subItems, _id, Decorator = null) => (
+    const renderSubItems = ({ subItems, _id, Decorator = null, mobile }) => (
       <nav
-        onMouseEnter={() => onMouseEnter(_id)}
-        onMouseLeave={() => onMouseLeave(_id)}
-        className={`dropdown-list w-dropdown-list ${
-          this.state[_id] ? 'w--open' : ''
-        } `}
+        onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+        onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+        className={
+          mobile
+            ? 'mobile-menu-subitem'
+            : `dropdown-list w-dropdown-list ${
+                this.state[_id] ? 'w--open' : ''
+              } `
+        }
       >
         {subItems.map(subitem => {
           const subSubItemOpenId = `${subitem.label}-thirdlevel`;
@@ -188,14 +218,18 @@ class NavigationBarComponent extends React.Component {
           return (
             <div style={{ width: '100%' }} key={subSubItemOpenId}>
               <div
-                className={classNames(
-                  {
-                    'expandable-dropdown':
-                      subitem.items && subitem.items.length,
-                  },
-                  'dropdown-link',
-                  'w-dropdown-link'
-                )}
+                className={
+                  mobile
+                    ? ''
+                    : classNames(
+                        {
+                          'expandable-dropdown':
+                            subitem.items && subitem.items.length,
+                        },
+                        'dropdown-link',
+                        'w-dropdown-link'
+                      )
+                }
                 onClick={e => {
                   if (subitem.items && subitem.items.length) {
                     e.stopPropagation();
@@ -212,7 +246,9 @@ class NavigationBarComponent extends React.Component {
                       ? logoutFunction
                       : undefined
                   }
-                  className="dropdown-link w-dropdown-link no-padding"
+                  className={
+                    mobile ? '' : 'dropdown-link w-dropdown-link no-padding'
+                  }
                 >
                   {Decorator ? (
                     <Decorator
@@ -241,11 +277,13 @@ class NavigationBarComponent extends React.Component {
                 )}
               </div>
               {subitem.items && subitem.items.length && (
-                <div className="third-level-items">
+                <div className={mobile ? '' : 'third-level-items'}>
                   <ul
-                    className={`${
-                      this.state[subSubItemOpenId] ? 'ul--open' : ''
-                    } `}
+                    className={
+                      mobile
+                        ? ''
+                        : `${this.state[subSubItemOpenId] ? 'ul--open' : ''} `
+                    }
                   >
                     {(subitem.items || []).map(subSubItem => (
                       <li key={`${subitem.label}-${subSubItem.label}`}>
@@ -253,7 +291,9 @@ class NavigationBarComponent extends React.Component {
                         <Link
                           href={subSubItem.actionLink || undefined}
                           RouterComponent={RouterComponent}
-                          className="dropdown-link w-dropdown-link"
+                          className={
+                            mobile ? '' : 'dropdown-link w-dropdown-link'
+                          }
                         >
                           {subSubItem.label}
                         </Link>
@@ -268,103 +308,154 @@ class NavigationBarComponent extends React.Component {
       </nav>
     );
 
-    return (
-      <nav className={this.props.className}>
-        <Link href="/" RouterComponent={RouterComponent}>
-          <span>
-            {variant === LIGHT_VARIANT ? (
-              <LogoLight className="logo" />
-            ) : (
-              <LogoDark className="logo" />
-            )}
-          </span>
-        </Link>
-        <div className="links">
-          {currentApplication && currentApplicationInfo && (
-            <div className="flex">
-              <span style={{ marginRight: 16 }}>{currentApplication}</span>
-              <PlanRibbon>{currentApplicationInfo.tier}</PlanRibbon>
-            </div>
-          )}
-          {items.map(
-            ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
-              if (label === SPECIAL_ITEMS.ACCOUNT) {
-                return (
-                  <div
-                    key="accounts"
-                    className="w-dropdown account-icon"
-                    style={{ marginLeft: 0 }}
-                  >
-                    <LetterAvatar
-                      size={40}
-                      bgColor="white"
-                      textColor="#595dff"
-                      onMouseEnter={() => onMouseEnter(_id)}
-                      onMouseLeave={() => onMouseLeave(_id)}
-                    >
-                      {this.props.loggedUser
-                        ? this.props.loggedUser.username.toUpperCase()
-                        : 'ND'}
-                    </LetterAvatar>
-                    {mapSubitems(itemSubitems, _id)}
-                  </div>
-                );
-              } else if (label === SPECIAL_ITEMS.REGIONS) {
-                const currentRegion = itemSubitems.find(
-                  ({ actionLink: regionActionLink }) =>
-                    new URL(regionActionLink).hostname ===
-                    new URL(window.location.href).hostname
-                );
-                const Decorator = ({ item: { label: regionLabel }, style }) => (
-                  <img
-                    style={style}
-                    src={`/packages/mdg_borealis/icons/countries/${regionLabel}.svg`}
-                  />
-                );
+    const NavItems = ({ mobile }) => (
+      <div className={mobile ? 'mobile-menu-items' : 'links'}>
+        {currentApplication && currentApplicationInfo && (
+          <div className={mobile ? 'mobile-menu-item' : 'flex'}>
+            <span style={{ marginRight: 16 }}>{currentApplication}</span>
+            <PlanRibbon>{currentApplicationInfo.tier}</PlanRibbon>
+          </div>
+        )}
+        {items.map(
+          ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
+            if (mobile && this.state.mainLabel && this.state.mainLabel !== label) {
+              return null;
+            }
+            const showLabelSubItems = !mobile || this.state.mainLabel === label;
 
-                return (
-                  <div key={label} className="w-dropdown">
-                    <Link
-                      RouterComponent={RouterComponent}
-                      className={variant}
-                      {...(onClick ? { onClick } : { href: actionLink })}
-                      onMouseEnter={() => onMouseEnter(_id)}
-                      onMouseLeave={() => onMouseLeave(_id)}
-                    >
-                      {currentRegion.label}
-                      <img
-                        style={{ height: 25, float: 'right', marginLeft: 5 }}
-                        src={`/packages/mdg_borealis/icons/countries/${currentRegion.label}.svg`}
-                      />
-                    </Link>
-                    {(itemSubitems &&
-                      itemSubitems.length &&
-                      mapSubitems(itemSubitems, _id, Decorator)) ||
-                      null}
-                  </div>
-                );
-              }
+            const mobileOnClick = mobile
+              ? () => this.setState({ mainLabel: label })
+              : () => {};
+            if (label === SPECIAL_ITEMS.ACCOUNT) {
               return (
-                <div key={label} className="w-dropdown">
+                <div
+                  key="accounts"
+                  className={
+                    mobile ? 'mobile-menu-item' : 'w-dropdown account-icon'
+                  }
+                  onClick={mobileOnClick}
+                  style={{ marginLeft: 0 }}
+                >
+                  <LetterAvatar
+                    size={40}
+                    bgColor="white"
+                    textColor="#595dff"
+                    onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                    onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+                  >
+                    {this.props.loggedUser
+                      ? this.props.loggedUser.username.toUpperCase()
+                      : 'ND'}
+                  </LetterAvatar>
+                  {showLabelSubItems &&
+                    renderSubItems({ subItems: itemSubitems, _id, mobile })}
+                </div>
+              );
+            }
+
+            if (label === SPECIAL_ITEMS.REGIONS) {
+              const currentRegion = itemSubitems.find(
+                ({ actionLink: regionActionLink }) =>
+                  new URL(regionActionLink).hostname ===
+                  new URL(window.location.href).hostname
+              );
+              const Decorator = ({ item: { label: regionLabel }, style }) => (
+                <img
+                  style={style}
+                  src={`/packages/mdg_borealis/icons/countries/${regionLabel}.svg`}
+                />
+              );
+
+              return (
+                <div
+                  key={label}
+                  className={mobile ? 'mobile-menu-item' : 'w-dropdown'}
+                  onClick={mobileOnClick}
+                >
                   <Link
                     RouterComponent={RouterComponent}
                     className={variant}
                     {...(onClick ? { onClick } : { href: actionLink })}
-                    onMouseEnter={() => onMouseEnter(_id)}
-                    onMouseLeave={() => onMouseLeave(_id)}
+                    onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                    onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
                   >
-                    {label}
+                    {currentRegion.label}
+                    <img
+                      style={{ height: 25, float: 'right', marginLeft: 5 }}
+                      src={`/packages/mdg_borealis/icons/countries/${currentRegion.label}.svg`}
+                    />
                   </Link>
-                  {(itemSubitems &&
+                  {(showLabelSubItems &&
+                    itemSubitems &&
                     itemSubitems.length &&
-                    mapSubitems(itemSubitems, _id)) ||
+                    renderSubItems({
+                      subItems: itemSubitems,
+                      _id,
+                      Decorator,
+                      mobile,
+                    })) ||
                     null}
                 </div>
               );
             }
+
+            return (
+              <div
+                key={label}
+                className={mobile ? 'mobile-menu-item' : 'w-dropdown'}
+                onClick={mobileOnClick}
+              >
+                <Link
+                  RouterComponent={RouterComponent}
+                  className={variant}
+                  {...(onClick ? { onClick } : { href: actionLink })}
+                  onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                  onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+                >
+                  {label}
+                </Link>
+                {(showLabelSubItems &&
+                  itemSubitems &&
+                  itemSubitems.length &&
+                  renderSubItems({ subItems: itemSubitems, _id, mobile })) ||
+                  null}
+              </div>
+            );
+          }
+        )}
+      </div>
+    );
+
+    return (
+      <nav className={this.props.className}>
+        <Link href="/" RouterComponent={RouterComponent}>
+          {variant === LIGHT_VARIANT ? (
+            <LogoLight className="logo" />
+          ) : (
+            <LogoDark className="logo" />
           )}
-        </div>
-        <span className="menu-button icon-menu" />
+        </Link>
+        <NavItems />
+        <span
+          className="menu-button icon-menu"
+          onClick={this.toggleMobileMenu}
+        />
+        {this.state.showMobileMenu && (
+          <div className="mobile-menu">
+            <div className="mobile-menu-close" onClick={this.toggleMobileMenu}>
+              <span className="icon-close" />
+            </div>
+            {this.state.mainLabel && (
+              <div
+                className="mobile-menu-close-nav"
+                onClick={this.toggleNavMobileMenu}
+              >
+                <span className="icon-arrow-up" />
+              </div>
+            )}
+            <NavItems mobile />
+          </div>
+        )}
       </nav>
     );
   }

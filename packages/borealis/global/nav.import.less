@@ -389,7 +389,7 @@ nav {
 
 .navbar__link.w--current::before,
 .navbar__link.current-parent::before {
-  content: '';
+  content: "";
   position: absolute;
 }
 
@@ -626,4 +626,57 @@ nav {
   &.margin {
     margin-left: 20px;
   }
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+
+  z-index: 9999;
+
+  height: 100vh;
+  width: 100vw;
+
+  background-color: white;
+}
+
+.mobile-menu-close {
+  display: flex;
+  justify-content: flex-end;
+
+  align-self: flex-end;
+
+  width: 100%;
+
+  span {
+    margin-right: 32px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+}
+
+.mobile-menu-close-nav {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+
+  span {
+    margin-right: 32px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+}
+
+.mobile-menu-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu-item {
+  display: flex;
+}
+
+.mobile-menu-subitem {
+  display: block;
 }
