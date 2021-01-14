@@ -269,13 +269,15 @@ class NavigationBarComponent extends React.Component {
     );
 
     return (
-      <nav>
+      <nav className={this.props.className}>
         <Link href="/" RouterComponent={RouterComponent}>
-          {variant === LIGHT_VARIANT ? (
-            <LogoLight className="logo" />
-          ) : (
-            <LogoDark className="logo" />
-          )}
+          <span>
+            {variant === LIGHT_VARIANT ? (
+              <LogoLight className="logo" />
+            ) : (
+              <LogoDark className="logo" />
+            )}
+          </span>
         </Link>
         <div className="links">
           {currentApplication && currentApplicationInfo && (
