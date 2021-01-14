@@ -66,7 +66,8 @@ class NavigationBarComponent extends React.Component {
     this.eventListener = () => {
       this.setState({ currentPath: window.location.pathname });
     };
-    this.intervalId = Meteor.setInterval(() => {}, 1000);
+    this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
+    this.pollingIntervalId = Meteor.setInterval(() => this.fetchItems(), 5000);
   }
   // eslint-disable-next-line no-undef
   state = {
@@ -117,8 +118,11 @@ class NavigationBarComponent extends React.Component {
     }
   }
   componentWillUnmount() {
-    if (this.intervalId) {
-      Meteor.clearInterval(this.intervalId);
+    if (this.urlIntervalId) {
+      Meteor.clearInterval(this.urlIntervalId);
+    }
+    if (this.pollingIntervalId) {
+      Meteor.clearInterval(this.pollingIntervalId);
     }
   }
 
@@ -182,7 +186,7 @@ class NavigationBarComponent extends React.Component {
             window.location.href = 'https://www.meteor.com';
           };
           return (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%' }} key={subSubItemOpenId}>
               <div
                 className={classNames(
                   {
