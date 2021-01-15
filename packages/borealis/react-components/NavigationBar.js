@@ -80,7 +80,7 @@ class NavigationBarComponent extends React.Component {
     active: {},
     items: [],
     currentPath: window.location.pathname,
-    showMobileMenu: !!NAVIGATION_BAR_MOCK_DATA,
+    showMobileMenu: false,
     mainLabel: null,
   };
 
@@ -179,23 +179,28 @@ class NavigationBarComponent extends React.Component {
     const onMouseEnter = _id => {
       if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
       this.setState({
-        ...this.state,
-        [_id]: true,
+        active: {
+          [_id]: true
+        },
       });
     };
-    const toggleState = _id => {
+    const toggleState = (_id, subitem) => {
       this.setState({
-        ...this.state,
-        [_id]: !this.state[_id],
+        active: {
+          [_id]: !this.state.active[_id],
+          [subitem]: this.state.active[subitem],
+        }
       });
     };
     const onMouseLeave = _id => {
       this.timeout[_id] = Meteor.setTimeout(() => {
         this.setState({
-          ...this.state,
-          [_id]: false,
+          active: {
+            ...this.state.active,
+            [_id]: false
+          },
         });
-      }, 300);
+      }, 100);
     };
     const renderSubItems = ({ subItems, _id, Decorator = null, mobile }) => (
       <nav
@@ -205,7 +210,7 @@ class NavigationBarComponent extends React.Component {
           mobile
             ? 'mobile-menu-subitem'
             : `dropdown-list w-dropdown-list ${
-                this.state[_id] ? 'w--open' : ''
+                this.state.active[_id] ? 'w--open' : ''
               } `
         }
       >
@@ -233,7 +238,7 @@ class NavigationBarComponent extends React.Component {
                 onClick={e => {
                   if (subitem.items && subitem.items.length) {
                     e.stopPropagation();
-                    toggleState(subSubItemOpenId);
+                    toggleState(subSubItemOpenId, _id);
                   }
                 }}
               >
@@ -260,8 +265,8 @@ class NavigationBarComponent extends React.Component {
                 </Link>
                 {subitem.items && subitem.items.length && (
                   <ArrowIcon
-                    direction={this.state[subSubItemOpenId] ? 'right' : 'down'}
-                    onClick={() => toggleState(subSubItemOpenId)}
+                    direction={this.state.active[subSubItemOpenId] ? 'right' : 'down'}
+                    onClick={() => toggleState(subSubItemOpenId, _id)}
                   />
                 )}
                 {subitem.alternativeLink ? (
@@ -282,7 +287,7 @@ class NavigationBarComponent extends React.Component {
                     className={
                       mobile
                         ? ''
-                        : `${this.state[subSubItemOpenId] ? 'ul--open' : ''} `
+                        : `${this.state.active[subSubItemOpenId] ? 'ul--open' : ''} `
                     }
                   >
                     {(subitem.items || []).map(subSubItem => (
@@ -318,7 +323,11 @@ class NavigationBarComponent extends React.Component {
         )}
         {items.map(
           ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
-            if (mobile && this.state.mainLabel && this.state.mainLabel !== label) {
+            if (
+              mobile &&
+              this.state.mainLabel &&
+              this.state.mainLabel !== label
+            ) {
               return null;
             }
             const showLabelSubItems = !mobile || this.state.mainLabel === label;
