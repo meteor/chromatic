@@ -65,6 +65,10 @@ class NavigationBarComponent extends React.Component {
   constructor() {
     super();
     this.eventListener = () => {
+      if (this.state.currentPath === window.location.pathname) {
+        return;
+      }
+
       this.setState({ currentPath: window.location.pathname });
     };
     if (!NAVIGATION_BAR_MOCK_DATA) {
@@ -318,7 +322,11 @@ class NavigationBarComponent extends React.Component {
         )}
         {items.map(
           ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
-            if (mobile && this.state.mainLabel && this.state.mainLabel !== label) {
+            if (
+              mobile &&
+              this.state.mainLabel &&
+              this.state.mainLabel !== label
+            ) {
               return null;
             }
             const showLabelSubItems = !mobile || this.state.mainLabel === label;
@@ -356,8 +364,8 @@ class NavigationBarComponent extends React.Component {
             if (label === SPECIAL_ITEMS.REGIONS) {
               const currentRegion = itemSubitems.find(
                 ({ actionLink: regionActionLink }) =>
-                  new URL(regionActionLink).hostname ===
-                  new URL(window.location.href).hostname
+                    new URL(regionActionLink).hostname ===
+                    new URL(window.location.href).hostname
               );
               const Decorator = ({ item: { label: regionLabel }, style }) => (
                 <img
