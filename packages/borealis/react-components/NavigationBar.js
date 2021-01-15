@@ -4,12 +4,10 @@ import * as PropTypes from 'prop-types';
 import { LetterAvatar } from './LetterAvatar';
 import keyBy from 'lodash.keyby';
 import classNames from 'classnames';
-import { NAVIGATION_BAR_MOCK_DATA } from './NavigationBarMockData';
 
 export const LIGHT_VARIANT = 'light';
 
 const DASHBOARD_URL = Meteor.settings.public.dashboardUrl;
-const FORCE_MOBILE_MENU = Meteor.settings.public.forceMobileMenu;
 const DASHBOARD_MENU_ENDPOINT = `${DASHBOARD_URL}/rest/menu-items`;
 
 const SPECIAL_ITEMS = {
@@ -72,20 +70,15 @@ class NavigationBarComponent extends React.Component {
 
       this.setState({ currentPath: window.location.pathname });
     };
-    if (!FORCE_MOBILE_MENU) {
-      this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
-      this.pollingIntervalId = Meteor.setInterval(
-        () => this.fetchItems(),
-        5000
-      );
-    }
+    this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
+    this.pollingIntervalId = Meteor.setInterval(() => this.fetchItems(), 5000);
   }
   // eslint-disable-next-line no-undef
   state = {
     active: {},
     items: [],
     currentPath: window.location.pathname,
-    showMobileMenu: FORCE_MOBILE_MENU,
+    showMobileMenu: false,
     mainLabel: null,
   };
 
@@ -104,11 +97,6 @@ class NavigationBarComponent extends React.Component {
       headers: { Authorization: `Bearer ${dashboardToken}` },
       cache: 'default',
     };
-
-    if (NAVIGATION_BAR_MOCK_DATA) {
-      this.setState({ items: NAVIGATION_BAR_MOCK_DATA });
-      return;
-    }
 
     fetch(
       `${DASHBOARD_MENU_ENDPOINT}?app=${app}&username=${
@@ -207,7 +195,13 @@ class NavigationBarComponent extends React.Component {
         });
       }, 100);
     };
-    const renderSubItems = ({ subItems, _id, Decorator = null, mobile }) => (
+    const renderSubItems = ({
+      subItems,
+      _id,
+      Decorator = null,
+      mobile,
+      mobileOnClick,
+    }) => (
       <nav
         onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
         onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
@@ -226,7 +220,11 @@ class NavigationBarComponent extends React.Component {
             window.location.href = 'https://www.meteor.com';
           };
           return (
-            <div style={{ width: '100%' }} key={subSubItemOpenId}>
+            <div
+              className={mobile ? 'mobile-menu-item' : ''}
+              style={{ width: '100%' }}
+              key={subSubItemOpenId}
+            >
               <div
                 className={
                   mobile
@@ -244,6 +242,9 @@ class NavigationBarComponent extends React.Component {
                   if (subitem.items && subitem.items.length) {
                     e.stopPropagation();
                     toggleState(subSubItemOpenId, _id);
+                  }
+                  if (mobile) {
+                    mobileOnClick({ close: true })();
                   }
                 }}
               >
@@ -365,19 +366,31 @@ class NavigationBarComponent extends React.Component {
                   onClick={mobileOnClick()}
                   style={{ marginLeft: 0 }}
                 >
-                  <LetterAvatar
-                    size={40}
-                    bgColor={mobile ? '#eee' : 'whilte'}
-                    textColor="#595dff"
-                    onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
-                    onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
-                  >
-                    {this.props.loggedUser
-                      ? this.props.loggedUser.username.toUpperCase()
-                      : 'ND'}
-                  </LetterAvatar>
+                  {!mobile ||
+                    (this.state.mainLabel !== label && (
+                      <LetterAvatar
+                        size={40}
+                        bgColor={mobile ? '#eee' : 'white'}
+                        textColor="#595dff"
+                        onMouseEnter={
+                          mobile ? () => {} : () => onMouseEnter(_id)
+                        }
+                        onMouseLeave={
+                          mobile ? () => {} : () => onMouseLeave(_id)
+                        }
+                      >
+                        {this.props.loggedUser
+                          ? this.props.loggedUser.username.toUpperCase()
+                          : 'ND'}
+                      </LetterAvatar>
+                    ))}
                   {showLabelSubItems &&
-                    renderSubItems({ subItems: itemSubitems, _id, mobile })}
+                    renderSubItems({
+                      subItems: itemSubitems,
+                      _id,
+                      mobile,
+                      mobileOnClick,
+                    })}
                 </div>
               );
             }
@@ -422,6 +435,7 @@ class NavigationBarComponent extends React.Component {
                       _id,
                       Decorator,
                       mobile,
+                      mobileOnClick,
                     })) ||
                     null}
                 </div>
@@ -446,7 +460,12 @@ class NavigationBarComponent extends React.Component {
                 {(showLabelSubItems &&
                   itemSubitems &&
                   itemSubitems.length &&
-                  renderSubItems({ subItems: itemSubitems, _id, mobile })) ||
+                  renderSubItems({
+                    subItems: itemSubitems,
+                    _id,
+                    mobile,
+                    mobileOnClick,
+                  })) ||
                   null}
               </div>
             );
