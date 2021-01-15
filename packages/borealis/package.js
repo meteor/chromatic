@@ -50,6 +50,8 @@ Package.onUse(function(api) {
       'icons/countries/staging.svg',
       'icons/countries/us-east-1.svg',
       'icons/countries/localhost.svg',
+      'icons/countries/meet-eeyore.svg',
+      'icons/countries/ties.svg'
     ],
     'client'
   );
