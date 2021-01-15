@@ -65,6 +65,10 @@ class NavigationBarComponent extends React.Component {
   constructor() {
     super();
     this.eventListener = () => {
+      if (this.state.currentPath === window.location.pathname) {
+        return;
+      }
+
       this.setState({ currentPath: window.location.pathname });
     };
     if (!NAVIGATION_BAR_MOCK_DATA) {
@@ -365,8 +369,8 @@ class NavigationBarComponent extends React.Component {
             if (label === SPECIAL_ITEMS.REGIONS) {
               const currentRegion = itemSubitems.find(
                 ({ actionLink: regionActionLink }) =>
-                  new URL(regionActionLink).hostname ===
-                  new URL(window.location.href).hostname
+                    new URL(regionActionLink).hostname ===
+                    new URL(window.location.href).hostname
               );
               const Decorator = ({ item: { label: regionLabel }, style }) => (
                 <img
