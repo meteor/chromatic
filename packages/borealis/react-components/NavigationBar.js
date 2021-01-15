@@ -9,6 +9,7 @@ import { NAVIGATION_BAR_MOCK_DATA } from './NavigationBarMockData';
 export const LIGHT_VARIANT = 'light';
 
 const DASHBOARD_URL = Meteor.settings.public.dashboardUrl;
+const FORCE_MOBILE_MENU = Meteor.settings.public.forceMobileMenu;
 const DASHBOARD_MENU_ENDPOINT = `${DASHBOARD_URL}/rest/menu-items`;
 
 const SPECIAL_ITEMS = {
@@ -71,7 +72,7 @@ class NavigationBarComponent extends React.Component {
 
       this.setState({ currentPath: window.location.pathname });
     };
-    if (!NAVIGATION_BAR_MOCK_DATA) {
+    if (!FORCE_MOBILE_MENU) {
       this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
       this.pollingIntervalId = Meteor.setInterval(
         () => this.fetchItems(),
@@ -84,7 +85,7 @@ class NavigationBarComponent extends React.Component {
     active: {},
     items: [],
     currentPath: window.location.pathname,
-    showMobileMenu: false,
+    showMobileMenu: FORCE_MOBILE_MENU,
     mainLabel: null,
   };
 
@@ -184,7 +185,7 @@ class NavigationBarComponent extends React.Component {
       if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
       this.setState({
         active: {
-          [_id]: true
+          [_id]: true,
         },
       });
     };
@@ -193,7 +194,7 @@ class NavigationBarComponent extends React.Component {
         active: {
           [_id]: !this.state.active[_id],
           [subitem]: this.state.active[subitem],
-        }
+        },
       });
     };
     const onMouseLeave = _id => {
@@ -201,7 +202,7 @@ class NavigationBarComponent extends React.Component {
         this.setState({
           active: {
             ...this.state.active,
-            [_id]: false
+            [_id]: false,
           },
         });
       }, 100);
@@ -269,7 +270,9 @@ class NavigationBarComponent extends React.Component {
                 </Link>
                 {subitem.items && subitem.items.length && (
                   <ArrowIcon
-                    direction={this.state.active[subSubItemOpenId] ? 'right' : 'down'}
+                    direction={
+                      this.state.active[subSubItemOpenId] ? 'right' : 'down'
+                    }
                     onClick={() => toggleState(subSubItemOpenId, _id)}
                   />
                 )}
@@ -291,7 +294,11 @@ class NavigationBarComponent extends React.Component {
                     className={
                       mobile
                         ? ''
-                        : `${this.state.active[subSubItemOpenId] ? 'ul--open' : ''} `
+                        : `${
+                            this.state.active[subSubItemOpenId]
+                              ? 'ul--open'
+                              : ''
+                          } `
                     }
                   >
                     {(subitem.items || []).map(subSubItem => (
@@ -336,22 +343,31 @@ class NavigationBarComponent extends React.Component {
             }
             const showLabelSubItems = !mobile || this.state.mainLabel === label;
 
-            const mobileOnClick = mobile
-              ? () => this.setState({ mainLabel: label })
-              : () => {};
+            const mobileOnClick = ({ close } = {}) =>
+              mobile
+                ? () => {
+                    if (close) {
+                      this.toggleMobileMenu();
+                    } else {
+                      this.setState({ mainLabel: label });
+                    }
+                  }
+                : () => {};
             if (label === SPECIAL_ITEMS.ACCOUNT) {
               return (
                 <div
                   key="accounts"
                   className={
-                    mobile ? 'mobile-menu-item' : 'w-dropdown account-icon'
+                    mobile
+                      ? 'mobile-menu-item mobile-menu-item-profile'
+                      : 'w-dropdown account-icon'
                   }
-                  onClick={mobileOnClick}
+                  onClick={mobileOnClick()}
                   style={{ marginLeft: 0 }}
                 >
                   <LetterAvatar
                     size={40}
-                    bgColor="white"
+                    bgColor={mobile ? '#eee' : 'whilte'}
                     textColor="#595dff"
                     onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
                     onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
@@ -369,8 +385,8 @@ class NavigationBarComponent extends React.Component {
             if (label === SPECIAL_ITEMS.REGIONS) {
               const currentRegion = itemSubitems.find(
                 ({ actionLink: regionActionLink }) =>
-                    new URL(regionActionLink).hostname ===
-                    new URL(window.location.href).hostname
+                  new URL(regionActionLink).hostname ===
+                  new URL(window.location.href).hostname
               );
               const Decorator = ({ item: { label: regionLabel }, style }) => (
                 <img
@@ -383,7 +399,7 @@ class NavigationBarComponent extends React.Component {
                 <div
                   key={label}
                   className={mobile ? 'mobile-menu-item' : 'w-dropdown'}
-                  onClick={mobileOnClick}
+                  onClick={mobileOnClick({ close: true })}
                 >
                   <Link
                     RouterComponent={RouterComponent}
@@ -416,7 +432,7 @@ class NavigationBarComponent extends React.Component {
               <div
                 key={label}
                 className={mobile ? 'mobile-menu-item' : 'w-dropdown'}
-                onClick={mobileOnClick}
+                onClick={mobileOnClick({ close: true })}
               >
                 <Link
                   RouterComponent={RouterComponent}
@@ -455,7 +471,8 @@ class NavigationBarComponent extends React.Component {
         />
         {this.state.showMobileMenu && (
           <div className="mobile-menu">
-            <div className="mobile-menu-close" onClick={this.toggleMobileMenu}>
+            <div className="mobile-menu-title" onClick={this.toggleMobileMenu}>
+              <LogoDark />
               <span className="icon-close" />
             </div>
             {this.state.mainLabel && (
