@@ -67,7 +67,6 @@ class NavigationBarComponent extends React.Component {
       if (this.state.currentPath === window.location.pathname) {
         return;
       }
-
       this.setState({ currentPath: window.location.pathname });
     };
     this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
@@ -84,7 +83,7 @@ class NavigationBarComponent extends React.Component {
 
   // eslint-disable-next-line no-undef
   fetchItems = () => {
-    console.log(`fetchItems`);
+    console.log('fetchItems');
 
     const { dashboardToken, app, loggedUser = {} } = this.props;
     if (!dashboardToken) {
@@ -106,6 +105,9 @@ class NavigationBarComponent extends React.Component {
     )
       .then(result => result.json())
       .then(items => {
+        if (JSON.stringify(items) === JSON.stringify(this.state.items)) {
+          return;
+        }
         this.setState({ items });
       })
       .catch(e => console.error('Error fetching NavigationBar data', e));
@@ -257,6 +259,7 @@ class NavigationBarComponent extends React.Component {
                       ? logoutFunction
                       : undefined
                   }
+                  style={mobile ? { color: '#8d91a3' } : {}}
                   className={
                     mobile ? '' : 'dropdown-link w-dropdown-link no-padding'
                   }
@@ -366,24 +369,19 @@ class NavigationBarComponent extends React.Component {
                   onClick={mobileOnClick()}
                   style={{ marginLeft: 0 }}
                 >
-                  {!mobile ||
-                    (this.state.mainLabel !== label && (
-                      <LetterAvatar
-                        size={40}
-                        bgColor={mobile ? '#eee' : 'white'}
-                        textColor="#595dff"
-                        onMouseEnter={
-                          mobile ? () => {} : () => onMouseEnter(_id)
-                        }
-                        onMouseLeave={
-                          mobile ? () => {} : () => onMouseLeave(_id)
-                        }
-                      >
-                        {this.props.loggedUser
-                          ? this.props.loggedUser.username.toUpperCase()
-                          : 'ND'}
-                      </LetterAvatar>
-                    ))}
+                  {(!mobile || this.state.mainLabel !== label) && (
+                    <LetterAvatar
+                      size={40}
+                      bgColor={mobile ? '#eee' : 'white'}
+                      textColor="#595dff"
+                      onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                      onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+                    >
+                      {this.props.loggedUser
+                        ? this.props.loggedUser.username.toUpperCase()
+                        : 'ND'}
+                    </LetterAvatar>
+                  )}
                   {showLabelSubItems &&
                     renderSubItems({
                       subItems: itemSubitems,
