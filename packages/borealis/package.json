@@ -11,10 +11,14 @@
   "name": "mdg-borealis",
   "repository": {
     "type": "git",
-    "url": "https://github.com/meteor/chromatic/tree/master/packages/borealis"
+    "url": "https://github.com/meteor/clnhromatic/tree/master/packages/borealis"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.10"
+  "version": "1.0.10",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "lodash.keyby": "^4.6.0"
+  }
 }

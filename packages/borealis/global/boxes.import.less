@@ -1,0 +1,107 @@
+.four-boxes,
+.three-boxes,
+.two-boxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex-grow: 1;
+
+  @media @md {
+    flex-direction: row;
+  }
+
+  .box-bg,
+  .box-shadowed,
+  .box-empty-white,
+  .box-empty {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    p {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      color: #8d91a3;
+    }
+    h3 {
+      &:not(:first-child) {
+        margin-top: 34px;
+      }
+    }
+  }
+}
+
+.four-boxes {
+  max-width: 1200px;
+}
+
+.four-boxes > div {
+  flex-basis: 25%;
+}
+.three-boxes {
+  flex-wrap: wrap;
+}
+.three-boxes > div {
+  flex-basis: 30%;
+  margin-top: 20px;
+  &:not(:nth-child(3n + 1)):not(:first-child) {
+    margin-left: 50px;
+  }
+}
+.two-boxes > div {
+  flex-basis: 25%;
+  flex-wrap: wrap;
+  &:not(:first-child) {
+    margin-left: 34px;
+  }
+}
+
+.header-boxes {
+  margin-top: 20px;
+}
+
+
+.box-empty-white,.box-shadowed, .box-bg, .box-empty {
+  margin-bottom: 8px;
+
+  @media @md {
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
+
+.box-empty-white {
+  /* Primary / White */
+
+  background: #ffffff;
+  /* Shadow / Short */
+
+  box-shadow: 0px 1px 3px rgba(27, 36, 72, 0.16),
+    0px 10px 20px -10px rgba(13, 17, 33, 0.2497);
+  border-radius: 8px;
+}
+
+.box-shadowed {
+  /* Primary / White */
+
+  background: #ffffff;
+  /* Shadow / Medium */
+  box-shadow: 0px 30px 40px -20px rgba(27, 36, 72, 0.16);
+  border-radius: 12px;
+}
+
+.box-bg {
+  background: #ffffff;
+  border-radius: 12px;
+  background-image: url(packages/mdg_borealis/icons/box-bg.png);
+  background-size: contain;
+}
+.box-empty {
+  background: #ffffff;
+  border-radius: 12px;
+}

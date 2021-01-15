@@ -1,0 +1,35 @@
+@import '../util/index.import.less';
+
+@color-primary: #ff6a3e; // coral
+@color-secondary: #595dff; // violet
+
+.ribbon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 29px;
+  height: 30px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 8px 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  &.primary {
+    background: rgba(255, 106, 62, 1);
+    color: white;
+  }
+  &.secondary {
+    background: #8D91A3;
+    color: white;
+  }
+  &.tertiary {
+    background: rgba(27, 36, 72, 1);
+    color: white;
+  }
+}

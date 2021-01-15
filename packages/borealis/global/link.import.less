@@ -1,58 +1,138 @@
 a,
 .link {
-	.transition( all 250ms ease-out );
-	.type-bold;
+  .transition(all 250ms ease-out);
   cursor: pointer;
   text-decoration: none;
 
-	&:visited { color: inherit; }
+  &:visited {
+    color: inherit;
+  }
 }
 
-
+.header {
+  .header-tabs {
+    color: white;
+    .tab {
+      .text {
+        color: white;
+      }
+      .icon-cog {
+        color: white;
+      }
+    }
+    .active {
+      .text {
+        color: #ff6a3e;
+      }
+      .icon-cog {
+        color: #ff6a3e;
+      }
+    }
+  }
+}
 .link {
-	&:hover { text-decoration: underline; }
-	&:focus { outline: none; } //hides outline in FF
-	&:visited { color: inherit; }
+  &:hover {
+    text-decoration: underline;
+  }
+  &:focus {
+    outline: none;
+  } //hides outline in FF
+  &:visited {
+    color: inherit;
+  }
 
-	&.primary { .link(@color-primary); }
-	&.secondary { .link(@color-secondary); }
-	&.tertiary { .link(@color-dark); }
-	&.complementary { .link(@color-complementary); }
+  &.primary {
+    .link(@color-primary);
+  }
+  &.secondary {
+    .link(@color-secondary);
+  }
+  &.tertiary {
+    .link(@color-dark);
+  }
+  &.complementary {
+    .link(lighten(@color-primary, 7%));
+  }
 
-	// When a file uploading is dressed as a link
-	&.upload {
-		display: inline-block;
-		overflow: hidden;
+  // When a file uploading is dressed as a link
+  &.upload {
+    display: inline-block;
+    overflow: hidden;
     position: relative;
-		vertical-align: bottom;
+    vertical-align: bottom;
 
-    input[type="file"] {
-			.position(absolute, 0,0,0,0);
-			opacity: 0;
+    input[type='file'] {
+      .position(absolute, 0, 0, 0, 0);
+      opacity: 0;
     }
   }
 
-	//When a link is on a dark background
-	&.inverse {
-		color: @color-lightest;
-		&:link,
-		&:visited { color: @color-lightest; }
-	  &:hover { color: @color-light; }
-	  &:active { color: @color-medium; }
-	}
+  //When a link is on a dark background
+  &.inverse {
+    color: @color-lightest;
+    &:link,
+    &:visited {
+      color: @color-lightest;
+    }
+    &:hover {
+      color: @color-light;
+    }
+    &:active {
+      color: @color-medium;
+    }
+  }
 
-	&.inverse-alt {
-		color: fade(@color-lightest, 70%);
-		&:link,
-		&:visited { color: fade(@color-lightest, 70%); }
-	  &:hover { color: fade(@color-lightest, 100%); }
-	  &:active { color: @color-medium; }
-	}
+  &.inverse-alt {
+    color: fade(@color-lightest, 70%);
+    &:link,
+    &:visited {
+      color: fade(@color-lightest, 70%);
+    }
+    &:hover {
+      color: fade(@color-lightest, 100%);
+    }
+    &:active {
+      color: @color-medium;
+    }
+  }
 
-	> [class*="icon-"] {
-		font-size: 80%;
-		display: inline-block;
-		margin-right: .25em;
-		vertical-align: baseline;
-	}
+  > [class*='icon-'] {
+    font-size: 80%;
+    display: inline-block;
+    margin-right: 0.25em;
+    vertical-align: baseline;
+  }
+}
+
+.link-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+
+  span:first-child {
+    margin-right: 7px;
+    margin-top: 1px;
+  }
+  &.primary {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    /* Primary / Orange */
+
+    color: #ff6a3e;
+  }
+
+  &.secondary {
+    color: white;
+  }
 }
