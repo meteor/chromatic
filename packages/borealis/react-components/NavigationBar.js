@@ -114,13 +114,6 @@ class NavigationBarComponent extends React.Component {
   };
 
   componentDidMount() {
-    const authToken = new URLSearchParams(window.location.search).get(
-      'authToken'
-    );
-    if (authToken) {
-      Meteor.loginWithToken(authToken);
-    }
-
     this.fetchItems();
   }
 
