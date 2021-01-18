@@ -1,10 +1,15 @@
 Package.describe({
   name: 'mdg:loading-spinner',
-  version: '0.2.6',
+  version: '0.2.9',
   summary: 'Basic in-place spinner',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
 });
+
+Npm.depends({
+  'lodash.times': '4.3.2',
+});
+
 
 Package.onUse(function(api) {
   api.versionsFrom('1.3');
