@@ -16,6 +16,36 @@ const SPECIAL_ITEMS = {
   REGIONS: 'Regions',
 };
 
+const Link = ({ RouterComponent, href, children, ...props }) => {
+  if (RouterComponent && href) {
+    let to = href;
+    if (href.startsWith('http')) {
+      const url = new URL(href);
+      const currentPath = new URL(window.location.href);
+
+      if (url.origin === currentPath.origin) {
+        to = url.toString().substring(url.origin.length);
+      } else {
+        return (
+          <a href={href} {...props}>
+            {children}
+          </a>
+        );
+      }
+    }
+    return (
+      <RouterComponent to={to} {...props}>
+        {children}{' '}
+      </RouterComponent>
+    );
+  }
+  return (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+};
+
 const ImageLogo = ({ app }) => (
   <img
     style={{ width: 30 }}
@@ -25,7 +55,7 @@ const ImageLogo = ({ app }) => (
 const ArrowIcon = ({ direction = 'right', ...props }) => (
   <img
     {...props}
-    style={{ width: 13, marginLeft: 8, cursor: 'pointer' }}
+    style={{ width: 13, marginRight: 8, marginLeft: 8, cursor: 'pointer' }}
     src={`/packages/mdg_borealis/icons/svg/arrow-${direction}.svg`}
   />
 );
@@ -34,21 +64,31 @@ class NavigationBarComponent extends React.Component {
   constructor() {
     super();
     this.eventListener = () => {
+      if (this.state.currentPath === window.location.pathname) {
+        return;
+      }
       this.setState({ currentPath: window.location.pathname });
     };
-    this.intervalId = Meteor.setInterval(() => {}, 1000);
+    this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
+    this.pollingIntervalId = Meteor.setInterval(() => this.fetchItems(), 5000);
   }
   // eslint-disable-next-line no-undef
   state = {
     active: {},
     items: [],
     currentPath: window.location.pathname,
+    showMobileMenu: false,
+    mainLabel: null,
   };
 
   // eslint-disable-next-line no-undef
   fetchItems = () => {
+    console.log('fetchItems');
+
     const { dashboardToken, app, loggedUser = {} } = this.props;
-    if (!dashboardToken) return;
+    if (!dashboardToken) {
+      return;
+    }
 
     const options = {
       method: 'GET',
@@ -65,8 +105,12 @@ class NavigationBarComponent extends React.Component {
     )
       .then(result => result.json())
       .then(items => {
+        if (JSON.stringify(items) === JSON.stringify(this.state.items)) {
+          return;
+        }
         this.setState({ items });
-      });
+      })
+      .catch(e => console.error('Error fetching NavigationBar data', e));
   };
 
   componentDidMount() {
@@ -87,16 +131,32 @@ class NavigationBarComponent extends React.Component {
     }
   }
   componentWillUnmount() {
-    if (this.intervalId) {
-      Meteor.clearInterval(this.intervalId);
+    if (this.urlIntervalId) {
+      Meteor.clearInterval(this.urlIntervalId);
+    }
+    if (this.pollingIntervalId) {
+      Meteor.clearInterval(this.pollingIntervalId);
     }
   }
+
+  toggleMobileMenu = () => {
+    this.setState({ showMobileMenu: !this.state.showMobileMenu });
+  };
+
+  toggleNavMobileMenu = () => {
+    this.setState({ mainLabel: null });
+  };
 
   // eslint-disable-next-line no-undef
   timeout = {};
 
   render() {
-    const { variant, app = 'dashboard', applicationItems = [] } = this.props;
+    const {
+      variant,
+      app = 'dashboard',
+      applicationItems = [],
+      RouterComponent = 'a',
+    } = this.props;
     let { items = [] } = this.state;
     const { currentPath } = this.state;
     const match = currentPath.match(/\/app\/(.*)/);
@@ -114,31 +174,46 @@ class NavigationBarComponent extends React.Component {
     const onMouseEnter = _id => {
       if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
       this.setState({
-        ...this.state,
-        [_id]: true,
+        active: {
+          [_id]: true,
+        },
       });
     };
-    const toggleState = _id => {
+    const toggleState = (_id, subitem) => {
       this.setState({
-        ...this.state,
-        [_id]: !this.state[_id],
+        active: {
+          [_id]: !this.state.active[_id],
+          [subitem]: this.state.active[subitem],
+        },
       });
     };
     const onMouseLeave = _id => {
       this.timeout[_id] = Meteor.setTimeout(() => {
         this.setState({
-          ...this.state,
-          [_id]: false,
+          active: {
+            ...this.state.active,
+            [_id]: false,
+          },
         });
       }, 100);
     };
-    const mapSubitems = (subItems, _id, Decorator = null) => (
+    const renderSubItems = ({
+      subItems,
+      _id,
+      Decorator = null,
+      mobile,
+      mobileOnClick,
+    }) => (
       <nav
-        onMouseEnter={() => onMouseEnter(_id)}
-        onMouseLeave={() => onMouseLeave(_id)}
-        className={`dropdown-list w-dropdown-list ${
-          this.state[_id] ? 'w--open' : ''
-        } `}
+        onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+        onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+        className={
+          mobile
+            ? 'mobile-menu-subitem'
+            : `dropdown-list w-dropdown-list ${
+                this.state.active[_id] ? 'w--open' : ''
+              } `
+        }
       >
         {subItems.map(subitem => {
           const subSubItemOpenId = `${subitem.label}-thirdlevel`;
@@ -147,26 +222,47 @@ class NavigationBarComponent extends React.Component {
             window.location.href = 'https://www.meteor.com';
           };
           return (
-            <div>
+            <div
+              className={mobile ? 'mobile-menu-item' : ''}
+              style={{ width: '100%' }}
+              key={subSubItemOpenId}
+            >
               <div
-                className={classNames(
-                  {
-                    'expandable-dropdown':
-                      subitem.items && subitem.items.length,
-                  },
-                  'dropdown-link',
-                  'w-dropdown-link'
-                )}
+                className={
+                  mobile
+                    ? ''
+                    : classNames(
+                        {
+                          'expandable-dropdown':
+                            subitem.items && subitem.items.length,
+                        },
+                        'dropdown-link',
+                        'w-dropdown-link'
+                      )
+                }
+                onClick={e => {
+                  if (subitem.items && subitem.items.length) {
+                    e.stopPropagation();
+                    toggleState(subSubItemOpenId, _id);
+                  }
+                  if (mobile) {
+                    mobileOnClick({ close: true })();
+                  }
+                }}
               >
-                <a
+                <Link
                   key={subitem.label}
                   href={subitem.actionLink || undefined}
+                  RouterComponent={RouterComponent}
                   onClick={
                     subitem.label === SPECIAL_ITEMS.LOG_OUT
                       ? logoutFunction
                       : undefined
                   }
-                  className="dropdown-link w-dropdown-link no-padding"
+                  style={mobile ? { color: '#8d91a3' } : {}}
+                  className={
+                    mobile ? '' : 'dropdown-link w-dropdown-link no-padding'
+                  }
                 >
                   {Decorator ? (
                     <Decorator
@@ -175,37 +271,52 @@ class NavigationBarComponent extends React.Component {
                     />
                   ) : null}
                   {subitem.label}
-                </a>
+                </Link>
                 {subitem.items && subitem.items.length && (
                   <ArrowIcon
-                    direction={this.state[subSubItemOpenId] ? 'right' : 'down'}
-                    onClick={() => toggleState(subSubItemOpenId)}
+                    direction={
+                      this.state.active[subSubItemOpenId] ? 'right' : 'down'
+                    }
+                    onClick={() => toggleState(subSubItemOpenId, _id)}
                   />
                 )}
                 {subitem.alternativeLink ? (
-                  <a href={subitem.alternativeLink} style={{ marginLeft: 10 }}>
+                  <Link
+                    href={subitem.alternativeLink}
+                    style={{ marginLeft: 10 }}
+                    RouterComponent={RouterComponent}
+                  >
                     <ImageLogo app={app} />
-                  </a>
+                  </Link>
                 ) : (
                   ''
                 )}
               </div>
               {subitem.items && subitem.items.length && (
-                <div className="third-level-items">
+                <div className={mobile ? '' : 'third-level-items'}>
                   <ul
-                    className={`${
-                      this.state[subSubItemOpenId] ? 'ul--open' : ''
-                    } `}
+                    className={
+                      mobile
+                        ? ''
+                        : `${
+                            this.state.active[subSubItemOpenId]
+                              ? 'ul--open'
+                              : ''
+                          } `
+                    }
                   >
                     {(subitem.items || []).map(subSubItem => (
                       <li key={`${subitem.label}-${subSubItem.label}`}>
                         <ImageLogo app={subSubItem.label.toLowerCase()} />
-                        <a
+                        <Link
                           href={subSubItem.actionLink || undefined}
-                          className="dropdown-link w-dropdown-link"
+                          RouterComponent={RouterComponent}
+                          className={
+                            mobile ? '' : 'dropdown-link w-dropdown-link'
+                          }
                         >
                           {subSubItem.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -217,100 +328,181 @@ class NavigationBarComponent extends React.Component {
       </nav>
     );
 
-    return (
-      <nav>
-        <a href="/">
-          {variant === LIGHT_VARIANT ? (
-            <LogoLight className="logo" />
-          ) : (
-            <LogoDark className="logo" />
-          )}
-        </a>
-        <div className="links">
-          {currentApplication && currentApplicationInfo && (
-            <div className="flex">
-              <span style={{ marginRight: 16 }}>{currentApplication}</span>
-              <PlanRibbon>{currentApplicationInfo.tier}</PlanRibbon>
-            </div>
-          )}
-          {items.map(
-            ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
-              if (label === SPECIAL_ITEMS.ACCOUNT) {
-                return (
-                  <div
-                    key="accounts"
-                    className="w-dropdown account-icon"
-                    style={{ marginLeft: 0 }}
-                  >
+    const NavItems = ({ mobile }) => (
+      <div className={mobile ? 'mobile-menu-items' : 'links'}>
+        {currentApplication && currentApplicationInfo && (
+          <div className={mobile ? 'mobile-menu-item' : 'flex'}>
+            <span style={{ marginRight: 16 }}>{currentApplication}</span>
+            <PlanRibbon>{currentApplicationInfo.tier}</PlanRibbon>
+          </div>
+        )}
+        {items.map(
+          ({ _id, label, actionLink, onClick, items: itemSubitems }) => {
+            if (
+              mobile &&
+              this.state.mainLabel &&
+              this.state.mainLabel !== label
+            ) {
+              return null;
+            }
+            const showLabelSubItems = !mobile || this.state.mainLabel === label;
+
+            const mobileOnClick = ({ close } = {}) =>
+              mobile
+                ? () => {
+                    if (close) {
+                      this.toggleMobileMenu();
+                    } else {
+                      this.setState({ mainLabel: label });
+                    }
+                  }
+                : () => {};
+            if (label === SPECIAL_ITEMS.ACCOUNT) {
+              return (
+                <div
+                  key="accounts"
+                  className={
+                    mobile
+                      ? 'mobile-menu-item mobile-menu-item-profile'
+                      : 'w-dropdown account-icon'
+                  }
+                  onClick={mobileOnClick()}
+                  style={{ marginLeft: 0 }}
+                >
+                  {(!mobile || this.state.mainLabel !== label) && (
                     <LetterAvatar
                       size={40}
-                      bgColor="white"
+                      bgColor={mobile ? '#eee' : 'white'}
                       textColor="#595dff"
-                      onMouseEnter={() => onMouseEnter(_id)}
-                      onMouseLeave={() => onMouseLeave(_id)}
+                      onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                      onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
                     >
                       {this.props.loggedUser
                         ? this.props.loggedUser.username.toUpperCase()
                         : 'ND'}
                     </LetterAvatar>
-                    {mapSubitems(itemSubitems, _id)}
-                  </div>
-                );
-              } else if (label === SPECIAL_ITEMS.REGIONS) {
-                const currentRegion = itemSubitems.find(({ actionLink }) => {
-                  return (
-                    new URL(actionLink).hostname ===
-                    new URL(window.location.href).hostname
-                  );
-                });
-                const Decorator = ({ item: { label: regionLabel }, style }) => (
-                  <img
-                    style={style}
-                    src={`/packages/mdg_borealis/icons/countries/${regionLabel}.svg`}
-                  />
-                );
+                  )}
+                  {showLabelSubItems &&
+                    renderSubItems({
+                      subItems: itemSubitems,
+                      _id,
+                      mobile,
+                      mobileOnClick,
+                    })}
+                </div>
+              );
+            }
 
-                return (
-                  <div key={label} className="w-dropdown">
-                    <a
-                      className={variant}
-                      {...(onClick ? { onClick } : { href: actionLink })}
-                      onMouseEnter={() => onMouseEnter(_id)}
-                      onMouseLeave={() => onMouseLeave(_id)}
-                    >
-                      {currentRegion.label}
-                      <img
-                        style={{ height: 25, float: 'right', marginLeft: 5 }}
-                        src={`/packages/mdg_borealis/icons/countries/${currentRegion.label}.svg`}
-                      />
-                    </a>
-                    {(itemSubitems &&
-                      itemSubitems.length &&
-                      mapSubitems(itemSubitems, _id, Decorator)) ||
-                      null}
-                  </div>
-                );
-              }
+            if (label === SPECIAL_ITEMS.REGIONS) {
+              const currentRegion = itemSubitems.find(
+                ({ actionLink: regionActionLink }) =>
+                  new URL(regionActionLink).hostname ===
+                  new URL(window.location.href).hostname
+              );
+              const Decorator = ({ item: { label: regionLabel }, style }) => (
+                <img
+                  style={style}
+                  src={`/packages/mdg_borealis/icons/countries/${regionLabel}.svg`}
+                />
+              );
+
               return (
-                <div key={label} className="w-dropdown">
-                  <a
+                <div
+                  key={label}
+                  className={mobile ? 'mobile-menu-item' : 'w-dropdown'}
+                  onClick={mobileOnClick({ close: true })}
+                >
+                  <Link
+                    RouterComponent={RouterComponent}
                     className={variant}
                     {...(onClick ? { onClick } : { href: actionLink })}
-                    onMouseEnter={() => onMouseEnter(_id)}
-                    onMouseLeave={() => onMouseLeave(_id)}
+                    onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                    onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
                   >
-                    {label}
-                  </a>
-                  {(itemSubitems &&
+                    {currentRegion.label}
+                    <img
+                      style={{ height: 25, float: 'right', marginLeft: 5 }}
+                      src={`/packages/mdg_borealis/icons/countries/${currentRegion.label}.svg`}
+                    />
+                  </Link>
+                  {(showLabelSubItems &&
+                    itemSubitems &&
                     itemSubitems.length &&
-                    mapSubitems(itemSubitems, _id)) ||
+                    renderSubItems({
+                      subItems: itemSubitems,
+                      _id,
+                      Decorator,
+                      mobile,
+                      mobileOnClick,
+                    })) ||
                     null}
                 </div>
               );
             }
+
+            return (
+              <div
+                key={label}
+                className={mobile ? 'mobile-menu-item' : 'w-dropdown'}
+                onClick={mobileOnClick({ close: true })}
+              >
+                <Link
+                  RouterComponent={RouterComponent}
+                  className={variant}
+                  {...(onClick ? { onClick } : { href: actionLink })}
+                  onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                  onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+                >
+                  {label}
+                </Link>
+                {(showLabelSubItems &&
+                  itemSubitems &&
+                  itemSubitems.length &&
+                  renderSubItems({
+                    subItems: itemSubitems,
+                    _id,
+                    mobile,
+                    mobileOnClick,
+                  })) ||
+                  null}
+              </div>
+            );
+          }
+        )}
+      </div>
+    );
+
+    return (
+      <nav className={this.props.className}>
+        <Link href="/" RouterComponent={RouterComponent}>
+          {variant === LIGHT_VARIANT ? (
+            <LogoLight className="logo" />
+          ) : (
+            <LogoDark className="logo" />
           )}
-        </div>
-        <span className="menu-button icon-menu" />
+        </Link>
+        <NavItems />
+        <span
+          className="menu-button icon-menu"
+          onClick={this.toggleMobileMenu}
+        />
+        {this.state.showMobileMenu && (
+          <div className="mobile-menu">
+            <div className="mobile-menu-title" onClick={this.toggleMobileMenu}>
+              <LogoDark />
+              <span className="icon-close" />
+            </div>
+            {this.state.mainLabel && (
+              <div
+                className="mobile-menu-close-nav"
+                onClick={this.toggleNavMobileMenu}
+              >
+                <span className="icon-arrow-up" />
+              </div>
+            )}
+            <NavItems mobile />
+          </div>
+        )}
       </nav>
     );
   }

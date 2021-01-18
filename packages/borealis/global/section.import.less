@@ -88,6 +88,9 @@
       }
     }
   }
+  &.quarter, &.third {
+    width: 100%;
+  }
 
   @media screen and (min-width: @breakpoint) {
     &.third {
@@ -225,7 +228,6 @@
   margin-bottom: 1rem;
   margin-top: 1.5rem;
   @media screen and (min-width: @breakpoint) {
-    height: 1rem;
     margin-top: 3rem;
   }
 
@@ -239,7 +241,7 @@
     float: left;
 
     &.right {
-      float: none;
+      float: right;
       margin-left: 1rem;
       @media screen and (min-width: @breakpoint) {
         float: right;
