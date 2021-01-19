@@ -83,8 +83,6 @@ class NavigationBarComponent extends React.Component {
 
   // eslint-disable-next-line no-undef
   fetchItems = () => {
-    console.log('fetchItems');
-
     const { dashboardToken, app, loggedUser = {} } = this.props;
     if (!dashboardToken) {
       return;
