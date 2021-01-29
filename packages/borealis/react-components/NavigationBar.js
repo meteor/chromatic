@@ -324,7 +324,11 @@ class NavigationBarComponent extends React.Component {
         {currentApplication && currentApplicationInfo && (
           <div className={mobile ? 'mobile-menu-item' : 'flex'}>
             <span style={{ marginRight: 16 }}>{currentApplication}</span>
-            <PlanRibbon>{currentApplicationInfo.tier}</PlanRibbon>
+            <Link href={`${currentApplicationInfo.actionLink}/upgrade`}>
+              <PlanRibbon>
+                {currentApplicationInfo.tier}
+              </PlanRibbon>
+            </Link>
           </div>
         )}
         {items.map(
