@@ -212,6 +212,9 @@ class NavigationBarComponent extends React.Component {
             Meteor.logout();
             window.location.href = 'https://www.meteor.com';
           };
+          const logoutOnClick = subitem.label === SPECIAL_ITEMS.LOG_OUT
+              ? logoutFunction
+              : undefined;
           return (
             <div
               className={mobile ? 'mobile-menu-item' : ''}
@@ -246,9 +249,7 @@ class NavigationBarComponent extends React.Component {
                   href={subitem.actionLink || undefined}
                   RouterComponent={RouterComponent}
                   onClick={
-                    subitem.label === SPECIAL_ITEMS.LOG_OUT
-                      ? logoutFunction
-                      : undefined
+                    subitem.onClick ? subitem.onClick : logoutOnClick
                   }
                   style={mobile ? { color: '#8d91a3' } : {}}
                   className={
