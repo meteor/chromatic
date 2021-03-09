@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '0.2.14',
+  version: '0.2.15',
   summary: 'a style system',
   documentation: null,
 });
@@ -51,7 +51,8 @@ Package.onUse(function(api) {
       'icons/countries/us-east-1.svg',
       'icons/countries/localhost.svg',
       'icons/countries/meet-eeyore.svg',
-      'icons/countries/ties.svg'
+      'icons/countries/ties.svg',
+      'icons/galaxy/Icon.svg'
     ],
     'client'
   );
