@@ -6,53 +6,44 @@ import React from 'react';
 
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-Sortable = React.createClass({
-  propTypes: {
-    // TODO: figure out how to spec this
-    field: React.PropTypes.string.isRequired,
-    specifier: React.PropTypes.object.isRequired,
-    onSort: React.PropTypes.func.isRequired,
-    inverted: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    children: React.PropTypes.node,
-    Component: React.PropTypes.string
-  },
-  getDefaultProps() {
-    return {
-      inverted: false,
-      Component: 'th'
-    };
-  },
-  onClick() {
+// propTypes: {
+//   field: React.PropTypes.string.isRequired,
+//     specifier: React.PropTypes.object.isRequired,
+//     onSort: React.PropTypes.func.isRequired,
+//     inverted: React.PropTypes.bool,
+//     className: React.PropTypes.string,
+//     children: React.PropTypes.node,
+//     Component: React.PropTypes.string
+// },
+
+Sortable = ({field, specifier, onSort, inverted = false, className, children, Component = 'th', ...other}) => {
+  const onClick = () => {
     const {field, specifier, onSort} = this.props;
     if (specifier[field] === -1) {
       onSort({[field]: 1});
     } else {
       onSort({[field]: -1});
     }
-  },
-  render() {
-    const {field, specifier, onSort, inverted, className, children, Component, ...other} = this.props;
-    const classNames = [className];
-    let icon;
-    if (specifier[field]) {
-      icon = 'icon-arrow-down';
-      classNames.push('sortable');
-      const direction = inverted ? -1 : 1;
-      if (specifier[field] === direction) {
-        classNames.push('ascending');
-      } else {
-        classNames.push('descending');
-      }
+  };
+  const classNames = [className];
+  let icon;
+  if (specifier[field]) {
+    icon = 'icon-arrow-down';
+    classNames.push('sortable');
+    const direction = inverted ? -1 : 1;
+    if (specifier[field] === direction) {
+      classNames.push('ascending');
+    } else {
+      classNames.push('descending');
     }
-
-    return (
-      <Component className={classnames(classNames)} onClick={this.onClick} {...other}>
-        <span>{children}<span className={icon}></span></span>
-      </Component>
-    );
   }
-});
+
+  return (
+    <Component className={classnames(classNames)} onClick={onClick} {...other}>
+      <span>{children}<span className={icon} /></span>
+    </Component>
+  );
+};
 
 // The reason we pass Component in here and we have a Component prop is because the browser
 //   doesn't like it if you render a <th> without a containing <table>.

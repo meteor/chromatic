@@ -5,20 +5,18 @@ import classnames from 'classnames';
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-export const CodeBlock = React.createClass({
-  propTypes: {
-    code: React.PropTypes.string,
-    className: React.PropTypes.string
-  },
-  render() {
-    const {code, className, ...other} = this.props;
-    const formattedCode = hljs.highlightAuto(code);
-    return (
-      <pre {...other} className={classnames('code-block', className)}
-        dangerouslySetInnerHTML={{__html: formattedCode.value}} />
-    );
-  }
-});
+// propTypes: {
+//   code: React.PropTypes.string,
+//     className: React.PropTypes.string
+// },
+
+export const CodeBlock = ({code, className, ...other}) => {
+  const formattedCode = hljs.highlightAuto(code);
+  return (
+    <pre {...other} className={classnames('code-block', className)}
+      dangerouslySetInnerHTML={{__html: formattedCode.value}} />
+  );
+};
 
 
 if (Chromatic) {

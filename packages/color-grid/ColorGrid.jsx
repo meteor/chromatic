@@ -3,27 +3,20 @@
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-ColorGrid = React.createClass({
-  propTypes: {
-    size: React.PropTypes.number.isRequired
-  },
-  getDefaultProps() {
-    return { size: 8 };
-  },
-  render() {
-    const {size} = this.props;
-    return (
-      <div className="clr-grid">
-        <table>
-          <tbody>
-            {_.times(size, (r) => <tr key={`cg-row-${r}`}>{
-              _.times(size, (c) => <td key={`cg-col-${c}`}/>)
-            }</tr>)}
-          </tbody>
-        </table>
-      </div>);
-  }
-});
+// propTypes: {
+//   size: React.PropTypes.number.isRequired
+// }
+
+ColorGrid = ({ size = 8 }) => (
+  <div className="clr-grid">
+    <table>
+      <tbody>
+        {Array.from({length: size}, (_,r) => <tr key={`cg-row-${r}`}>{
+          Array.from({length: 10}, (_,c) => <td key={`cg-col-${c}`}/>)
+        }</tr>)}
+      </tbody>
+    </table>
+  </div>);
 
 if (Chromatic) {
   Chromatic.add(ColorGrid, {

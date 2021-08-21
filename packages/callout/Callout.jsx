@@ -4,24 +4,20 @@ import classnames from 'classnames';
 import React from 'react';
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
-export const Callout = React.createClass({
+// propTypes: {
+//   className: React.PropTypes.string.isRequired,
+//     children: React.PropTypes.node
+// },
 
-  propTypes: {
-    className: React.PropTypes.string.isRequired,
-    children: React.PropTypes.node
-  },
+export const Callout = ({className, children}) => {
+  const calloutClassName = classnames('callout', className);
 
-  render() {
-    const {className, children} = this.props,
-      calloutClassName = classnames('callout', className);
-
-    return (
-      <div className={calloutClassName}>
-        {children}
-      </div>
-    );
-  }
-});
+  return (
+    <div className={calloutClassName}>
+      {children}
+    </div>
+  );
+};
 
 if (Chromatic) {
   Chromatic.add(Callout, {
