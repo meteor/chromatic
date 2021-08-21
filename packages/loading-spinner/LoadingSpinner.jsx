@@ -7,24 +7,19 @@ const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const TICK_COUNTS = {small: 16, medium: 24, large: 32};
 
-LoadingSpinner = React.createClass({
-  propTypes: {
-    size: React.PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
-    className: React.PropTypes.string
-  },
-  render() {
-    const {size, className} = this.props;
+// propTypes: {
+//   size: React.PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
+//     className: React.PropTypes.string
+// },
 
-    return (
-      <div className={classnames('loading-spinner', size, className)}>
-        <div className="spinner-wheel"></div>
-        <div className="spinner-ticks">
-          {_.times(TICK_COUNTS[size], (i) => <div key={i} className="spinner-tick"/>)}
-        </div>
-      </div>
-    );
-  }
-});
+LoadingSpinner = ({size, className}) => (
+  <div className={classnames('loading-spinner', size, className)}>
+    <div className="spinner-wheel" />
+    <div className="spinner-ticks">
+      {Array.from({length: TICK_COUNTS[size]}, (_, i) => <div key={i} className="spinner-tick"/>)}
+    </div>
+  </div>
+);
 
 if (Chromatic) {
   Chromatic.add(LoadingSpinner, {

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:loading-spinner',
-  version: '0.2.6',
+  version: '0.3.0',
   summary: 'Basic in-place spinner',
   git: 'https://github.com/meteor/chromatic',
   documentation: null
