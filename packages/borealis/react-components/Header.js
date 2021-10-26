@@ -2,7 +2,7 @@ import React from 'react';
 import { useHeaderInfo } from './useHeaderInfo';
 
 Header = ({ className, children }) => {
-  const { showBack, title } = useHeaderInfo();
+  const { showBack, title, label } = useHeaderInfo();
   return (
     <header className={`header ${className}`}>
       <div className="header-title">
@@ -14,7 +14,7 @@ Header = ({ className, children }) => {
             }}
           >
             <span className="icon-back" />
-            Back
+            {label}
           </a>
         )}
 
