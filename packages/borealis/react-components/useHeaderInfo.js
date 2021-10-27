@@ -10,6 +10,7 @@ const HeaderContext = React.createContext({});
 HeaderProvider = ({ children }) => {
   const [title, setTitle] = React.useState('');
   const [showBack, setShowBack] = React.useState(false);
+  const [label, setLabel] = React.useState('Back');
   return (
     <HeaderContext.Provider
       value={{
@@ -20,6 +21,8 @@ HeaderProvider = ({ children }) => {
         },
         showBack,
         setShowBack,
+        label,
+        setLabel
       }}
     >
       {children}
@@ -27,8 +30,8 @@ HeaderProvider = ({ children }) => {
   );
 };
 
-export const useHeaderInfo = (newTitle, newShowBack) => {
-  const { title, setTitle, showBack, setShowBack } = React.useContext(
+export const useHeaderInfo = (newTitle, newShowBack, newLabel) => {
+  const { title, setTitle, showBack, setShowBack, label, setLabel } = React.useContext(
     HeaderContext
   );
   React.useEffect(() => {
@@ -38,10 +41,14 @@ export const useHeaderInfo = (newTitle, newShowBack) => {
     if (newShowBack !== null) {
       setShowBack(newShowBack);
     }
+    if (newLabel) {
+      setLabel(newLabel);
+    }
   });
 
   return {
     title,
+    label,
     setTitle,
     showBack,
     setShowBack,
