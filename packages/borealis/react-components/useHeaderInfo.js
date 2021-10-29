@@ -30,7 +30,7 @@ HeaderProvider = ({ children }) => {
   );
 };
 
-export const useHeaderInfo = (newTitle, newShowBack, newLabel) => {
+export const useHeaderInfo = (newTitle, newShowBack, newLabel = 'Back') => {
   const { title, setTitle, showBack, setShowBack, label, setLabel } = React.useContext(
     HeaderContext
   );
@@ -41,9 +41,8 @@ export const useHeaderInfo = (newTitle, newShowBack, newLabel) => {
     if (newShowBack !== null) {
       setShowBack(newShowBack);
     }
-    if (newLabel) {
-      setLabel(newLabel);
-    }
+
+    setLabel(newLabel);
   });
 
   return {
