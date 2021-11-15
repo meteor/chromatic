@@ -363,20 +363,22 @@ class NavigationBarComponent extends React.Component {
                       : 'w-dropdown account-icon'
                   }
                   onClick={mobileOnClick()}
-                  style={{ marginLeft: 0 }}
                 >
                   {(!mobile || this.state.mainLabel !== label) && (
-                    <LetterAvatar
-                      size={40}
-                      bgColor={mobile ? '#eee' : 'white'}
-                      textColor="#595dff"
-                      onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
-                      onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
+                    <div className="avatar-wrapper"
+                       onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
+                       onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
                     >
-                      {this.props.loggedUser
-                        ? this.props.loggedUser.username.toUpperCase()
-                        : 'ND'}
-                    </LetterAvatar>
+                      <LetterAvatar
+                        size={40}
+                        bgColor={mobile ? '#eee' : 'white'}
+                        textColor="#595dff"
+                      >
+                        {this.props.loggedUser
+                          ? this.props.loggedUser.username.toUpperCase()
+                          : 'ND'}
+                      </LetterAvatar>
+                    </div>
                   )}
                   {showLabelSubItems &&
                     renderSubItems({
@@ -516,4 +518,5 @@ NavigationBarComponent.defaultProps = {
   dashboardToken: null,
   loggedUser: { username: 'ND' },
 };
+
 NavigationBar = NavigationBarComponent;
