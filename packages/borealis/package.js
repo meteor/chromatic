@@ -25,11 +25,9 @@ Package.onUse(function(api) {
 
   api.addAssets(
     [
-      'fonts/PulpDisplay-Light.otf',
-      'fonts/PulpDisplay-Regular.otf',
-      'fonts/PulpDisplay-Medium.otf',
-      'fonts/PulpDisplay-SemiBold.otf',
-      'fonts/PulpDisplay-Bold.otf',
+      'fonts/PulpDisplay-Light.ttf',
+      'fonts/PulpDisplay-Medium.ttf',
+      'fonts/PulpDisplay-Bold.ttf',
       'icons/box-bg.png',
       'icons/forums.svg',
       'icons/dashboard-logo.svg',
