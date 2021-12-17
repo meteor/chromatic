@@ -201,9 +201,9 @@ class NavigationBarComponent extends React.Component {
         className={
           mobile
             ? 'mobile-menu-subitem'
-            : `dropdown-list w-dropdown-list ${
+            : `dropdown-list w-dropdown-list` /*${
                 this.state.active[_id] ? 'w--open' : ''
-              } `
+              } `*/
         }
       >
         {subItems.map(subitem => {
