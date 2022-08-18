@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '0.2.19',
+  version: '0.2.20',
   summary: 'a style system',
   documentation: null,
 })

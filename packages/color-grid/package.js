@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:color-grid',
-  version: '0.2.4',
+  version: '0.2.5',
   summary: 'Generate a pretty grid of colored boxes',
   documentation: 'README.md',
   git: 'https://github.com/meteor/chromatic',

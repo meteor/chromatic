@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:form-components',
-  version: '0.2.12',
+  version: '0.2.13',
   summary: 'Simple React form components that use method validation',
   documentation: 'README.md',
   git: 'https://github.com/meteor/chromatic',

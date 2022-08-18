@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:code-block',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'Format a code block using simple:highlight.js',
   git: 'http://github.com/meteor/chromatic',
   documentation: null,
