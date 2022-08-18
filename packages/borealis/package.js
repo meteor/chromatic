@@ -3,25 +3,17 @@ Package.describe({
   version: '0.2.19',
   summary: 'a style system',
   documentation: null,
-});
+})
 Npm.depends({
   'lodash.keyby': '4.6.0',
-});
+})
 
-Package.onUse(function(api) {
-  api.versionsFrom('1.3');
-  api.use(['ecmascript', 'less', 'percolate:icons@0.0.12']);
+Package.onUse(function (api) {
+  api.versionsFrom('1.3')
+  api.use(['ecmascript', 'less@3.0.1', 'percolate:icons@0.0.12'])
 
-  api.imply(['percolate:icons'], 'client');
-  api.export([
-    'LogoLight',
-    'HeaderLogo',
-    'NavigationBar',
-    'LogoDark',
-    'Header',
-    'HeaderProvider',
-    'PlanRibbon',
-  ]);
+  api.imply(['percolate:icons'], 'client')
+  api.export(['LogoLight', 'HeaderLogo', 'NavigationBar', 'LogoDark', 'Header', 'HeaderProvider', 'PlanRibbon'])
 
   api.addAssets(
     [
@@ -52,10 +44,10 @@ Package.onUse(function(api) {
       'icons/countries/localhost.svg',
       'icons/countries/meet-eeyore.svg',
       'icons/countries/ties.svg',
-      'icons/galaxy/Icon.svg'
+      'icons/galaxy/Icon.svg',
     ],
-    'client'
-  );
+    'client',
+  )
   api.addFiles(
     [
       'react-components/NavigationBar.js',
@@ -105,6 +97,6 @@ Package.onUse(function(api) {
       'util/ui.import.less',
       'index.import.less',
     ],
-    'client'
-  );
-});
+    'client',
+  )
+})
