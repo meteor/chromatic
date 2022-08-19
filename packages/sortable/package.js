@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:sortable',
-  version: '0.2.12',
+  version: '0.2.13',
   summary: 'Components to create sortable things',
   git: 'https://github.com/meteor/chromatic',
   documentation: null,

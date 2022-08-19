@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:buttons',
-  version: '0.2.8',
+  version: '0.2.9',
   summary: 'button components',
   git: 'https://github.com/meteor/chromatic',
   documentation: null,

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:date-components',
-  version: '0.2.4',
+  version: '0.2.5',
   summary: 'Simple rendering of dates',
   git: 'https://github.com/meteor/chromatic',
   documentation: null,
