@@ -13,7 +13,7 @@ Package.onUse(function (api) {
     [
       'underscore',
       'ecmascript',
-      'less',
+      'less@4.0.0',
       'check',
       'react-meteor-data@0.2.9',
       'kadira:flow-router@2.4.0',

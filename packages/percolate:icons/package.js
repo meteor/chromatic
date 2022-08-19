@@ -19,6 +19,6 @@ Package.onUse(function (api) {
   api.addAssets(path.join(assetPath, 'fonts', 'percolate.ttf'), 'client')
   api.addAssets(path.join(assetPath, 'fonts', 'percolate.woff'), 'client')
 
-  api.use(['less'])
+  api.use(['less@4.0.0'])
   api.addFiles(path.join('edited-style.less'), 'client')
 })

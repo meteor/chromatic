@@ -11,7 +11,7 @@ Package.onUse(function (api) {
   api.use(
     [
       'ecmascript',
-      'less',
+      'less@4.0.0',
       'mdg:utils@0.2.3',
       'mdg:validation-error@0.5.1',
       'mdg:borealis@0.2.20',
