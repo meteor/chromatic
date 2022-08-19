@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.12')
+  api.versionsFrom('2.3.1')
   api.use(['ecmascript', 'less', 'mdg:borealis@0.2.20'])
   api.addFiles(['LoadingSpinner.jsx', 'LoadingSpinner.less'], 'client')
   api.export('LoadingSpinner', 'client')

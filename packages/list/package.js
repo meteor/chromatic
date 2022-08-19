@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.12')
+  api.versionsFrom('2.3.1')
   api.use(
     ['ecmascript', 'mdg:borealis@0.2.20', 'underscore', 'mdg:form-components@0.2.13', 'mdg:animations@0.2.3'],
     'client',

@@ -9,7 +9,7 @@ Npm.depends({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.12')
+  api.versionsFrom('2.3.1')
   api.use(['ecmascript', 'less', 'percolate:icons@0.0.14'])
 
   api.imply(['percolate:icons'], 'client')

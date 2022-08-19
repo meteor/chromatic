@@ -8,7 +8,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.12')
+  api.versionsFrom('2.3.1')
   api.use(['ecmascript', 'underscore', 'check', 'reactive-dict'], 'client')
   api.mainModule('chromatic-api.js', 'client')
 })
