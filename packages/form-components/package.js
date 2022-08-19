@@ -7,16 +7,16 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.3')
+  api.versionsFrom('1.6.0.1')
   api.use(
     [
       'ecmascript',
-      'less@3.0.1',
+      'less',
       'mdg:utils@0.2.3',
       'mdg:validation-error@0.5.1',
-      'mdg:borealis@0.2.5',
+      'mdg:borealis@0.2.20',
       'mdg:buttons@0.2.8',
-      'mdg:tooltips@0.2.4',
+      'mdg:tooltips@0.2.12',
       'numeral:numeral@1.5.3_1',
     ],
     'client',

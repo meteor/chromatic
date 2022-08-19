@@ -1,6 +1,6 @@
 /* global StyleguideReadme:true */
 /* global React */
-import React from 'react';
+import React from 'react'
 
 StyleguideReadme = React.createClass({
   render() {
@@ -15,19 +15,21 @@ StyleguideReadme = React.createClass({
           <div className="section-content">
             <p className="font-s2">Declare Chromatic at the top of your component code</p>
             <pre>{`
-      // Meteor.1.3
+      // Meteor >= 1.3
       import { Chromatic } from 'meteor/mdg:chromatic';
       // Meteor 1.2
       const { Chromatic } = Package['mdg:chromatic-api'] || {};
                   `}</pre>
             <p className="font-s2">Build your component</p>
-            <pre>{`
+            <pre>
+              {`
       ComponentName = React.createClass({
         // code
       });`}
             </pre>
             <div className="font-s2">Register your component and add specs</div>
-            <pre>{`
+            <pre>
+              {`
       if (Chromatic) {
         Chromatic.add(ComponentName, {
           specs: [
@@ -46,7 +48,8 @@ StyleguideReadme = React.createClass({
       }`}
             </pre>
             <div className="font-s2">Example Code</div>
-            <pre>{`
+            <pre>
+              {`
       import { Chromatic } from 'meteor/mdg:chromatic';
 
       ColorGrid = React.createClass({
@@ -70,10 +73,12 @@ StyleguideReadme = React.createClass({
         });
       }`}
             </pre>
-            <div className="font-s2">If all goes well, your component will appear in the sidebar and you'll be able to see it in action!</div>
+            <div className="font-s2">
+              If all goes well, your component will appear in the sidebar and you'll be able to see it in action!
+            </div>
           </div>
         </div>
       </div>
-    );
-  }
-});
+    )
+  },
+})

@@ -8,19 +8,19 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.3')
+  api.versionsFrom('1.6.0.1')
   api.use(
     [
       'underscore',
       'ecmascript',
-      'less@3.0.1',
+      'less',
       'check',
       'react-meteor-data@0.2.9',
       'kadira:flow-router@2.4.0',
       'mdg:flow-router-extensions@0.2.3',
       'mdg:chromatic-api@0.3.0',
-      'mdg:form-components@0.2.7',
-      'mdg:color-grid@0.2.3',
+      'mdg:form-components@0.2.13',
+      'mdg:color-grid@0.2.5',
       'mdg:outlines@0.2.3',
     ],
     'client',

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/meteor/chromatic#readme",
   "dependencies": {
+    "@babel/runtime": "^7.18.9",
     "assert": "^1.4.1",
     "autosize": "3.0.15",
     "babel-runtime": "^6.23.0",

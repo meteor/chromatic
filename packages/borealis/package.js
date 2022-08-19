@@ -9,8 +9,8 @@ Npm.depends({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.3')
-  api.use(['ecmascript', 'less@3.0.1', 'percolate:icons@0.0.12'])
+  api.versionsFrom('1.6.0.1')
+  api.use(['ecmascript', 'less', 'percolate:icons@0.0.14'])
 
   api.imply(['percolate:icons'], 'client')
   api.export(['LogoLight', 'HeaderLogo', 'NavigationBar', 'LogoDark', 'Header', 'HeaderProvider', 'PlanRibbon'])
