@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.6.0.1')
+  api.versionsFrom('1.12')
   api.use(['ecmascript', 'less', 'mdg:borealis@0.2.20', 'mdg:chromatic-api@0.2.4'], 'client')
   api.addFiles(['for.import.less', 'color-grid.import.less', 'color-grid.less', 'ColorGrid.jsx'], 'client')
   api.export('ColorGrid', 'client')

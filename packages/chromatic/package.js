@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.6.0.1')
+  api.versionsFrom('1.12')
 
   api.use(['ecmascript', 'mdg:chromatic-api@0.3.0', 'mdg:chromatic-explorer@0.3.1'], 'client')
 
