@@ -1,6 +1,6 @@
 allow-deny@1.1.0
 autoupdate@1.7.0
-babel-compiler@7.6.1
+babel-compiler@7.7.0
 babel-runtime@1.5.0
 base64@1.0.12
 binary-heap@1.0.11
@@ -14,7 +14,7 @@ ddp-common@1.4.0
 ddp-server@2.3.2
 diff-sequence@1.1.1
 dynamic-import@0.6.0
-ecmascript@0.15.1
+ecmascript@0.15.3
 ecmascript-runtime@0.7.0
 ecmascript-runtime-client@0.11.0
 ecmascript-runtime-server@0.10.0
