@@ -9,6 +9,6 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
-  api.use(['ecmascript', 'jquery'], 'client')
+  api.use(['ecmascript', 'jquery@1.11.10'], 'client')
   api.addFiles(['outlines.js', 'outlines.css'], 'client')
 })

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:code-block',
-  version: '0.2.6',
+  version: '0.2.7',
   summary: 'Format a code block using simple:highlight.js',
   git: 'http://github.com/meteor/chromatic',
   documentation: null,
@@ -9,7 +9,7 @@ Package.describe({
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
   api.use(
-    ['ecmascript', 'less@4.0.0', 'mdg:borealis@0.2.20', 'mdg:chromatic@0.2.6', 'simple:highlight.js@1.0.9'],
+    ['ecmascript', 'less@4.0.0', 'mdg:borealis@0.2.21', 'mdg:chromatic@0.3.1', 'simple:highlight.js@1.0.9'],
     'client',
   )
 

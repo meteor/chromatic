@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:utils',
-  version: '0.2.4',
+  version: '0.2.5',
   summary: 'common utility functions',
   git: 'https://github.com/meteor/chromatic',
   documentation: null,
