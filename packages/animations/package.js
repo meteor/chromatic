@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
-  api.use(['tmeasday:check-npm-versions@0.3.1', 'ecmascript', 'jquery', 'underscore', 'modules'])
+  api.use(['tmeasday:check-npm-versions@0.3.1', 'ecmascript', 'jquery@1.11.10', 'underscore', 'modules'])
 
   api.mainModule('main.js', 'client')
 })
