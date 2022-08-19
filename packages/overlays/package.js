@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('2.3.1')
+  api.versionsFrom('2.7.3')
   api.use(['ecmascript', 'less', 'mdg:borealis@0.2.20', 'mdg:animations@0.2.3', 'react-meteor-data@0.2.9'], 'client')
   api.mainModule('index.js', 'client')
 })

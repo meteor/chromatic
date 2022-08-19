@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('2.3.1')
+  api.versionsFrom('2.7.3')
   api.use(['ecmascript', 'less', 'underscore', 'mdg:borealis@0.2.20', 'mdg:chromatic-api@0.2.4'], 'client')
 
   api.addFiles(['WithTooltip.jsx', 'TooltipStyleguide.jsx'], 'client')

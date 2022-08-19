@@ -9,7 +9,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('2.3.1')
+  api.versionsFrom('2.7.3')
 
   var path = Npm.require('path')
   var assetPath = path.join(Version)

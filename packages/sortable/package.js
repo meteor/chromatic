@@ -7,7 +7,7 @@ Package.describe({
 })
 
 Package.onUse(function (api) {
-  api.versionsFrom('2.3.1')
+  api.versionsFrom('2.7.3')
   api.use(['ecmascript', 'mdg:borealis@0.2.20'], 'client')
   api.addFiles(['Sortable.jsx', 'SortableTableExample.jsx'], 'client')
   api.export('Sortable', 'client')
