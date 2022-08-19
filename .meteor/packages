@@ -5,13 +5,13 @@
 # but you can also edit it by hand.
 
 meteor-base@1.4.0             # Packages every Meteor app needs to have
-mongo@1.10.1                   # The database Meteor supports right now
+mongo@1.11.0                   # The database Meteor supports right now
 session@1.2.0                 # Client-side reactive dictionary for your app
 jquery@1.11.10                  # Helpful client-side library
 tracker@1.2.0                 # Meteor's client-side reactive programming library
 
 es5-shim@4.8.0                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.15.0              # Enable ECMAScript2015+ syntax in app code
+ecmascript@0.15.1              # Enable ECMAScript2015+ syntax in app code
 
 kadira:flow-router
 mdg:react-meteor-app

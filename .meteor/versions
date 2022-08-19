@@ -1,6 +1,6 @@
 allow-deny@1.1.0
 autoupdate@1.7.0
-babel-compiler@7.6.0
+babel-compiler@7.6.1
 babel-runtime@1.5.0
 base64@1.0.12
 binary-heap@1.0.11
@@ -14,7 +14,7 @@ ddp-common@1.4.0
 ddp-server@2.3.2
 diff-sequence@1.1.1
 dynamic-import@0.6.0
-ecmascript@0.15.0
+ecmascript@0.15.1
 ecmascript-runtime@0.7.0
 ecmascript-runtime-client@0.11.0
 ecmascript-runtime-server@0.10.0
@@ -55,16 +55,16 @@ meteor@1.9.3
 meteor-base@1.4.0
 minifier-css@1.5.3
 minifier-js@2.6.0
-minimongo@1.6.1
+minimongo@1.6.2
 modern-browsers@0.1.5
 modules@0.16.0
 modules-runtime@0.12.0
 momentjs:moment@2.14.4
-mongo@1.10.1
+mongo@1.11.0
 mongo-decimal@0.1.2
 mongo-dev-server@1.1.0
 mongo-id@1.0.7
-npm-mongo@3.8.1
+npm-mongo@3.9.0
 numeral:numeral@1.5.3_1
 ordered-dict@1.1.0
 percolate:icons@0.0.14
@@ -86,5 +86,5 @@ standard-minifier-js@2.6.0
 tmeasday:check-npm-versions@0.3.1
 tracker@1.2.0
 underscore@1.0.10
-webapp@1.10.0
+webapp@1.10.1
 webapp-hashing@1.1.0
