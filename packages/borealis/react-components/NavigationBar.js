@@ -210,7 +210,7 @@ class NavigationBarComponent extends React.Component {
           const subSubItemOpenId = `${subitem.label}-thirdlevel`;
           const logoutFunction = () => {
             Meteor.logout();
-            window.location.href = 'https://www.meteor.com';
+            window.location.href = 'https://cloud.meteor.com';
           };
           const logoutOnClick = subitem.label === SPECIAL_ITEMS.LOG_OUT
               ? logoutFunction
