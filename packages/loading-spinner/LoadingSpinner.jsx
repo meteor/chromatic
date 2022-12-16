@@ -3,14 +3,15 @@
 
 import classnames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types'
 const {Chromatic} = Package['mdg:chromatic-api'] || {};
 
 const TICK_COUNTS = {small: 16, medium: 24, large: 32};
 
 LoadingSpinner = React.createClass({
   propTypes: {
-    size: React.PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
-    className: React.PropTypes.string
+    size: PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
+    className: PropTypes.string
   },
   render() {
     const {size, className} = this.props;
