@@ -9,7 +9,7 @@ Package.describe({
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
   api.use(
-    ['ecmascript', 'less@4.0.0', 'mdg:borealis@0.2.21', 'mdg:chromatic@0.3.1', 'simple:highlight.js@1.0.9'],
+    ['ecmascript', 'less@2.8.0', 'mdg:borealis@0.2.24', 'mdg:chromatic@0.3.1', 'simple:highlight.js@1.0.9'],
     'client',
   )
 

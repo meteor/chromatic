@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mdg:borealis',
-  version: '0.2.22',
+  version: '0.2.24',
   summary: 'a style system',
   documentation: null,
 })
@@ -10,7 +10,7 @@ Npm.depends({
 
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
-  api.use(['ecmascript', 'less@4.0.0', 'percolate:icons@0.0.14'])
+  api.use(['ecmascript', 'less@2.8.0', 'percolate:icons@0.0.13'])
 
   api.imply(['percolate:icons'], 'client')
   api.export(['LogoLight', 'HeaderLogo', 'NavigationBar', 'LogoDark', 'Header', 'HeaderProvider', 'PlanRibbon'])

@@ -11,10 +11,10 @@ Package.onUse(function (api) {
   api.use(
     [
       'ecmascript',
-      'less@4.0.0',
+      'less@2.8.0',
       'mdg:utils@0.2.3',
       'mdg:validation-error@0.5.1',
-      'mdg:borealis@0.2.21',
+      'mdg:borealis@0.2.24',
       'mdg:buttons@0.2.8',
       'mdg:tooltips@0.2.12',
       'numeral:numeral@1.5.3_1',

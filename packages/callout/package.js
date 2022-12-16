@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
-  api.use(['ecmascript', 'less@4.0.0', 'mdg:borealis@0.2.21', 'mdg:chromatic-api@0.3.3'], 'client')
+  api.use(['ecmascript', 'less@2.8.0', 'mdg:borealis@0.2.24', 'mdg:chromatic-api@0.3.3'], 'client')
 
   api.mainModule('main.js', 'client')
 

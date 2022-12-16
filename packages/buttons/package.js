@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('2.7.3')
-  api.use(['ecmascript', 'mdg:borealis@0.2.21', 'tmeasday:check-npm-versions@0.3.1'], 'client')
+  api.use(['ecmascript', 'mdg:borealis@0.2.24', 'tmeasday:check-npm-versions@0.3.1'], 'client')
 
   api.mainModule('main.js', 'client')
 })
