@@ -372,7 +372,7 @@ class NavigationBarComponent extends React.Component {
                       <LetterAvatar
                         size={40}
                         bgColor={mobile ? '#eee' : 'white'}
-                        textColor="#595dff"
+                        textColor="#4241A8"
                       >
                         {this.props.loggedUser
                           ? this.props.loggedUser.username.toUpperCase()

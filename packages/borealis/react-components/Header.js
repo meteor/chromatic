@@ -20,7 +20,6 @@ Header = ({ className, children }) => {
 
         <h1>{title}</h1>
       </div>
-      <HeaderLogo className="absolute-background" />
       {children}
     </header>
   );
