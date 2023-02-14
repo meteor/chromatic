@@ -71,6 +71,8 @@ class NavigationBarComponent extends React.Component {
     };
     this.urlIntervalId = Meteor.setInterval(this.eventListener, 1000);
     this.pollingIntervalId = Meteor.setInterval(() => this.fetchItems(), 5000);
+    this.dropdownSecondary = React.createRef();
+    this.dropdownSecondary.current = [];
   }
   // eslint-disable-next-line no-undef
   state = {
@@ -138,6 +140,10 @@ class NavigationBarComponent extends React.Component {
     this.setState({ mainLabel: null });
   };
 
+  toggleDropdownSecondary = (i) => {
+    this.dropdownSecondary.current[i].classList.toggle('ul--open');
+  };
+
   // eslint-disable-next-line no-undef
   timeout = {};
 
@@ -162,14 +168,6 @@ class NavigationBarComponent extends React.Component {
     const currentApplicationInfo =
       currentApplication && applicationsMap[currentApplication];
 
-    const onMouseEnter = _id => {
-      if (this.timeout[_id]) Meteor.clearTimeout(this.timeout[_id]);
-      this.setState({
-        active: {
-          [_id]: true,
-        },
-      });
-    };
     const toggleState = (_id, subitem) => {
       this.setState({
         active: {
@@ -178,16 +176,7 @@ class NavigationBarComponent extends React.Component {
         },
       });
     };
-    const onMouseLeave = _id => {
-      this.timeout[_id] = Meteor.setTimeout(() => {
-        this.setState({
-          active: {
-            ...this.state.active,
-            [_id]: false,
-          },
-        });
-      }, 100);
-    };
+
     const renderSubItems = ({
       subItems,
       _id,
@@ -196,17 +185,13 @@ class NavigationBarComponent extends React.Component {
       mobileOnClick,
     }) => (
       <nav
-        onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
-        onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
         className={
           mobile
             ? 'mobile-menu-subitem'
-            : `dropdown-list w-dropdown-list ${
-                this.state.active[_id] ? 'w--open' : ''
-              } `
+            : `dropdown-list w-dropdown-list`
         }
       >
-        {subItems.map(subitem => {
+        {subItems.map((subitem, i) => {
           const subSubItemOpenId = `${subitem.label}-thirdlevel`;
           const logoutFunction = () => {
             Meteor.logout();
@@ -237,7 +222,6 @@ class NavigationBarComponent extends React.Component {
                 onClick={e => {
                   if (subitem.items && subitem.items.length) {
                     e.stopPropagation();
-                    toggleState(subSubItemOpenId, _id);
                   }
                   if (mobile) {
                     mobileOnClick({ close: true })();
@@ -266,10 +250,11 @@ class NavigationBarComponent extends React.Component {
                 </Link>
                 {subitem.items && subitem.items.length && (
                   <ArrowIcon
-                    direction={
-                      this.state.active[subSubItemOpenId] ? 'right' : 'down'
-                    }
-                    onClick={() => toggleState(subSubItemOpenId, _id)}
+                    direction='down'
+                    onClick={(e) => {
+                      this.toggleDropdownSecondary(i);
+                      e.currentTarget.classList.toggle('arrow-icon--active');
+                    }}
                   />
                 )}
                 {subitem.alternativeLink ? (
@@ -287,15 +272,7 @@ class NavigationBarComponent extends React.Component {
               {subitem.items && subitem.items.length && (
                 <div className={mobile ? '' : 'third-level-items'}>
                   <ul
-                    className={
-                      mobile
-                        ? ''
-                        : `${
-                            this.state.active[subSubItemOpenId]
-                              ? 'ul--open'
-                              : ''
-                          } `
-                    }
+                    ref={el => this.dropdownSecondary.current[i] = el}
                   >
                     {(subitem.items || []).map(subSubItem => (
                       <li key={`${subitem.label}-${subSubItem.label}`}>
@@ -365,10 +342,7 @@ class NavigationBarComponent extends React.Component {
                   onClick={mobileOnClick()}
                 >
                   {(!mobile || this.state.mainLabel !== label) && (
-                    <div className="avatar-wrapper"
-                       onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
-                       onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
-                    >
+                    <div className="avatar-wrapper">
                       <LetterAvatar
                         size={40}
                         bgColor={mobile ? '#eee' : 'white'}
@@ -414,8 +388,6 @@ class NavigationBarComponent extends React.Component {
                     RouterComponent={RouterComponent}
                     className={variant}
                     {...(onClick ? { onClick } : { href: actionLink })}
-                    onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
-                    onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
                   >
                     {currentRegion.label}
                     <img
@@ -448,8 +420,6 @@ class NavigationBarComponent extends React.Component {
                   RouterComponent={RouterComponent}
                   className={variant}
                   {...(onClick ? { onClick } : { href: actionLink })}
-                  onMouseEnter={mobile ? () => {} : () => onMouseEnter(_id)}
-                  onMouseLeave={mobile ? () => {} : () => onMouseLeave(_id)}
                 >
                   {label}
                 </Link>
